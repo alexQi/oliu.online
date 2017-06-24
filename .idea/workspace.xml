@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="c6be3585-b6b4-4da0-b088-b15dcaca46f6" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/views/admin-log" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/controllers/AdminLogController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/views/admin-log/_form.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/views/admin-log/_search.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/views/admin-log/create.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/views/admin-log/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/views/admin-log/update.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/views/admin-log/view.php" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/backend/controllers/LogController.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/backend/views/log/_form.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/backend/views/log/_search.php" afterPath="" />
@@ -18,16 +11,9 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/backend/views/log/update.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/backend/views/log/view.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/backend/views/log" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/components/AdminLog.php" afterPath="$PROJECT_DIR$/backend/components/AdminLog.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/backend/views/log" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/config/main.php" afterPath="$PROJECT_DIR$/backend/config/main.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/controllers/SiteController.php" afterPath="$PROJECT_DIR$/backend/controllers/SiteController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/AdminLog.php" afterPath="$PROJECT_DIR$/backend/models/AdminLog.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/AdminLogSearch.php" afterPath="$PROJECT_DIR$/backend/models/AdminLogSearch.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/runtime/cache/18/1893981d427ed24c0c2720092207b032.bin" afterPath="$PROJECT_DIR$/backend/runtime/cache/18/1893981d427ed24c0c2720092207b032.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/runtime/cache/6b/6b4a6c6d3e11334936d17fcc97f42233.bin" afterPath="$PROJECT_DIR$/backend/runtime/cache/6b/6b4a6c6d3e11334936d17fcc97f42233.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/runtime/cache/80/80d2cfbf5da707c62f9b302972b24355.bin" afterPath="$PROJECT_DIR$/backend/runtime/cache/80/80d2cfbf5da707c62f9b302972b24355.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/runtime/cache/d0/d00804dfbf8332405444a46a1ba16769.bin" afterPath="$PROJECT_DIR$/backend/runtime/cache/d0/d00804dfbf8332405444a46a1ba16769.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/runtime/cache/f9/f90ab1de9bef54e4a8c4bd9bde61f092.bin" afterPath="$PROJECT_DIR$/backend/runtime/cache/f9/f90ab1de9bef54e4a8c4bd9bde61f092.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/runtime/debug/index.data" afterPath="$PROJECT_DIR$/frontend/runtime/debug/index.data" />
     </list>
     <ignored path="demo.iws" />
@@ -83,8 +69,8 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/views/site/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="85" column="42" lean-forward="true" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
+            <state relative-caret-position="126">
+              <caret line="85" column="42" lean-forward="false" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -255,6 +241,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="zcg" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zcg" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zcg" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -431,7 +431,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143722000" />
+    <option name="totallyTimeSpent" value="143870000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -525,20 +525,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/config/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/runtime/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="11" lean-forward="false" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/config/.gitignore" />
+    <entry file="file://$PROJECT_DIR$/backend/runtime/.gitignore" />
     <entry file="file://$PROJECT_DIR$/vendor/yiisoft/yii2/web/ErrorHandler.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -553,13 +541,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/runtime/logs/app.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5820">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/runtime/logs/app.log" />
     <entry file="file://$PROJECT_DIR$/vendor/yiisoft/yii2/log/Logger.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
@@ -776,13 +758,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/runtime/logs/app.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="160" column="12" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/runtime/logs/app.log" />
     <entry file="file://$PROJECT_DIR$/vendor/mdmsoft/yii2-admin/models/Menu.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="620">
@@ -813,7 +789,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -871,8 +846,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/views/site/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="85" column="42" lean-forward="true" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
+        <state relative-caret-position="126">
+          <caret line="85" column="42" lean-forward="false" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
           <folding />
         </state>
       </provider>
