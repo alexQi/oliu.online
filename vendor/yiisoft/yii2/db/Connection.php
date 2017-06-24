@@ -557,6 +557,7 @@ class Connection extends Component
             throw new InvalidConfigException('Connection::dsn cannot be empty.');
         }
         $token = 'Opening DB connection: ' . $this->dsn;
+        var_dump($token);die();
         try {
             Yii::info($token, __METHOD__);
             Yii::beginProfile($token, __METHOD__);
