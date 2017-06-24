@@ -1,0 +1,420 @@
+2017-04-25 15:31:20 [127.0.0.1][3][okbq2k9nt572mgr7b2majtsjsi][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: description in /home/alex/www/zcg/backend/components/AdminLog.php:48
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Event.php(217): ::call_user_func:{/home/alex/www/zcg/vendor/yiisoft/yii2/base/Event.php:217}()
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Component.php(553): yii\base\Event::trigger()
+#2 /home/alex/www/zcg/vendor/yiisoft/yii2/db/BaseActiveRecord.php(956): yii\base\Component->trigger()
+#3 /home/alex/www/zcg/vendor/yiisoft/yii2/db/BaseActiveRecord.php(755): yii\db\BaseActiveRecord->afterSave()
+#4 /home/alex/www/zcg/vendor/yiisoft/yii2/db/ActiveRecord.php(570): yii\db\BaseActiveRecord->updateInternal()
+#5 /home/alex/www/zcg/vendor/yiisoft/yii2/db/BaseActiveRecord.php(637): yii\db\ActiveRecord->update()
+#6 /home/alex/www/zcg/backend/controllers/CategoryController.php(87): yii\db\BaseActiveRecord->save()
+#7 /home/alex/www/zcg/vendor/yiisoft/yii2/base/InlineAction.php(57): backend\controllers\CategoryController->actionUpdate()
+#8 /home/alex/www/zcg/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array:{/home/alex/www/zcg/vendor/yiisoft/yii2/base/InlineAction.php:57}()
+#9 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#10 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#11 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#12 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#13 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#14 {main}
+2017-04-25 15:32:21 [127.0.0.1][3][okbq2k9nt572mgr7b2majtsjsi][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: description in /home/alex/www/zcg/backend/components/AdminLog.php:48
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Event.php(217): ::call_user_func:{/home/alex/www/zcg/vendor/yiisoft/yii2/base/Event.php:217}()
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Component.php(553): yii\base\Event::trigger()
+#2 /home/alex/www/zcg/vendor/yiisoft/yii2/db/BaseActiveRecord.php(956): yii\base\Component->trigger()
+#3 /home/alex/www/zcg/vendor/yiisoft/yii2/db/BaseActiveRecord.php(755): yii\db\BaseActiveRecord->afterSave()
+#4 /home/alex/www/zcg/vendor/yiisoft/yii2/db/ActiveRecord.php(570): yii\db\BaseActiveRecord->updateInternal()
+#5 /home/alex/www/zcg/vendor/yiisoft/yii2/db/BaseActiveRecord.php(637): yii\db\ActiveRecord->update()
+#6 /home/alex/www/zcg/backend/controllers/CategoryController.php(87): yii\db\BaseActiveRecord->save()
+#7 /home/alex/www/zcg/vendor/yiisoft/yii2/base/InlineAction.php(57): backend\controllers\CategoryController->actionUpdate()
+#8 /home/alex/www/zcg/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array:{/home/alex/www/zcg/vendor/yiisoft/yii2/base/InlineAction.php:57}()
+#9 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#10 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#11 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#12 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#13 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#14 {main}
+2017-04-26 11:27:56 [127.0.0.1][-][t64klcupb9l1bia0denlee0cc3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-26 11:28:04 [127.0.0.1][-][hsilm0ja2ulm3grm6na8fupifo][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-26 11:33:47 [127.0.0.1][-][vlo0ravcr3tustf09qs23nkacg][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "pc/getzip". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('pc/getzip', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-26 11:33:47 [127.0.0.1][-][l7ptpmi0l6c9l1u4hmud1q395c][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "qqfind/btn/tips". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('qqfind/btn/tips', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-26 11:36:15 [127.0.0.1][-][q5nladjrj8ve5rt9scpj31til6][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi-bin/notice/get_data_new". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi-bin/notice/...', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-27 11:59:23 [127.0.0.1][-][9svsqe1a48nq3p8r50s8e01s6f][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-27 11:59:30 [127.0.0.1][-][o6ua0n8dndos5fm7foq4pnd8ba][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-28 12:19:39 [127.0.0.1][-][vtitssgllmkhivrpj4evq0asch][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-28 12:19:46 [127.0.0.1][-][ct1kq39t6uea84i4catfj9rcag][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-29 01:08:30 [127.0.0.1][-][1u7popshp8e8va9kb9d5v277vu][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-29 01:08:37 [127.0.0.1][-][6hbv01ndcbca4g9pah5stqh0u8][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-29 01:22:23 [127.0.0.1][-][vipbddqru38151n13efe4dn62b][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi-bin/notice/get_data_new". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi-bin/notice/...', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-29 13:20:48 [127.0.0.1][-][c8kq6a56frp5c9p06v0gqiqlnr][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-29 13:20:48 [127.0.0.1][-][gpc2t2hqrsefnpr4h12lh5nkp7][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-30 02:55:23 [127.0.0.1][-][qmkee315e4ifq59jefaijufadn][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-04-30 02:55:30 [127.0.0.1][-][akds9lje8l52fbl96e3c88vvof][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-04 11:36:50 [127.0.0.1][-][ipequurhnlojq8i0sk5mep4582][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-04 11:36:57 [127.0.0.1][-][p6imdqekh5dbjkou4csk8a79vm][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-05 11:52:38 [127.0.0.1][-][oaihgmggg9d1gg85m3iae9pspr][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-05 11:52:45 [127.0.0.1][-][1g6kscsntd3rj0elvl0i21h9ji][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-06 10:21:04 [127.0.0.1][-][82k9dpmd3prfpqngcr0m5k5jd5][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-06 10:21:10 [127.0.0.1][-][kct1pki7gbk2797n6euqii71j8][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-06 10:22:22 [127.0.0.1][-][8dmskcadicph122rujef3v8224][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi-bin/pu-cgi". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi-bin/pu-cgi', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-09 11:57:29 [127.0.0.1][-][a298ktasu0397ho4dskt2g2g18][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-09 11:57:36 [127.0.0.1][-][dmtm40lubdce3kodmhf6r192mc][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-11 13:08:50 [127.0.0.1][-][7ko65k4tbed82sp3krddobf0a9][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-11 13:08:56 [127.0.0.1][-][lk02aosio3tiuokohmffp0ro9h][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-29 06:55:28 [127.0.0.1][-][e99ep0g4mf870r78rn3mr39e5n][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi/reccom". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi/reccom', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-29 06:55:36 [127.0.0.1][-][27perrr1kkfe2r6151r5643bpa][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "search.xml". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('search.xml', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-29 06:56:46 [127.0.0.1][-][5skop754dm4s3m2n4g07115q9n][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "cgi-bin/pu-cgi". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('cgi-bin/pu-cgi', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-05-30 09:00:18 [127.0.0.1][3][a6keths2b1pea4hpjh0gdl6a6j][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "assets/11f1e783/images/ui-bg_flat_75_ffffff_40x100.png". in /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('assets/11f1e783...', Array)
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#2 {main}
+2017-06-24 12:03:57 [127.0.0.1][3][ljq7qo7bijfc5b9gibrim6gks2][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined offset: 6 in /home/alex/www/zcg/backend/views/site/index.php:87
+Stack trace:
+#0 /home/alex/www/zcg/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#1 /home/alex/www/zcg/vendor/yiisoft/yii2/base/View.php(152): yii\base\View->renderFile()
+#2 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Controller.php(381): yii\base\View->render()
+#3 /home/alex/www/zcg/backend/controllers/SiteController.php(69): yii\base\Controller->render()
+#4 /home/alex/www/zcg/vendor/yiisoft/yii2/base/InlineAction.php(57): backend\controllers\SiteController->actionIndex()
+#5 /home/alex/www/zcg/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array:{/home/alex/www/zcg/vendor/yiisoft/yii2/base/InlineAction.php:57}()
+#6 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#7 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#8 /home/alex/www/zcg/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#9 /home/alex/www/zcg/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#10 /home/alex/www/zcg/backend/web/index.php(19): yii\base\Application->run()
+#11 {main}
