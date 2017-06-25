@@ -2,7 +2,7 @@
 namespace wechat\controllers;
 
 use Yii;
-use yii\web\Controller;
+use yii\base\Controller;
 use common\components\Common;
 
 /**
