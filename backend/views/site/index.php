@@ -85,7 +85,7 @@ $server = $_SERVER;
                 exec("git status", $info);
                 exec("git tag", $gitinfo);
                 exec("du -hs ../", $a);
-                echo $info[0] . '&nbsp;'.end($gitinfo).'&nbsp;体积:' . str_replace("../","",$a[0]);
+                echo $info[0] . '&nbsp;'.'体积:' . str_replace("../","",$a[0]);
                 ?>
             </div>
         </div>
