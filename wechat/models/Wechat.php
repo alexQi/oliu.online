@@ -10,6 +10,7 @@ namespace wechat\models;
 
 use Yii;
 use yii\base\Model;
+use wechat\models\Api;
 
 class Wechat extends Model{
 
@@ -59,9 +60,14 @@ class Wechat extends Model{
         yii::info($data,'wechat.message');
 
         $data = json_decode($data, true);
-        $this->data    = $data;
-        $this->msgType = strtolower($this->data['MsgType']);
-        $this->responMsg();
+        if (!empty($data)){
+            $this->data    = $data;
+            $this->msgType = strtolower($this->data['MsgType']);
+            $this->responMsg();
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function responMsg(){
@@ -78,8 +84,9 @@ class Wechat extends Model{
                 }
                 break;
             case 'text':
-                if ($this->data['Content']=='天气'){
-                    $this->msg = '今天天气很好';
+                $responData = Api::robot($this->data['Content']);
+                if ($responData['msg']=='ok'){
+                    $this->msg = $responData['result']['content'];
                 }
                 break;
             case 'image':

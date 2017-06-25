@@ -12,9 +12,13 @@ use yii\base\Component;
 
 class Common extends Component{
 
-    public static function httpRequest($url, $params = null, $type = 'get')
+    public static function httpRequest($url, $params = null, $type = 'get',$header='')
     {
         $curl = curl_init();
+        if ($header){
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+        }
+
         switch ($type) {
             case 'get':
                 is_array($params) && $params = http_build_query($params);
