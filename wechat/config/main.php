@@ -27,6 +27,15 @@ return [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info', 'error'],
+                    'categories' => ['wechat.message'],
+                    'logFile' => '@app/runtime/logs/wechat/data.log',
+                    'maxFileSize' => 2048,
+                    'maxLogFiles' => 20,
+                    'logVars' => [],
+                ],
             ],
         ],
         'errorHandler' => [
