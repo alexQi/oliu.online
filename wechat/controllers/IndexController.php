@@ -1,6 +1,7 @@
 <?php
 namespace wechat\controllers;
 
+use wechat\models\Api;
 use Yii;
 use yii\base\Controller;
 use common\components\Common;
@@ -17,6 +18,10 @@ class IndexController extends Controller
         if($wechat->getMsg()){
             echo $wechat->sendMsg();
         }
+    }
+
+    public function actionTest(){
+        var_dump(Api::robot('天气'));
     }
 
 }

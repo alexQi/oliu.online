@@ -85,8 +85,8 @@ class Wechat extends Model{
                 break;
             case 'text':
                 $responData = Api::robot($this->data['Content']);
-                if ($responData['msg']=='ok'){
-                    $this->msg = $responData['result']['content'];
+                if ($responData->msg=='ok'){
+                    $this->msg = $responData->result->content;
                 }
                 break;
             case 'image':
