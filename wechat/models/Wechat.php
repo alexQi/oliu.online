@@ -15,6 +15,8 @@ class Wechat extends Model{
 
     public $data = array();
     public $msgType;
+    public $msg;
+    public $tpl;
 
     public function valid()
 
@@ -22,6 +24,8 @@ class Wechat extends Model{
         $echoStr = $_GET["echostr"];
         if($this->checkSignature()){
             return $echoStr;
+        }else{
+            return false;
         }
     }
 
@@ -57,10 +61,53 @@ class Wechat extends Model{
         $data = json_decode($data, true);
         $this->data    = $data;
         $this->msgType = strtolower($this->data['MsgType']);
+        $this->responMsg();
     }
 
     public function responMsg(){
+        switch ($this->msgType){
+            case 'event':
+                if ($this->data['Event']=='subscribe')
+                {
+                    $this->msg = 'welcome to alex\'shome';
 
+                }else if ($this->data['Event']=='unsubscribe')
+                {
+                    #取消关注 不做处理
+                    //........
+                }
+                break;
+            case 'text':
+                if ($this->data['Content']=='天气'){
+                    $this->msg = '今天天气很好';
+                }
+                break;
+            case 'image':
+                #....
+                break;
+            case 'voice':
+                #....
+                break;
+            case 'video':
+                #....
+                break;
+            case 'location':
+                //..
+                break;
+            case 'link':
+                //..
+                break;
+            default:
+                break;
+        }
+
+        $this->msgType == 'event' ? 'text':$this->msgType;
+        $this->tpl = yii::$app->params['wechat']['tpl'][$this->msgType];
+    }
+
+    public function sendMsg(){
+        $result = sprintf($this->tpl, $this->data['FromUserName'], $this->data['ToUserName'], time(), $this->msg);
+        return $result;
     }
 
 

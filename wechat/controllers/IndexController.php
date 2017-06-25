@@ -14,8 +14,6 @@ class IndexController extends Controller
     public function actionIndex(){
         $wechat = new Wechat();
         $wechat->getMsg();
-
-
-
+        echo $wechat->sendMsg();
     }
 }
