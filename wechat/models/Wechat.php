@@ -51,7 +51,6 @@ class Wechat extends Model{
 
 
     public function getMsg(){
-        var_dump(yii::$app->params);die();
         $fileContent = file_get_contents("php://input");
         libxml_disable_entity_loader(true);
         $data = simplexml_load_string($fileContent, 'SimpleXMLElement', LIBXML_NOCDATA);
