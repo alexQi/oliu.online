@@ -83,7 +83,6 @@ $server = $_SERVER;
                 <p></p>
                 程序版本:<?php
                 exec("git status", $info);
-                exec("git tag", $gitinfo);
                 exec("du -hs ../", $a);
                 echo $info[0] . '&nbsp;'.'体积:' . str_replace("../","",$a[0]);
                 ?>
