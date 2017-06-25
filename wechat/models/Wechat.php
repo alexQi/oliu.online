@@ -75,7 +75,7 @@ class Wechat extends Model{
             case 'event':
                 if ($this->data['Event']=='subscribe')
                 {
-                    $this->msg = 'welcome to alex\'shome';
+                    $this->msg = '欢迎关注我 O(∩_∩)O~∑ , 有啥想知道的尽管问我吧  (：◎)≡ ';
 
                 }else if ($this->data['Event']=='unsubscribe')
                 {
