@@ -10,11 +10,12 @@ namespace wechat\models;
 
 use Yii;
 use yii\base\Model;
-use wechat\models\Api;
+use common\models\Api;
 
 class Wechat extends Model{
 
     public $data = array();
+    public $api;
     public $msgType;
     public $msg;
     public $tpl;
@@ -70,7 +71,10 @@ class Wechat extends Model{
         }
     }
 
-    public function responMsg(){
+    public function responMsg()
+    {
+        $this->api = new Api();
+
         switch ($this->msgType){
             case 'event':
                 if ($this->data['Event']=='subscribe')
@@ -84,8 +88,10 @@ class Wechat extends Model{
                 }
                 break;
             case 'text':
-                $responData = Api::robot($this->data['Content']);
-                if ($responData->msg=='ok'){
+                $this->api->queryParam['queryString'] = $this->data['Content'];
+                $responData = $this->api->run();
+                if ($responData->msg=='ok')
+                {
                     $this->msg = $responData->result->content;
                 }
                 break;

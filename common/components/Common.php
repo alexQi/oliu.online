@@ -9,6 +9,7 @@ namespace common\components;
 
 
 use yii\base\Component;
+use yii\base\Exception;
 
 class Common extends Component{
 
@@ -27,19 +28,19 @@ class Common extends Component{
             case 'post':
                 curl_setopt($curl, CURLOPT_POST, true);
                 if (!is_array($params)) {
-                    throw new InvalidParamException("Post data must be an array.");
+                    throw new Exception("Post data must be an array.");
                 }
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
                 break;
             case 'raw':
                 curl_setopt($curl, CURLOPT_POST, true);
                 if (is_array($params)) {
-                    throw new InvalidParamException("Post raw data must not be an array.");
+                    throw new Exception("Post raw data must not be an array.");
                 }
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
                 break;
             default:
-                throw new InvalidParamException("Invalid http type '{$type}.' called.");
+                throw new Exception("Invalid http type '{$type}.' called.");
         }
         if (stripos($url, "https://") !== false) {
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
