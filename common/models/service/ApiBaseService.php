@@ -22,11 +22,18 @@ class ApiBaseService extends ApiBase
         {
             $query->andWhere(['is_default'=>$param['isDefault']]);
         }else{
-            if (isset($param['queryString']))
+            if (isset($param['apiName']))
             {
-                $query->andFilterWhere(['like','invoke_string',$param['queryString']]);
+                $query->andWhere(['api_name'=>$param['apiName']]);
+            }else{
+                if (isset($param['queryString']))
+                {
+                    $query->andFilterWhere(['like','invoke_string',$param['queryString']]);
+                }
             }
         }
+
+        echo $query->createCommand()->getRawSql();
 
         if (isset($param['id'])){
             $query->andWhere(['id'=>$param['id']]);
