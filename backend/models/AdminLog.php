@@ -22,7 +22,7 @@ class AdminLog extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'admin_log';
+        return '{{%admin_log}}';
     }
 
     /**
