@@ -24,4 +24,15 @@ return [
     'time'=>'时间',
     'user id'=>'用户id',
 
+    'ID'=>'ID',
+    'Api Name'=>'API名称',
+    'Url'=>'域名',
+    'Url Path'=>'域名路径',
+    'Request Method'=>'请求方法',
+    'Query String'=>'查询字符',
+    'Invoke String'=>'调用关键字',
+    'Status'=>'状态',
+    'Created At'=>'创建时间',
+    'Updated At'=>'更新时间',
+    'Is Default'=>'是否默认',
 ];

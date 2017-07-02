@@ -36,8 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'query_string',
             'invoke_string',
             'status',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
             'is_default',
         ],
     ]) ?>

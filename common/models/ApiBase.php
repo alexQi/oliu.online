@@ -16,7 +16,8 @@ use Yii;
  * @property string $invoke_string
  * @property integer $status
  * @property integer $created_at
- * @property string $updated_at
+ * @property integer $updated_at
+ * @property integer $is_default
  */
 class ApiBase extends \yii\db\ActiveRecord
 {
@@ -35,8 +36,8 @@ class ApiBase extends \yii\db\ActiveRecord
     {
         return [
             [['api_name'], 'required'],
-            [['status', 'created_at'], 'integer'],
-            [['api_name', 'url', 'url_path', 'updated_at'], 'string', 'max' => 100],
+            [['status', 'created_at', 'updated_at', 'is_default'], 'integer'],
+            [['api_name', 'url', 'url_path'], 'string', 'max' => 100],
             [['request_method'], 'string', 'max' => 10],
             [['query_string'], 'string', 'max' => 50],
             [['invoke_string'], 'string', 'max' => 255],
@@ -49,16 +50,17 @@ class ApiBase extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'api_name' => 'Api Name',
-            'url' => 'Url',
-            'url_path' => 'Url Path',
-            'request_method' => 'Request Method',
-            'query_string' => 'Query String',
-            'invoke_string' => 'Invoke String',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'id' => Yii::t('app', 'ID'),
+            'api_name' => Yii::t('app', 'Api Name'),
+            'url' => Yii::t('app', 'Url'),
+            'url_path' => Yii::t('app', 'Url Path'),
+            'request_method' => Yii::t('app', 'Request Method'),
+            'query_string' => Yii::t('app', 'Query String'),
+            'invoke_string' => Yii::t('app', 'Invoke String'),
+            'status' => Yii::t('app', 'Status'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'is_default' => Yii::t('app', 'Is Default'),
         ];
     }
 }
