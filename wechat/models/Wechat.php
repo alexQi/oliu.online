@@ -94,7 +94,7 @@ class Wechat extends Model{
                 #....
                 break;
             case 'voice':
-                $this->api->queryParam['queryString'] = $this->data['Recognition'];
+                $this->api->queryParam['queryString'] = iconv("ASCII", "UTF-8//IGNORE",$this->data['Recognition']);
                 break;
             case 'video':
                 #....
@@ -116,9 +116,6 @@ class Wechat extends Model{
         }
 
         $this->msgType = $this->msgType == 'event' || $this->msgType == 'voice' ? 'text':$this->msgType;
-
-        yii::info($this->api->queryParam['queryString'],'wechat.message');
-        yii::info($this->msgType,'wechat.message');
 
         $this->tpl = yii::$app->params['wechat']['tpl'][$this->msgType];
     }
