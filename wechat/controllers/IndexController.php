@@ -29,9 +29,6 @@ class IndexController extends Controller
     }
 
     public function actionTest(){
-        $wechat = new Wechat();
-        var_dump($wechat->getAccessToken());
-
         var_dump($this->api->run());
     }
 

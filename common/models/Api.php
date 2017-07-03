@@ -16,6 +16,7 @@ use common\models\service\ApiBaseService;
 class Api extends Model{
 
     public $queryParam;
+    public $userId;
 
     public function init()
     {
@@ -24,19 +25,23 @@ class Api extends Model{
 
     public function run(){
         $ApiBase = new ApiBaseService();
+        $this->queryParam['isDefault'] = 2;
         $apiInfo = $ApiBase->getApi($this->queryParam);
-
-        if (empty($apiInfo)){
-            $this->queryParam['isDefault'] = 2;
-            $apiInfo = $ApiBase->getApi($this->queryParam['isDefault']);
-        }
 
         $param['url']    = $apiInfo['url'].$apiInfo['url_path'];
         $param['method'] = $apiInfo['request_method'];
-        $param['query_string'] = array(
-            $apiInfo['query_string']=>$this->queryParam['queryString'],
-        );
-        $param['header'] = ["Authorization:APPCODE ".yii::$app->params['aliyun']['AppCode']];
+
+
+        if ($apiInfo['api_name']=='Robot')
+        {
+            $param['header'] = ["Authorization:APPCODE ".yii::$app->params['aliyun']['AppCode']];
+        }elseif ($apiInfo['api_name']=='Turing')
+        {
+            $param['header'] = ["content-type: application/x-www-form-urlencoded"];
+            $param['query_string']['key']    = yii::$app->params['turing']['APIkey'];
+            $param['query_string']['userid'] = $this->userId;
+        }
+        $param['query_string'][$apiInfo['query_string']] = $this->queryParam['queryString'];
 
         return $this->invokeApi($param);
     }
@@ -50,7 +55,6 @@ class Api extends Model{
     public function invokeApi($param)
     {
         $content = Common::httpRequest($param['url'],$param['query_string'],$param['method'],$param['header']);
-        yii::info('响应字符：'.$content,'wechat.message');
         return json_decode($content);
     }
 }

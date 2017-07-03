@@ -117,7 +117,7 @@ class Wechat extends Model{
             default:
                 break;
         }
-
+        $this->api->userId = $this->data['FromUserName'];
         $responData = $this->api->run();
         if ($responData->msg=='ok')
         {

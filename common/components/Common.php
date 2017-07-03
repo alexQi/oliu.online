@@ -18,24 +18,25 @@ class Common extends Component{
         $curl = curl_init();
         if ($header){
             curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+        }else{
+            curl_setopt($curl, CURLOPT_HEADER, false);
         }
-
+        is_array($params) && $params = http_build_query($params);
         switch ($type) {
             case 'get':
-                is_array($params) && $params = http_build_query($params);
                 !empty($params) && $url .= (stripos($url, '?') === false ? '?' : '&') . $params;
                 break;
             case 'post':
                 curl_setopt($curl, CURLOPT_POST, true);
-                if (!is_array($params)) {
-                    throw new Exception("Post data must be an array.");
+                if (!$params) {
+                    throw new Exception("Post data can not be empty.");
                 }
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
                 break;
             case 'raw':
                 curl_setopt($curl, CURLOPT_POST, true);
                 if (is_array($params)) {
-                    throw new Exception("Post raw data must not be an array.");
+                    throw new Exception("Post data can not be empty.");
                 }
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
                 break;
@@ -49,6 +50,7 @@ class Common extends Component{
         }
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
         $content = curl_exec($curl);
         $status = curl_getinfo($curl);
         curl_close($curl);
