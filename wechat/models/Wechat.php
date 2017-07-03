@@ -89,17 +89,12 @@ class Wechat extends Model{
                 break;
             case 'text':
                 $this->api->queryParam['queryString'] = $this->data['Content'];
-                $responData = $this->api->run();
-                if ($responData->msg=='ok')
-                {
-                    $this->msg = $responData->result->content;
-                }
                 break;
             case 'image':
                 #....
                 break;
             case 'voice':
-                #....
+                $this->api->queryParam['queryString'] = $this->data['Recognition'];
                 break;
             case 'video':
                 #....
@@ -112,6 +107,12 @@ class Wechat extends Model{
                 break;
             default:
                 break;
+        }
+
+        $responData = $this->api->run();
+        if ($responData->msg=='ok')
+        {
+            $this->msg = $responData->result->content;
         }
 
         $this->msgType = $this->msgType == 'event' ? 'text':$this->msgType;
