@@ -109,8 +109,6 @@ class Wechat extends Model{
                 break;
         }
 
-        yii::info('参数字符：'.$this->data['Recognition'],'wechat.message');
-
         $responData = $this->api->run();
         if ($responData->msg=='ok')
         {
@@ -118,7 +116,6 @@ class Wechat extends Model{
         }
 
         $this->msgType = $this->msgType == 'event' || $this->msgType == 'voice' ? 'text':$this->msgType;
-        yii::info('返回消息类型：'.$this->msgType,'wechat.message');
         $this->tpl     = yii::$app->params['wechat']['tpl'][$this->msgType];
     }
 
