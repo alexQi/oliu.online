@@ -33,8 +33,6 @@ class ApiBaseService extends ApiBase
             }
         }
 
-        echo $query->createCommand()->getRawSql();
-
         if (isset($param['id'])){
             $query->andWhere(['id'=>$param['id']]);
         }
