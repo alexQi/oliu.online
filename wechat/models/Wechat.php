@@ -95,6 +95,7 @@ class Wechat extends Model{
                 break;
             case 'voice':
                 $this->api->queryParam['queryString'] = $this->data['Recognition'];
+                $this->msgType = 'text';
                 break;
             case 'video':
                 #....
