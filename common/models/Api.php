@@ -23,10 +23,6 @@ class Api extends Model{
     }
 
     public function run(){
-        if (strstr($this->queryParam['queryString'],'天气'))
-        {
-            $this->queryParam['apiName'] = 'weather';
-        }
         $ApiBase = new ApiBaseService();
         $apiInfo = $ApiBase->getApi($this->queryParam);
 
@@ -54,6 +50,7 @@ class Api extends Model{
     public function invokeApi($param)
     {
         $content = Common::httpRequest($param['url'],$param['query_string'],$param['method'],$param['header']);
+        yii::info('响应字符：'.$content,'wechat.message');
         return json_decode($content);
     }
 }
