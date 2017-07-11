@@ -7,15 +7,10 @@
  */
 namespace frontend\controllers;
 
-use yii\web\Controller;
-
-class ToolController extends Controller
+class ToolController extends BaseController
 {
-    //重置全局layout
-    public $layout = '';
-
-    public function actionJsonFormat()
+    public function actionIndex()
     {
-
+        var_dump($this->queryParams);
     }
 }
