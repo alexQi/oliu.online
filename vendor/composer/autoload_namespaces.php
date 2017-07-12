@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'udokmeci\\yii2beanstalk' => array($vendorDir . '/udokmeci/yii2-beanstalk/src'),
     'cebe\\gravatar\\' => array($vendorDir . '/cebe/yii2-gravatar'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),

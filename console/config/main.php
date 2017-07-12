@@ -16,6 +16,10 @@ return [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'common\fixtures',
           ],
+        'worker'=>[
+            'class' => 'console\controllers\WorkerController',
+        ]
+
     ],
     'components' => [
         'log' => [

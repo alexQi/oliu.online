@@ -73,6 +73,7 @@ class ComposerStaticInit57eab4d0870c082e9f88da494937fc2a
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
+            'Pheanstalk\\' => 11,
         ),
         'G' => 
         array (
@@ -213,6 +214,10 @@ class ComposerStaticInit57eab4d0870c082e9f88da494937fc2a
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
+        'Pheanstalk\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pda/pheanstalk/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -240,6 +245,13 @@ class ComposerStaticInit57eab4d0870c082e9f88da494937fc2a
     );
 
     public static $prefixesPsr0 = array (
+        'u' => 
+        array (
+            'udokmeci\\yii2beanstalk' => 
+            array (
+                0 => __DIR__ . '/..' . '/udokmeci/yii2-beanstalk/src',
+            ),
+        ),
         'c' => 
         array (
             'cebe\\gravatar\\' => 

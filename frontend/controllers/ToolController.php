@@ -7,10 +7,26 @@
  */
 namespace frontend\controllers;
 
+use yii;
+use udokmeci\yii2beanstalk\Beanstalk;
+
 class ToolController extends BaseController
 {
     public function actionIndex()
     {
-        var_dump($this->queryParam);
+        $beanstalk = new Beanstalk();
+        $beanstalk->useTube('oliuSaveData');
+        $put = $beanstalk->put('cowsay hahahahahahah');
+
+        if (!$put){
+            exit($put);
+        }
+
+        $beanstalk->useTube('oliu.handleData');
+        $put = $beanstalk->put('cowsay hahahahahahah');
+
+        if (!$put){
+            exit($put);
+        }
     }
 }
