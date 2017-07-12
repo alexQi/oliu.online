@@ -10,21 +10,24 @@ namespace common\components;
 use yii;
 use yii\base\Behavior;
 use yii\helpers\ArrayHelper;
+use yii\web\Controller;
 
 class MyBehavior Extends Behavior
 {
-    public $queryParams;
-
-    public function handleRequest(){
-
-        $PostData = yii::$app->request->get();
-        $GetData  = yii::$app->request->post();
-
-        $this->queryParams = ArrayHelper::merge($PostData,$GetData);
-    }
+    public $queryParam;
 
     public function events()
     {
-        $this->EVENT;
+        return [
+            Controller::EVENT_BEFORE_ACTION => 'handleRequest',
+        ];
+    }
+
+    public function handleRequest(){
+
+        $GetData  = yii::$app->request->get();
+        $PostData = yii::$app->request->post();
+        var_dump(11111);
+        return $this->queryParam = ArrayHelper::merge($PostData,$GetData);
     }
 }

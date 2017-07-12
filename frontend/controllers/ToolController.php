@@ -11,6 +11,6 @@ class ToolController extends BaseController
 {
     public function actionIndex()
     {
-        var_dump($this->queryParams);
+        var_dump($this->queryParam);
     }
 }

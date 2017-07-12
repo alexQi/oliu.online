@@ -13,17 +13,15 @@ use common\components\MyBehavior;
 
 class BaseController extends Controller
 {
-    public $queryParams;
 
     public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['MyBehavior'] = [
             'class' => MyBehavior::className(),
-            'queryParams' => ['111111'],
+            'queryParam' => 'queryParam'
         ];
 
-        var_dump($behaviors);
         return $behaviors;
     }
 
