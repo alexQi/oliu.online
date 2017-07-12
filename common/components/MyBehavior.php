@@ -23,6 +23,11 @@ class MyBehavior Extends Behavior
         ];
     }
 
+    /**
+     * 处理request参数
+     *
+     * @return array
+     */
     public function handleRequest(){
 
         $GetData  = yii::$app->request->get();

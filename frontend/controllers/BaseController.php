@@ -7,7 +7,6 @@
  */
 namespace frontend\controllers;
 
-use yii;
 use yii\web\Controller;
 use common\components\MyBehavior;
 
