@@ -27,7 +27,7 @@ class MyBehavior Extends Behavior
 
         $GetData  = yii::$app->request->get();
         $PostData = yii::$app->request->post();
-        var_dump(11111);
+
         return $this->queryParam = ArrayHelper::merge($PostData,$GetData);
     }
 }
