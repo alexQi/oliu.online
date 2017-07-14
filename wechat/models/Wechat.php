@@ -18,7 +18,7 @@ class Wechat extends Model{
     public $data = array();
     public $api;
     public $msgType;
-    public $msg = "不知道是什么鬼地方出错啦～～   正在改";
+    public $msg = "不知道是什么鬼地方出错啦～～";
     public $tpl;
 
     public function valid()
@@ -128,9 +128,17 @@ class Wechat extends Model{
                 $this->msg = $responData->result->content;
             }
         }else if($this->api->apiName == "Turing"){
-            if ($responData->code=='100000')
+            switch ($responData->code)
             {
-                $this->msg = $responData->text;
+                case '100000':
+                    $this->msg = $responData->text;
+                    break;
+                case '200000':
+                    $this->msg = $responData->text;
+                    $this->msg .= "<a href='$responData->url'>[详情链接]</a>";
+                    break;
+                default:
+                    //.......
             }
         }
 

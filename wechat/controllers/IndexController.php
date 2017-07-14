@@ -31,8 +31,8 @@ class IndexController extends Controller
 
     public function actionTest()
     {
+        $this->api->userId = 'alex';
         var_dump($this->api->run());
-        var_dump($this->api);
     }
 
 
