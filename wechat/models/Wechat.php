@@ -18,7 +18,7 @@ class Wechat extends Model{
     public $data = array();
     public $api;
     public $msgType;
-    public $msg;
+    public $msg = "不知道是什么鬼地方出错啦～～   正在改";
     public $tpl;
 
     public function valid()
