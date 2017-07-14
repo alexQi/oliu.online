@@ -21,19 +21,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'options' => [
+            'style'=>'overflow: auto; word-wrap: break-word;'
+        ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'api_name',
-            'url:url',
-            'url_path:url',
-            'request_method',
-            'query_string',
-            'invoke_string',
             'status',
-            'created_at:datetime',
-            'updated_at:datetime',
+            [
+                'attribute'=>'created_at',
+                'value'=>function ($model) {
+                    return date('Y-m-d H:i:s',$model->created_at);
+                },
+            ],
             'is_default',
 
             ['class' => 'yii\grid\ActionColumn'],
