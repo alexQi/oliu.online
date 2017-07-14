@@ -128,7 +128,7 @@ class Wechat extends Model{
                 $this->msg = $responData->result->content;
             }
         }else if($this->api->apiName == "Turing"){
-            if ($responData->code=='10000')
+            if ($responData->code=='100000')
             {
                 $this->msg = $responData->text;
             }
