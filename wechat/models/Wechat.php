@@ -120,6 +120,8 @@ class Wechat extends Model{
         $useId = preg_replace('/[_-]+/','F',$this->data['FromUserName']);
         $this->api->userId = $useId;
         $responData = $this->api->run();
+
+
         if ($this->api->apiName == "Robot"){
             if ($responData->msg=='ok')
             {
@@ -132,7 +134,7 @@ class Wechat extends Model{
             }
         }
 
-        yii::info($this->msg,'wechat.message');
+        yii::info(json_encode($responData),'wechat.message');
 
         $this->msgType = $this->msgType == 'event' || $this->msgType == 'voice' ? 'text':$this->msgType;
         $this->tpl     = yii::$app->params['wechat']['tpl'][$this->msgType];
