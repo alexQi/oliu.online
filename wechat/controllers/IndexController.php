@@ -31,8 +31,17 @@ class IndexController extends Controller
 
     public function actionTest()
     {
-        $this->api->userId = 'alex';
-        var_dump($this->api->run());
+        $response = $this->api->run();
+        $msg    = $response->result->content;
+
+        $realMsg = preg_replace("/\[/",'<',$msg);
+        $realMsg = preg_replace("/\]/",'>',$realMsg);
+        $realMsg = preg_replace("/(link)/",'a',$realMsg);
+        $realMsg = preg_replace("/(url)/",'href',$realMsg);
+    }
+
+    public function actionDemo(){
+
     }
 
 

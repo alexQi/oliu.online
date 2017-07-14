@@ -125,7 +125,12 @@ class Wechat extends Model{
         if ($this->api->apiName == "Robot"){
             if ($responData->msg=='ok')
             {
-                $this->msg = $responData->result->content;
+                $msg = $responData->result->content;
+
+                $realMsg = preg_replace("/\[/",'<',$msg);
+                $realMsg = preg_replace("/\]/",'>',$realMsg);
+                $realMsg = preg_replace("/(link)/",'a',$realMsg);
+                $this->msg = preg_replace("/(url)/",'href',$realMsg);
             }
         }else if($this->api->apiName == "Turing"){
             switch ($responData->code)
@@ -142,8 +147,6 @@ class Wechat extends Model{
             }
         }
 
-        yii::info(json_encode($responData),'wechat.message');
-
         $this->msgType = $this->msgType == 'event' || $this->msgType == 'voice' ? 'text':$this->msgType;
         $this->tpl     = yii::$app->params['wechat']['tpl'][$this->msgType];
     }
@@ -151,7 +154,6 @@ class Wechat extends Model{
     public function sendMsg(){
         $result = sprintf($this->tpl, $this->data['FromUserName'], $this->data['ToUserName'], time(), $this->msg);
 
-        yii::info($result,'wechat.message');
         return $result;
     }
 
