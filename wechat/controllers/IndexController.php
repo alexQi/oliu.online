@@ -20,7 +20,8 @@ class IndexController extends Controller
         $this->api->queryParam['queryString'] = yii::$app->request->get('query_string');
     }
 
-    public function actionIndex(){
+    public function actionIndex()
+    {
         $wechat = new Wechat();
 
         if($wechat->getMsg()){
@@ -28,8 +29,11 @@ class IndexController extends Controller
         }
     }
 
-    public function actionTest(){
+    public function actionTest()
+    {
         var_dump($this->api->run());
+        var_dump($this->api);
     }
+
 
 }

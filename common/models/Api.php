@@ -16,6 +16,7 @@ use common\models\service\ApiBaseService;
 class Api extends Model{
 
     public $queryParam;
+    public $apiName;
     public $userId;
 
     public function init()
@@ -31,6 +32,7 @@ class Api extends Model{
         $param['url']    = $apiInfo['url'].$apiInfo['url_path'];
         $param['method'] = $apiInfo['request_method'];
 
+        $this->apiName = $apiInfo['api_name'];
 
         if ($apiInfo['api_name']=='Robot')
         {
@@ -43,7 +45,6 @@ class Api extends Model{
         }
         $param['query_string'][$apiInfo['query_string']] = $this->queryParam['queryString'];
 
-        var_dump($param);
         return $this->invokeApi($param);
     }
 

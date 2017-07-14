@@ -117,11 +117,19 @@ class Wechat extends Model{
             default:
                 break;
         }
-        $this->api->userId = $this->data['FromUserName'];
+        $useId = preg_replace('/[_-]+/','F',$this->data['FromUserName']);
+        $this->api->userId = $useId;
         $responData = $this->api->run();
-        if ($responData->msg=='ok')
-        {
-            $this->msg = $responData->result->content;
+        if ($this->api->apiName == "Robot"){
+            if ($responData->msg=='ok')
+            {
+                $this->msg = $responData->result->content;
+            }
+        }else if($this->api->apiName == "Turing"){
+            if ($responData->code=='10000')
+            {
+                $this->msg = $responData->text;
+            }
         }
 
         $this->msgType = $this->msgType == 'event' || $this->msgType == 'voice' ? 'text':$this->msgType;
