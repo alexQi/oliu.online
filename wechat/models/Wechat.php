@@ -134,6 +134,8 @@ class Wechat extends Model{
             }
         }
 
+        yii::info(json_encode($responData),'wechat.message');
+
         $this->msgType = $this->msgType == 'event' || $this->msgType == 'voice' ? 'text':$this->msgType;
         $this->tpl     = yii::$app->params['wechat']['tpl'][$this->msgType];
     }
