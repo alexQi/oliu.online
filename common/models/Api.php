@@ -43,6 +43,7 @@ class Api extends Model{
         }
         $param['query_string'][$apiInfo['query_string']] = $this->queryParam['queryString'];
 
+        var_dump($param);
         return $this->invokeApi($param);
     }
 
