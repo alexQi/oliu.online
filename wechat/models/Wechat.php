@@ -128,7 +128,7 @@ class Wechat extends Model{
                 $msg = $responData->result->content;
 
                 $realMsg = preg_replace("/\[/",'<',$msg);
-                $realMsg = preg_replace("/\]/",'>',$realMsg);
+                $realMsg = preg_replace("/\]/",'><br>',$realMsg);
                 $realMsg = preg_replace("/(link)/",'a',$realMsg);
                 $this->msg = preg_replace("/(url)/",'href',$realMsg);
             }
