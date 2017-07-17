@@ -32,12 +32,8 @@ class IndexController extends Controller
     public function actionTest()
     {
         $response = $this->api->run();
+        var_dump($response);die();
         $msg    = $response->result->content;
-
-        $realMsg = preg_replace("/\[/",'<',$msg);
-        $realMsg = preg_replace("/\]/",'>',$realMsg);
-        $realMsg = preg_replace("/(link)/",'a',$realMsg);
-        $realMsg = preg_replace("/(url)/",'href',$realMsg);
     }
 
     public function actionDemo(){

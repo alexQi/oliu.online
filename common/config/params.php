@@ -1,7 +1,7 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
-    'supportEmail' => 'support@example.com',
+    'adminEmail' => 'alex.qiubo@qq.com',
+    'supportEmail' => 'alex.qiubo@qq.com',
     'user.passwordResetTokenExpire' => 3600,
 
     //upload file path

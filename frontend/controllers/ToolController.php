@@ -9,6 +9,7 @@ namespace frontend\controllers;
 
 use yii;
 use udokmeci\yii2beanstalk\Beanstalk;
+use common\models\Mail;
 
 class ToolController extends BaseController
 {
@@ -28,5 +29,11 @@ class ToolController extends BaseController
         if (!$put){
             exit($put);
         }
+    }
+
+    public function actionSendMail(){
+        $mail = new Mail();
+        $res = $mail->SendMail();
+        var_dump($res);
     }
 }
