@@ -22,7 +22,6 @@ class ConsController extends Controller
         while (true){
             $job  = $beanstalk->reserve();
             $data = $job->getData();
-            var_dump($data);
             if ($data){
                 $beanstalk->release($job,5,10);
             }else{
