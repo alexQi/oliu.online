@@ -7,7 +7,7 @@
  */
 namespace console\controllers;
 
-use udokmeci\yii2beanstalk\Beanstalk;
+use common\components\yii2beanstalk\Beanstalk;
 use yii;
 use yii\console\Controller;
 

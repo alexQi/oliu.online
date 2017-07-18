@@ -3,7 +3,7 @@
 
 namespace console\controllers;
 
-use udokmeci\yii2beanstalk\BeanstalkController;
+use common\components\BeanstalkController;
 use yii\helpers\Console;
 
 class WorkerController extends BeanstalkController
