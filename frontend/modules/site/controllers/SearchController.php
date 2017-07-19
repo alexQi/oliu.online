@@ -5,10 +5,11 @@
  * Date: 17-7-18
  * Time: 下午5:00
  */
-namespace frontend\controllers;
+namespace frontend\modules\site\controllers;
 
 use common\components\Common;
 use frontend\models\Search;
+use frontend\controllers\BaseController;
 
 class SearchController extends BaseController
 {

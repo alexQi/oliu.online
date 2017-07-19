@@ -35,7 +35,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => '/site/site/error',
         ],
         "urlManager" => [
             //用于表明urlManager是否启用URL美化功能，在Yii1.1中称为path格式URL，
@@ -52,7 +52,9 @@ return [
             "suffix" => "",
             "rules" => [
                 "<controller:\w+>/<id:\d+>.html"=>"<controller>/view",
-                "<controller:\w+>/<action:\w+>.html"=>"<controller>/<action>"
+                "<controller:\w+>/<action:\w+>.html"=>"<controller>/<action>",
+                "<module:\w+>/<controller:\w+>/<id:\d+>.html"=>"<module>/<controller>/view",
+                "<module:\w+>/<controller:\w+>/<action:\w+>.html"=>"<module>/<controller>/<action>"
             ],
         ],
     ],

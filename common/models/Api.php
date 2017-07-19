@@ -32,8 +32,9 @@ class Api extends Model{
         $param['url']    = $apiInfo['url'].$apiInfo['url_path'];
         $param['method'] = $apiInfo['request_method'];
 
-        $this->apiName = $apiInfo['api_name'];
+        $this->apiName   = $apiInfo['api_name'];
 
+        $param['header'] = '';
         if ($apiInfo['api_name']=='Robot')
         {
             $param['header'] = ["Authorization:APPCODE ".yii::$app->params['aliyun']['AppCode']];

@@ -5,11 +5,12 @@
  * Date: 17-7-11
  * Time: 下午2:46
  */
-namespace frontend\controllers;
+namespace frontend\modules\tool\controllers;
 
 use yii;
-use udokmeci\yii2beanstalk\Beanstalk;
+use common\components\yii2beanstalk\Beanstalk;
 use common\models\Mail;
+use frontend\controllers\BaseController;
 
 class ToolController extends BaseController
 {
