@@ -16,6 +16,21 @@ return [
         "admin" => [
             "class" => "backend\modules\admin\Module",
         ],
+        'site' => [
+            'class' => 'backend\modules\site\Module',
+        ],
+        'ajax' => [
+            'class' => 'backend\modules\ajax\Module',
+        ],
+        'product' => [
+            'class' => 'backend\modules\product\Module',
+        ],
+        'api' => [
+            'class' => 'backend\modules\api\Module',
+        ],
+        'log' => [
+            'class' => 'backend\modules\log\Module',
+        ],
     ],
     'components' => [
         'request' => [
