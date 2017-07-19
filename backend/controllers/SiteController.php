@@ -61,12 +61,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $query = Yii::$app->db->createCommand('show status');
+        $query = Yii::$app->db->createCommand('show processlist');
         $mysqlStatus = $query->queryAll();
-        $mysqlInfo = array();
-        foreach ($mysqlStatus as $mysql){
-            $mysqlInfo[$mysql['Variable_name']] = $mysql['Value'];
-        }
 
         $queue = yii::$app->beanstalk;
         $tubes = $queue->listTubes();
@@ -75,6 +71,16 @@ class SiteController extends Controller
         {
             $list[] = $queue->statsTube($val);
         }
+
+        $mysqlInfo = new ArrayDataProvider(
+            [
+                'allModels'  => $mysqlStatus,
+                'sort'       => [
+                    'attributes' => ['Id', 'User', 'Time', 'State', 'State'],
+                ],
+                'pagination' => ['pageSize' => 15],
+            ]
+        );
 
         $dataProvider = new ArrayDataProvider(
             [

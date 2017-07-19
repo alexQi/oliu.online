@@ -86,27 +86,48 @@ $server = $_SERVER;
         <div class="panel panel-success">
             <div class="panel-heading"><i class="glyphicon glyphicon-fire"></i>MYSQL运行信息</div>
             <div class="panel-body">
-                键值总数量:3546
-                <p></p>
+                <?php Pjax::begin(['id' => 'tube-list', 'clientOptions' => ["skipOuterContainers" => true]]);?>
+                <?=GridView::widget([
+                    'dataProvider' => $mysqlInfo,
+                    'layout'       => "{summary}{pager}{items}",
+                    'summary'      => "当前共有{totalCount}条数据,分为{pageCount}页,当前为第{page}页",
+                    'columns'      => [
+                        [
+                            'attribute' => 'Id',
+                            'label'     => 'ID',
+                            'format'    => 'raw',
+                            'value'     => function ($val) {
+                                return $val['Id'];
+                            },
+                        ],
+                        [
+                            'attribute' => 'User',
+                            'label'     => '用户',
+                        ],
+                        [
+                            'attribute' => 'Host',
+                            'label'     => '地址',
+                        ],
+                        [
+                            'attribute' => 'Command',
+                            'label'     => '命令类型',
+                        ],
+                        [
+                            'attribute' => 'Time',
+                            'label'     => '用时',
+                        ],
+                        [
+                            'attribute' => 'State',
+                            'label'     => '状态',
+                        ],
+                        [
+                            'attribute' => 'Info',
+                            'label'     => '命令',
+                        ],
 
-                <?php
-                array_pop($info);
-                $meminfo           = 1;
-                $client_list       = 2;
-                $redis_version     = 3;
-                $blocked_clients   = 4;
-                $uptime_in_seconds = 5;
-                ?>
-                版本:<?=$redis_version?>
-                <p></p>
-                已工作时间:<?=$uptime_in_seconds?>秒
-                <p></p>
-                内存占用:<?=$meminfo;?>
-                <p></p>
-                当前连接:<?=$client_list;?>
-                <p></p>
-                阻塞连接:<?=$blocked_clients;?>
-
+                    ],
+                ]);?>
+                <?php Pjax::end();?>
             </div>
         </div>
     </div>
