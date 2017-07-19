@@ -14,6 +14,9 @@ $config = [
         'tool' => [
             'class' => 'frontend\modules\tool\Module',
         ],
+        'ajax' => [
+            'class' => 'frontend\modules\ajax\Module',
+        ],
     ],
 ];
 
