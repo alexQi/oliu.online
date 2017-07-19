@@ -20,7 +20,7 @@ $server = $_SERVER;
         <div class="panel panel-primary">
             <div class="panel-heading"><i class="glyphicon glyphicon-info-sign"></i>功能区</div>
             <div class="panel-body">
-                <a href="<?=\yii\helpers\Url::to(['/site/flush-cache'])?>" class="btn btn-primary">清除系统缓存</a>
+                <a href="<?=\yii\helpers\Url::to(['/site/site/flush-cache'])?>" class="btn btn-primary">清除系统缓存</a>
                 <?php if (Yii::$app->getSession()->hasFlash("navclear")): ?>
                     <code><?= \Yii::$app->getSession()->getFlash("navclear"); ?></code>
                 <?php endif; ?>

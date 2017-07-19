@@ -50,9 +50,9 @@ return [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class'  => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
-                    'logVars'=>[],//被收集记录的额外数据如'logVars'=>['_GET','_POST','_FILES','_COOKIE','_SESSION','_SERVER'],
+                    'logVars'=> [],//被收集记录的额外数据如'logVars'=>['_GET','_POST','_FILES','_COOKIE','_SESSION','_SERVER'],
                 ],
             ],
         ],
