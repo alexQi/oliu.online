@@ -29,7 +29,7 @@ use yii\di\Instance;
  * or use [[\Yii::$container]]
  * 
  * ```
- * Yii::$container->set('mdm\admin\components\Configs',[
+ * Yii::$container->set('backend\modules\admin\components\Configs',[
  *     'db' => 'customDb',
  *     'menuTable' => 'admin_menu',
  * ]);

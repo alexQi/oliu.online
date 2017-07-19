@@ -22,7 +22,7 @@ class PasswordResetRequest extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'exist',
-                'targetClass' => 'mdm\admin\models\User',
+                'targetClass' => 'backend\modules\admin\models\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
                 'message' => 'There is no user with such email.'
             ],

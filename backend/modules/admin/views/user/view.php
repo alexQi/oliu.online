@@ -2,15 +2,15 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use mdm\admin\components\Helper;
+use backend\modules\admin\components\Helper;
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
-use mdm\admin\AnimateAsset;
+use backend\modules\admin\AnimateAsset;
 use yii\web\YiiAsset;
 
 /* @var $this yii\web\View */
-/* @var $model mdm\admin\models\User */
+/* @var $model backend\modules\admin\models\User */
 
 $this->title = $model->username;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Users'), 'url' => ['index']];
@@ -62,7 +62,7 @@ $controllerId = $this->context->uniqueId . '/';
 </div>
 <?php
 /* @var $this yii\web\View */
-/* @var $model mdm\admin\models\Assignment */
+/* @var $model backend\modules\admin\models\Assignment */
 /* @var $fullnameField string */
 
 AnimateAsset::register($this);

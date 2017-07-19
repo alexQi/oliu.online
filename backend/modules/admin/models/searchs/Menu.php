@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use backend\modules\admin\models\Menu as MenuModel;
 
 /**
- * Menu represents the model behind the search form about [[\mdm\admin\models\Menu]].
+ * Menu represents the model behind the search form about [[\backend\modules\admin\models\Menu]].
  * 
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
