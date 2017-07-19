@@ -12,6 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'language'=>'zh-CN',
+    'defaultRoute' => '/site/site/index',
     "modules" => [
         "admin" => [
             "class" => "backend\modules\admin\Module",
@@ -56,7 +57,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => '/site/site/error',
         ],
         "urlManager" => [
             //用于表明urlManager是否启用URL美化功能，在Yii1.1中称为path格式URL，
@@ -72,8 +73,10 @@ return [
             // 指定续接在URL后面的一个后缀，如 .html 之类的。仅在 enablePrettyUrl 启用时有效。
             "suffix" => "",
             "rules" => [
-                "<controller:\w+>/<id:\d+>"=>"<controller>/view",
-                "<controller:\w+>/<action:\w+>"=>"<controller>/<action>"
+                "<controller:\w+>/<id:\d+>.html"=>"<controller>/view",
+                "<controller:\w+>/<action:\w+>.html"=>"<controller>/<action>",
+                "<module:\w+>/<controller:\w+>/<id:\d+>.html"=>"<module>/<controller>/view",
+                "<module:\w+>/<controller:\w+>/<action:\w+>.html"=>"<module>/<controller>/<action>"
             ],
         ],
 

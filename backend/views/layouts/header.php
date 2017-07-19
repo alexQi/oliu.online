@@ -133,11 +133,6 @@ use yii\helpers\Html;
                                         <i class="fa fa-shopping-cart text-green"></i> 25 sales made
                                     </a>
                                 </li>
-<!--                                <li>-->
-<!--                                    <a href="#">-->
-<!--                                        <i class="fa fa-user text-red"></i> You changed your username-->
-<!--                                    </a>-->
-<!--                                </li>-->
                             </ul>
                         </li>
                         <li class="footer"><a href="#">View all</a></li>
@@ -180,8 +175,8 @@ use yii\helpers\Html;
                             <div class="pull-right">
                                 <?= Html::a(
                                     'loginOut',
-                                    ['/site/logout'],
-                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
+                                    ['/site/site/logout'],
+                                    ['class' => 'btn btn-default btn-flat']
                                 ) ?>
                             </div>
                         </li>
