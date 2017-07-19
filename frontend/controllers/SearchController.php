@@ -23,7 +23,7 @@ class SearchController extends BaseController
         if (!empty($this->queryParam))
         {
             $html = Common::httpRequest('https://www.google.com.hk/#safe=strict&q='.$this->queryParam['keyword']);
-            var_dump($html);die();
+//            var_dump($html);die();
             echo $html;
         }else{
             $search  = new Search();

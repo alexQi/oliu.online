@@ -4,6 +4,9 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use yii\widgets\Pjax;
+use yii\grid\GridView;
+use yii\bootstrap\Modal;
 $server = $_SERVER;
 
 ?>
@@ -51,17 +54,7 @@ $server = $_SERVER;
                     <div class="clearfix"></div>
                 </div>
                 <script>
-                    $(function(){
-                        $("#api-backend-server").load("http://conf.api.dev.7tkt.com/setbackend",function(data){
-                            $("#api-backend-server").val(data);
-                        });
-                        $("#front-backend-server").load("http://conf.front.dev.7tkt.com/setbackend",function(data){
-                            $("#front-backend-server").val(data);
-                        });
-                        $("#ui-backend-server").load("http://conf.ui.dev.7tkt.com/setbackend",function(data){
-                            $("#ui-backend-server").val(data);
-                        });
-                    })
+
                 </script>
             <?php endif;?>
         </div>
@@ -122,6 +115,64 @@ $server = $_SERVER;
     <div class="col-lg-12">
         <div class="panel panel-info">
             <div class="panel-heading"><i class="glyphicon glyphicon-transfer"></i> beanstalk队列运行信息</div>
+            <div class="panel-body">
+                <?php Pjax::begin(['id' => 'tube-list', 'clientOptions' => ["skipOuterContainers" => true]]);?>
+                <?=GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'layout'       => "{summary}{pager}{items}",
+                    'summary'      => "当前共有{totalCount}条数据,分为{pageCount}页,当前为第{page}页",
+                    'columns'      => [
+                        [
+                            'attribute' => 'name',
+                            'label'     => '队列名称',
+                            'format'    => 'raw',
+                            'value'     => function ($val) {
+                                return Html::a($val->name,
+                                    ["/system/beanstalk/channel", "name" => $val->name],
+                                    [
+                                        'class'       => (int) $val["current-jobs-buried"] > 0 ? 'detail-link btn btn-sm btn-danger' : 'detail-link btn btn-sm btn-success',
+                                        'data-pjax'   => "0",
+                                        'data-key'    => $val->name,
+                                        'data-toggle' => 'modal',
+                                        'data-target' => '#activity-modal',
+                                    ]);
+                            },
+                        ],
+                        [
+                            'attribute' => 'total-jobs',
+                            'label'     => '总数',
+                        ],
+                        [
+                            'attribute' => 'current-jobs-ready',
+                            'label'     => '准备就绪',
+                        ],
+                        [
+                            'attribute' => 'current-jobs-reserved',
+                            'label'     => '已接收',
+                        ],
+                        [
+                            'attribute' => 'current-jobs-delayed',
+                            'label'     => '延时处理',
+                        ],
+                        [
+                            'attribute' => 'current-jobs-buried',
+                            'label'     => '已睡眠',
+                        ],
+
+                    ],
+                ]);?>
+                <?php Pjax::end();?>
+                <?php Modal::begin([
+                    'id'     => 'activity-modal',
+                    'header' => '<h4 class="modal-title">队列详情</h4>',
+                    'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">关闭</a>',
+                ]);?>
+
+                <div class="well">
+
+                </div>
+                <?php Modal::end();?>
+            </div>
         </div>
     </div>
 </div>

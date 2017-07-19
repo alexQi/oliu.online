@@ -13,6 +13,12 @@ use yii\console\Controller;
 
 class ConsController extends Controller
 {
+
+    public function actionIndex()
+    {
+
+    }
+
     public function actionHandleData()
     {
         $beanstalk = new Beanstalk();

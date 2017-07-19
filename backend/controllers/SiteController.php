@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use yii\data\ArrayDataProvider;
 
 /**
  * Site controller
@@ -66,7 +67,29 @@ class SiteController extends Controller
         foreach ($mysqlStatus as $mysql){
             $mysqlInfo[$mysql['Variable_name']] = $mysql['Value'];
         }
-        return $this->render('index',['mysqlInfo'=>$mysqlInfo]);
+
+        $queue = yii::$app->beanstalk;
+        $tubes = $queue->listTubes();
+        $list  = [];
+        foreach ($tubes as $key=>$val)
+        {
+            $list[] = $queue->statsTube($val);
+        }
+
+        $dataProvider = new ArrayDataProvider(
+            [
+                'allModels'  => $list,
+                'sort'       => [
+                    'attributes' => ['name', 'total-jobs', 'current-jobs-buried', 'current-jobs-delayed'],
+                ],
+                'pagination' => ['pageSize' => 15],
+            ]
+        );
+
+        return $this->render('index',[
+            'mysqlInfo'    => $mysqlInfo,
+            'dataProvider' => $dataProvider
+        ]);
     }
 
     public function actionFlushCache(){

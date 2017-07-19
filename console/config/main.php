@@ -18,6 +18,9 @@ return [
           ],
         'worker'=>[
             'class' => 'console\controllers\WorkerController',
+        ],
+        'cons'=>[
+            'class' => 'console\controllers\ConsController',
         ]
 
     ],
