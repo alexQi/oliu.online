@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\modules\product\controllers;
 
 use Yii;
 use app\models\Category;

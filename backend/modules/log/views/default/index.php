@@ -1,12 +1,32 @@
-<div class="log-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+<?php
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\AdminLogSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Admin Logs';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="admin-log-index">
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            'id',
+            'route',
+            'table_name',
+            'operation_type',
+            'description:ntext',
+            [
+                'attribute'=>'created_at',
+                'format'=>['date', 'php:Y-m-d H:i:s']
+            ],
+            // 'user_id',
+        ],
+    ]); ?>
 </div>

@@ -11,8 +11,8 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'language'=>'zh-CN',
-    'defaultRoute' => '/site/site/index',
+    'language'=> 'zh-CN',
+    'homeUrl' => '/site/default/index',
     "modules" => [
         "admin" => [
             "class" => "backend\modules\admin\Module",
@@ -57,7 +57,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => '/site/site/error',
+            'errorAction' => '/site/default/error',
         ],
         "urlManager" => [
             //用于表明urlManager是否启用URL美化功能，在Yii1.1中称为path格式URL，

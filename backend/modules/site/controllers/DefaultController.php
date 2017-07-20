@@ -2,6 +2,7 @@
 namespace backend\modules\site\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -11,7 +12,7 @@ use yii\data\ArrayDataProvider;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class DefaultController extends Controller
 {
     /**
      * @inheritdoc
@@ -36,8 +37,8 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['get'],
-                ],
+                    'logout' => ['post'],
+                ]
             ],
         ];
     }
@@ -131,8 +132,10 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
+        if (Yii::$app->user->logout())
+        {
+            return $this->redirect(Url::to(['login']));
+        }
 
-        return $this->goHome();
     }
 }

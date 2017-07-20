@@ -180,8 +180,8 @@ use yii\helpers\Html;
                             <div class="pull-right">
                                 <?= Html::a(
                                     'loginOut',
-                                    ['/site/site/logout'],
-                                    ['data-method' => 'get', 'class' => 'btn btn-default btn-flat']
+                                    ['/site/default/logout'],
+                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
                                 ) ?>
                             </div>
                         </li>
