@@ -45,4 +45,17 @@ class ConsController extends Controller
             }
         }
     }
+
+    public function actionInvokeWork(){
+        $beanstalk = new Beanstalk();
+        $beanstalk->useTube('oliu.sendEmail');
+        $param['from'] = [yii::$app->params['adminEmail']=>'Alex'];
+        $param['to']   = yii::$app->params['adminEmail'];
+
+        $put = $beanstalk->put(json_encode($param));
+
+        if (!$put){
+            exit($put);
+        }
+    }
 }
