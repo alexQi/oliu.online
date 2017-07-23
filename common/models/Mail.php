@@ -16,7 +16,7 @@ class Mail extends Model
     /**
      * @return bool
      */
-    public function SendMail()
+    public function SendMail($param)
     {
         $api = new Api();
         $api->queryParam['queryString'] = '杭州天气';
@@ -49,8 +49,8 @@ class Mail extends Model
         }
 
         $mail= Yii::$app->mailer->compose();
-        $mail->setFrom([yii::$app->params['adminEmail']=>'Alex']);
-        $mail->setTo(yii::$app->params['adminEmail']);
+        $mail->setFrom($param['from']);
+        $mail->setTo($param['to']);
         $mail->setSubject("天气预报");
         $mail->setHtmlBody($this->msg);
         return $mail->send();

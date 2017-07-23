@@ -27,7 +27,8 @@ class WorkerController extends BeanstalkController
             foreach ($info as $row){
                 fwrite(STDOUT, Console::ansiFormat("- $row"."\n", [Console::FG_GREEN]));
             }
-            return self::RELEASE;
+//            return self::RELEASE;
+            return self::DELETE;
         }
         catch(\Exception $e)
         {

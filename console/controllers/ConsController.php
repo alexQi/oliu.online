@@ -10,28 +10,38 @@ namespace console\controllers;
 use common\components\yii2beanstalk\Beanstalk;
 use yii;
 use yii\console\Controller;
+use yii\base\Exception;
+use common\models\Mail;
 
 class ConsController extends Controller
 {
 
     public function actionIndex()
     {
-
-    }
-
-    public function actionHandleData()
-    {
         $beanstalk = new Beanstalk();
-        $beanstalk->useTube('oliu.handleData');
-        $beanstalk->watch('oliu.handleData');
+        $beanstalk->useTube('oliu.sendEmail');
+        $beanstalk->watch('oliu.sendEmail');
 
         while (true){
             $job  = $beanstalk->reserve();
-            $data = $job->getData();
-            if ($data){
+            try{
+                $data = $job->getData();
+
+                $data = json_encode($data);
+                if (!$data)
+                {
+                    continue;
+                }
+                $mail = new Mail();
+                $res = $mail->SendMail(json_decode($data,true));
+                if (!$res){
+                    throw new Exception('发送失败');
+                }
+                $beanstalk->delete($job);
+            }catch (Exception $e)
+            {
                 $beanstalk->release($job,5,10);
-            }else{
-                $beanstalk->release($job,5,10);
+                echo $e->getMessage();
             }
         }
     }

@@ -17,15 +17,11 @@ class ToolController extends BaseController
     public function actionIndex()
     {
         $beanstalk = new Beanstalk();
-        $beanstalk->useTube('oliuSaveData');
-        $put = $beanstalk->put('cowsay hahahahahahah');
+        $beanstalk->useTube('oliu.sendEmail');
+        $param['from'] = [yii::$app->params['adminEmail']=>'Alex'];
+        $param['to']   = yii::$app->params['adminEmail'];
 
-        if (!$put){
-            exit($put);
-        }
-
-        $beanstalk->useTube('oliu.handleData');
-        $put = $beanstalk->put('cowsay hahahahahahah');
+        $put = $beanstalk->put(json_encode($param));
 
         if (!$put){
             exit($put);
@@ -34,7 +30,9 @@ class ToolController extends BaseController
 
     public function actionSendMail(){
         $mail = new Mail();
-        $res = $mail->SendMail();
+        $param['from'] = [yii::$app->params['adminEmail']=>'Alex'];
+        $param['to']   = yii::$app->params['adminEmail'];
+        $res = $mail->SendMail($param);
         var_dump($res);
     }
 }
