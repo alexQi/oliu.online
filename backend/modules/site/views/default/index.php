@@ -149,7 +149,7 @@ $server = $_SERVER;
                             'format'    => 'raw',
                             'value'     => function ($val) {
                                 return Html::a($val->name,
-                                    ["/system/beanstalk/channel", "name" => $val->name],
+                                    ["/site/beanstalk/channel", "name" => $val->name],
                                     [
                                         'class'       => (int) $val["current-jobs-buried"] > 0 ? 'detail-link btn btn-sm btn-danger' : 'detail-link btn btn-sm btn-success',
                                         'data-pjax'   => "0",
@@ -197,3 +197,17 @@ $server = $_SERVER;
         </div>
     </div>
 </div>
+<?php
+$this->registerJs(
+    "
+        $(document).on(\"click\",\".detail-link\",function() {
+            $.get($(this).attr(\"href\"),
+                function (data) {
+                    $('.modal-body').html(data);
+                    $('#activity-modal').modal();
+                }
+            );
+        });
+    "
+);
+?>
