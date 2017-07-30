@@ -58,4 +58,15 @@ class ConsController extends Controller
             exit($put);
         }
     }
+
+    public function actionDeleteAll(){
+        $beanstalk = new Beanstalk();
+        $beanstalk->useTube('oliu.sendEmail');
+        $beanstalk->watch('oliu.sendEmail');
+
+        while (true){
+            $job  = $beanstalk->reserve();
+            $beanstalk->delete($job);
+        }
+    }
 }
