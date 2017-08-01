@@ -31,9 +31,8 @@ class IndexController extends Controller
 
     public function actionTest()
     {
+        $this->api->getApiInfo();
         $response = $this->api->run();
-        var_dump($response);die();
-        $msg    = $response->result->content;
     }
 
     public function actionDemo(){

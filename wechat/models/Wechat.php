@@ -19,7 +19,7 @@ class Wechat extends Model{
     public $api;
     public $msgType;
     public $msg = "不知道是什么鬼地方出错啦～～";
-    public $tpl;
+    public $msgTpl;
 
     public function valid()
 
@@ -119,40 +119,17 @@ class Wechat extends Model{
         }
         $useId = preg_replace('/[_-]+/','F',$this->data['FromUserName']);
         $this->api->userId = $useId;
-        $responData = $this->api->run();
 
-
-        if ($this->api->apiName == "Robot"){
-            if ($responData->msg=='ok')
-            {
-                $msg = $responData->result->content;
-
-                $realMsg = preg_replace("/\[/",'<',$msg);
-                $realMsg = preg_replace("/\]/",'>',$realMsg);
-                $realMsg = preg_replace("/(link)/",'a',$realMsg);
-                $this->msg = preg_replace("/(url)/",'href',$realMsg);
-            }
-        }else if($this->api->apiName == "Turing"){
-            switch ($responData->code)
-            {
-                case '100000':
-                    $this->msg = $responData->text;
-                    break;
-                case '200000':
-                    $this->msg = $responData->text;
-                    $this->msg .= "<a href='$responData->url'>[详情链接]</a>";
-                    break;
-                default:
-                    //.......
-            }
-        }
+        // 获取API信息
+        $this->api->getApiInfo();
+        $this->msg = $this->api->run();
 
         $this->msgType = $this->msgType == 'event' || $this->msgType == 'voice' ? 'text':$this->msgType;
-        $this->tpl     = yii::$app->params['wechat']['tpl'][$this->msgType];
+        $this->msgTpl  = yii::$app->params['wechat']['tpl'][$this->msgType];
     }
 
     public function sendMsg(){
-        $result = sprintf($this->tpl, $this->data['FromUserName'], $this->data['ToUserName'], time(), $this->msg);
+        $result = sprintf($this->msgTpl, $this->data['FromUserName'], $this->data['ToUserName'], time(), $this->msg);
 
         return $result;
     }
