@@ -79,7 +79,7 @@ class DefaultController extends Controller
                 'sort'       => [
                     'attributes' => ['Id', 'User', 'Time', 'State', 'State'],
                 ],
-                'pagination' => ['pageSize' => 15],
+                'pagination' => ['pageSize' => 5],
             ]
         );
 
