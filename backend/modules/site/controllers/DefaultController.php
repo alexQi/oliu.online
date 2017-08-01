@@ -77,7 +77,7 @@ class DefaultController extends Controller
             [
                 'allModels'  => $mysqlStatus,
                 'sort'       => [
-                    'attributes' => ['Id','Time', 'State', 'State'],
+                    'attributes' => ['Id', 'User', 'Time', 'State', 'State'],
                 ],
                 'pagination' => ['pageSize' => 3],
             ]

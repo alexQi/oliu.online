@@ -89,7 +89,7 @@ $server = $_SERVER;
                 <?php Pjax::begin(['id' => 'tube-list', 'clientOptions' => ["skipOuterContainers" => true]]);?>
                 <?=GridView::widget([
                     'dataProvider' => $mysqlInfo,
-                    'layout'       => "{summary}{pager}{items}",
+                    'layout'       => "{summary}{items}{pager}",
                     'summary'      => "当前共有{totalCount}条数据,分为{pageCount}页,当前为第{page}页",
                     'columns'      => [
                         [
@@ -100,10 +100,10 @@ $server = $_SERVER;
                                 return $val['Id'];
                             },
                         ],
-                        [
-                            'attribute' => 'User',
-                            'label'     => '用户',
-                        ],
+//                        [
+//                            'attribute' => 'User',
+//                            'label'     => '用户',
+//                        ],
                         [
                             'attribute' => 'Host',
                             'label'     => '地址',
