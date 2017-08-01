@@ -7,11 +7,12 @@
  */
 namespace console\controllers;
 
-use common\components\yii2beanstalk\Beanstalk;
 use yii;
 use yii\console\Controller;
 use yii\base\Exception;
+use common\components\yii2beanstalk\Beanstalk;
 use common\models\Mail;
+use common\models\Api;
 
 class ConsController extends Controller
 {
@@ -22,6 +23,11 @@ class ConsController extends Controller
         $beanstalk->useTube('oliu.sendEmail');
         $beanstalk->watch('oliu.sendEmail');
 
+        //初始化Api
+        $api = new Api();
+        $api->queryParam['queryString'] = '杭州天气';
+
+        $api->getApiInfo();
         while (true){
             $job  = $beanstalk->reserve();
             try{
@@ -33,7 +39,13 @@ class ConsController extends Controller
                     continue;
                 }
                 $mail = new Mail();
-                $res = $mail->SendMail(json_decode($data,true));
+
+                $param = json_decode($data,true);
+                $param['title'] = $api->queryParam['queryString'];
+                $param['msg']   = $api->run();
+
+
+                $res = $mail->SendMail($param);
                 if (!$res){
                     throw new Exception('发送失败');
                 }

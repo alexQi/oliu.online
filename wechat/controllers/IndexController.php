@@ -33,11 +33,7 @@ class IndexController extends Controller
     {
         $this->api->getApiInfo();
         $response = $this->api->run();
+        echo $response;
     }
-
-    public function actionDemo(){
-
-    }
-
 
 }
