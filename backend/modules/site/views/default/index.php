@@ -10,204 +10,134 @@ use yii\bootstrap\Modal;
 $server = $_SERVER;
 
 ?>
-<style>
-    .modal-dialog{
-        width:800px;
-    }
-</style>
 <div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading"><i class="glyphicon glyphicon-info-sign"></i>功能区</div>
-            <div class="panel-body">
-                <a href="<?=\yii\helpers\Url::to(['/site/default/flush-cache'])?>" class="btn btn-primary">清除系统缓存</a>
-                <?php if (Yii::$app->getSession()->hasFlash("navclear")): ?>
-                    <code><?= \Yii::$app->getSession()->getFlash("navclear"); ?></code>
-                <?php endif; ?>
-                <code><?=\Yii::$app->request->getHostInfo();?></code>
-            </div>
-            <?php if(YII_DEBUG==='alex'):?>
-                <div class="row" style="padding-left:10px;padding-right:5px;padding-bottom:10px;">
-                    <?php echo Html::beginForm('http://conf.api.dev.7tkt.com/setbackend','post',['class'=>'form'])?>
-                    <div class="col-lg-3"><?=Html::input('text','url','',['class'=>'form-control','id'=>'api-backend-server']);?></div>
-                    <div class="col-lg-1"><?=Html::submitButton('api',['class'=>'form-control btn btn-info']);?></div>
-                    <?php echo Html::endForm();?>
-                    <?php echo Html::beginForm('http://conf.front.dev.7tkt.com/setbackend','post',['class'=>'form'])?>
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Simple Full Width Table</h3>
 
-                    <div class="col-lg-3">
-                        <?=Html::input('text','url','',['class'=>'form-control','id'=>'front-backend-server']);?>
-                    </div>
-                    <div class="col-lg-1">
-                        <?=Html::submitButton('网站',['class'=>'form-control btn btn-info']);?>
-                    </div>
-                    <?php echo Html::endForm();?>
-                    <?php echo Html::beginForm('http://conf.ui.dev.7tkt.com/setbackend','post',['class'=>'form'])?>
-
-                    <div class="col-lg-3">
-                        <?=Html::input('text','url','',['class'=>'form-control']);?>
-                    </div>
-                    <div class="col-lg-1">
-                        <?=Html::submitButton('UI',['class'=>'form-control btn btn-info']);?>
-                    </div>
-
-                    <?php echo Html::endForm();?>
-                    <div class="clearfix"></div>
+                <div class="box-tools">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        <li><a href="#">«</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
                 </div>
-                <script>
-
-                </script>
-            <?php endif;?>
-        </div>
-    </div>
-
-    <div class="col-lg-5">
-        <div class="panel panel-info">
-            <div class="panel-heading"><i class="glyphicon glyphicon-info-sign"></i>系统信息</div>
-            <div class="panel-body">
-                当前PHP版本:<?=PHP_VERSION?>/<code>Yii Framework <?=Yii::getVersion();?></code>
-                <p></p>
-                操作系统版本:<?=PHP_OS?>
-                <p></p>
-                文件最大上传:<?= ini_get("upload_max_filesize"); ?>
-                <p></p>
-                工作模式:<?=$server["SERVER_SOFTWARE"]?>/<?=php_sapi_name();?>
-                <p></p>
-                工作路径:<?=$server["DOCUMENT_ROOT"]?>
-                <p></p>
-                程序版本:<?php
-                exec("git status", $info);
-                exec("du -hs ../", $a);
-                echo $info[0] . '&nbsp;'.'体积:' . str_replace("../","",$a[0]);
-                ?>
             </div>
-        </div>
-    </div>
-    <div class="col-lg-7">
-        <div class="panel panel-success">
-            <div class="panel-heading"><i class="glyphicon glyphicon-fire"></i>MYSQL运行信息</div>
-            <div class="panel-body">
-                <?php Pjax::begin(['id' => 'tube-list', 'clientOptions' => ["skipOuterContainers" => true]]);?>
-                <?=GridView::widget([
-                    'dataProvider' => $mysqlInfo,
-                    'layout'       => "{summary}{items}<div class=\"text-right tooltip-demo\">{pager}</div>",
-                    'summary'      => "当前共有{totalCount}条数据,分为{pageCount}页,当前为第{page}页",
-                    'columns'      => [
-                        [
-                            'attribute' => 'Id',
-                            'label'     => 'ID',
-                            'format'    => 'raw',
-                            'value'     => function ($val) {
-                                return $val['Id'];
-                            },
-                        ],
-//                        [
-//                            'attribute' => 'User',
-//                            'label'     => '用户',
-//                        ],
-                        [
-                            'attribute' => 'Host',
-                            'label'     => '地址',
-                        ],
-                        [
-                            'attribute' => 'Command',
-                            'label'     => '命令类型',
-                        ],
-                        [
-                            'attribute' => 'Time',
-                            'label'     => '用时',
-                        ],
-                        [
-                            'attribute' => 'State',
-                            'label'     => '状态',
-                        ],
-                        [
-                            'attribute' => 'Info',
-                            'label'     => '命令',
-                        ],
-
-                    ],
-                ]);?>
-                <?php Pjax::end();?>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table">
+                    <tbody><tr>
+                        <th style="width: 10px">#</th>
+                        <th>Task</th>
+                        <th>Progress</th>
+                        <th style="width: 40px">Label</th>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>Update software</td>
+                        <td>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-red">55%</span></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>Clean database</td>
+                        <td>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-yellow">70%</span></td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>Cron job running</td>
+                        <td>
+                            <div class="progress progress-xs progress-striped active">
+                                <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-light-blue">30%</span></td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>Fix and squish bugs</td>
+                        <td>
+                            <div class="progress progress-xs progress-striped active">
+                                <div class="progress-bar progress-bar-success" style="width: 90%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-green">90%</span></td>
+                    </tr>
+                    </tbody></table>
             </div>
+            <!-- /.box-body -->
         </div>
+        <!-- /.box -->
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Striped Full Width Table</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-striped">
+                    <tbody><tr>
+                        <th style="width: 10px">#</th>
+                        <th>Task</th>
+                        <th>Progress</th>
+                        <th style="width: 40px">Label</th>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>Update software</td>
+                        <td>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-red">55%</span></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>Clean database</td>
+                        <td>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-yellow">70%</span></td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>Cron job running</td>
+                        <td>
+                            <div class="progress progress-xs progress-striped active">
+                                <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-light-blue">30%</span></td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>Fix and squish bugs</td>
+                        <td>
+                            <div class="progress progress-xs progress-striped active">
+                                <div class="progress-bar progress-bar-success" style="width: 90%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-green">90%</span></td>
+                    </tr>
+                    </tbody></table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-info">
-            <div class="panel-heading"><i class="glyphicon glyphicon-transfer"></i> beanstalk队列运行信息</div>
-            <div class="panel-body">
-                <?php Pjax::begin(['id' => 'tube-list', 'clientOptions' => ["skipOuterContainers" => true]]);?>
-                <?=GridView::widget([
-                    'dataProvider' => $dataProvider,
-                    'layout'       => "{summary}{pager}{items}",
-                    'summary'      => "当前共有{totalCount}条数据,分为{pageCount}页,当前为第{page}页",
-                    'columns'      => [
-                        [
-                            'attribute' => 'name',
-                            'label'     => '队列名称',
-                            'format'    => 'raw',
-                            'value'     => function ($val) {
-                                return Html::a($val->name,
-                                    ["/site/beanstalk/channel", "name" => $val->name],
-                                    [
-                                        'class'       => (int) $val["current-jobs-buried"] > 0 ? 'detail-link btn btn-sm btn-danger' : 'detail-link btn btn-sm btn-success',
-                                        'data-pjax'   => "0",
-                                        'data-key'    => $val->name,
-                                        'data-toggle' => 'modal',
-                                        'data-target' => '#activity-modal',
-                                    ]);
-                            },
-                        ],
-                        [
-                            'attribute' => 'total-jobs',
-                            'label'     => '总数',
-                        ],
-                        [
-                            'attribute' => 'current-jobs-ready',
-                            'label'     => '准备就绪',
-                        ],
-                        [
-                            'attribute' => 'current-jobs-reserved',
-                            'label'     => '已接收',
-                        ],
-                        [
-                            'attribute' => 'current-jobs-delayed',
-                            'label'     => '延时处理',
-                        ],
-                        [
-                            'attribute' => 'current-jobs-buried',
-                            'label'     => '已睡眠',
-                        ],
-
-                    ],
-                ]);?>
-                <?php Pjax::end();?>
-                <?php Modal::begin([
-                    'id'     => 'activity-modal',
-                    'header' => '<h4 class="modal-title">队列详情</h4>',
-                    'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">关闭</a>',
-                ]);?>
-
-                <div class="well">
-
-                </div>
-                <?php Modal::end();?>
-            </div>
-        </div>
-    </div>
-</div>
-<?php
-$this->registerJs(
-    "
-        $(document).on(\"click\",\".detail-link\",function() {
-            $.get($(this).attr(\"href\"),
-                function (data) {
-                    $('.modal-body').html(data);
-                    $('#activity-modal').modal();
-                }
-            );
-        });
-    "
-);
-?>
