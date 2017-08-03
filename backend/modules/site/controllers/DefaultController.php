@@ -79,9 +79,12 @@ class DefaultController extends Controller
                 'sort'       => [
                     'attributes' => ['Id', 'User', 'Time', 'State', 'State'],
                 ],
-                'pagination' => ['pageSize' => 15],
+                'pagination' => ['pageSize' => 1],
             ]
         );
+
+        var_dump($mysqlInfo->getPagination());
+        die();
 
         $dataProvider = new ArrayDataProvider(
             [
