@@ -68,8 +68,6 @@ class AccessControl extends \yii\base\ActionFilter
     {
         $actionId = $action->getUniqueId();
         $user = $this->getUser();
-        var_dump($user);die();
-        $user->loginUrl = "/site/default/login";
         if (Helper::checkRoute('/' . $actionId, Yii::$app->getRequest()->get(), $user)) {
             return true;
         }
