@@ -60,7 +60,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <!-- /.box-body -->
         </div>
-
+        <!-- /.box -->
+    </div>
+    <div class="col-md-8">
         <?php Pjax::begin(['id' => 'tube-list', 'clientOptions' => ["skipOuterContainers" => true]]);?>
         <div class="box box-success ">
             <div class="box-header">
@@ -124,18 +126,19 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <!-- /.box -->
         <?php Pjax::end();?>
-        <!-- /.box -->
+    </div>
+    <div class="col-xs-8">
         <div class="box box-primary box-solid">
-            <div class="box-header">
-                <h3 class="box-title"><i class="glyphicon glyphicon-transfer"></i>队列运行信息</h3>
+            <div class="box-header with-border">
+                <h3 class="box-title"><i class="glyphicon glyphicon-transfer"></i> beanstalk队列运行信息</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body no-padding">
                 <?php Pjax::begin(['id' => 'tube-list', 'clientOptions' => ["skipOuterContainers" => true]]);?>
                 <?=GridView::widget([
                     'dataProvider' => $dataProvider,
                     'layout'       => "{summary}{pager}{items}",
-                    'summary'      => "<div class='dataTables_info'>当前共有{totalCount}条数据,分为{pageCount}页,当前为第{page}页</div>",
+                    'summary'      => "当前共有{totalCount}条数据,分为{pageCount}页,当前为第{page}页",
                     'columns'      => [
                         [
                             'attribute' => 'name',
@@ -163,7 +166,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'attribute' => 'current-jobs-reserved',
-                            'label'     => '接收',
+                            'label'     => '已接收',
                         ],
                         [
                             'attribute' => 'current-jobs-delayed',
@@ -180,103 +183,6 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <!-- /.box-body -->
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="box box-danger collapsed-box chat">
-            <div class="box-header">
-                <h3 class="box-title"><i class="glyphicon glyphicon-tree-conifer"></i>更新日志</h3>
-            </div>
-            <!-- The time line -->
-            <ul class="timeline">
-                <!-- timeline time label -->
-                <li class="time-label">
-                      <span class="bg-red">
-                        10 Feb. 2014
-                      </span>
-                </li>
-                <!-- /.timeline-label -->
-                <!-- timeline item -->
-                <li>
-                    <i class="fa fa-envelope bg-blue"></i>
-
-                    <div class="timeline-item">
-                        <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-                        <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                        <div class="timeline-body">
-                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                            quora plaxo ideeli hulu weebly balihoo...
-                        </div>
-                        <div class="timeline-footer">
-                            <a class="btn btn-primary btn-xs">Read more</a>
-                            <a class="btn btn-danger btn-xs">Delete</a>
-                        </div>
-                    </div>
-                </li>
-                <!-- END timeline item -->
-                <!-- timeline item -->
-                <li>
-                    <i class="fa fa-user bg-aqua"></i>
-
-                    <div class="timeline-item">
-                        <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-
-                        <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
-                    </div>
-                </li>
-                <!-- END timeline item -->
-                <!-- timeline item -->
-                <li>
-                    <i class="fa fa-comments bg-yellow"></i>
-
-                    <div class="timeline-item">
-                        <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-
-                        <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                        <div class="timeline-body">
-                            Take me to your leader!
-                            Switzerland is small and neutral!
-                            We are more like Germany, ambitious and misunderstood!
-                        </div>
-                        <div class="timeline-footer">
-                            <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                        </div>
-                    </div>
-                </li>
-                <!-- END timeline item -->
-                <!-- timeline time label -->
-                <li class="time-label">
-                      <span class="bg-green">
-                        3 Jan. 2014
-                      </span>
-                </li>
-                <!-- /.timeline-label -->
-                <!-- timeline item -->
-                <li>
-                    <i class="fa fa-camera bg-purple"></i>
-
-                    <div class="timeline-item">
-                        <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-
-                        <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                        <div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                            <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        </div>
-                    </div>
-                </li>
-                <!-- END timeline item -->
-                <li>
-                    <i class="fa fa-clock-o bg-gray"></i>
-                </li>
-            </ul>
-        </div>
+        <!-- /.box -->
     </div>
 </div>

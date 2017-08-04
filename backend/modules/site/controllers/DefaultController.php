@@ -6,8 +6,9 @@ use yii\helpers\Url;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
 use yii\data\ArrayDataProvider;
+use yii\data\Pagination;
+use common\models\LoginForm;
 
 /**
  * Site controller
@@ -65,6 +66,17 @@ class DefaultController extends Controller
         $query = Yii::$app->db->createCommand('show processlist');
         $mysqlStatus = $query->queryAll();
 
+        $mysqlInfo = new ArrayDataProvider(
+            [
+                'allModels'  => $mysqlStatus,
+                'sort'       => [
+                    'attributes' => ['Id', 'User', 'Time', 'State', 'State'],
+                ],
+                'pagination' => ['pageSize' => 5],
+            ]
+        );
+        $mysqlInfoPage = new Pagination(["totalCount" => count($mysqlStatus),"defaultPageSize" => 5]);
+
         $queue = yii::$app->beanstalk;
         $tubes = $queue->listTubes();
         $list  = [];
@@ -72,19 +84,6 @@ class DefaultController extends Controller
         {
             $list[] = $queue->statsTube($val);
         }
-
-        $mysqlInfo = new ArrayDataProvider(
-            [
-                'allModels'  => $mysqlStatus,
-                'sort'       => [
-                    'attributes' => ['Id', 'User', 'Time', 'State', 'State'],
-                ],
-                'pagination' => ['pageSize' => 1],
-            ]
-        );
-
-        var_dump($mysqlInfo->getPagination());
-        die();
 
         $dataProvider = new ArrayDataProvider(
             [
@@ -98,6 +97,7 @@ class DefaultController extends Controller
 
         return $this->render('index',[
             'mysqlInfo'    => $mysqlInfo,
+            'mysqlInfoPage' => $mysqlInfoPage,
             'dataProvider' => $dataProvider
         ]);
     }
