@@ -48,6 +48,7 @@ class AccessControl extends \yii\base\ActionFilter
         if (!$this->_user instanceof User) {
             $this->_user = Instance::ensure($this->_user, User::className());
         }
+        $this->_user->loginUrl = '/site/default/login';
         return $this->_user;
     }
 
@@ -67,6 +68,8 @@ class AccessControl extends \yii\base\ActionFilter
     {
         $actionId = $action->getUniqueId();
         $user = $this->getUser();
+        var_dump($user);die();
+        $user->loginUrl = "/site/default/login";
         if (Helper::checkRoute('/' . $actionId, Yii::$app->getRequest()->get(), $user)) {
             return true;
         }

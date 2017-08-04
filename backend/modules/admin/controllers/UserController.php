@@ -65,7 +65,7 @@ class UserController extends Controller
                     'activate' => ['post'],
 
                     'assign' => ['post'],
-                    'assign' => ['post'],
+//                    'assign' => ['post'],
                     'revoke' => ['post'],
                 ],
             ],
