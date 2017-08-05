@@ -4,12 +4,13 @@ use dmstr\widgets\Alert;
 
 ?>
 <div class="content-wrapper">
-    <?=
-    Breadcrumbs::widget(
-        [
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]
-    ) ?>
+        <?=
+        Breadcrumbs::widget(
+            [
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                'options' => ['class'=>'breadcrumb no-margin']
+            ]
+        ) ?>
     <section class="content">
         <?= Alert::widget() ?>
         <?= $content ?>

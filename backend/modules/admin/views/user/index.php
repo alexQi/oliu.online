@@ -11,50 +11,75 @@ use backend\modules\admin\components\Helper;
 $this->title = Yii::t('rbac-admin', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-index">
-
-    <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Create'), ['signup'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?=
-    GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'username',
-            'email:email',
-            'created_at:date',
-            [
-                'attribute' => 'status',
-                'value' => function($model) {
-                    return $model->status == 0 ? 'Inactive' : 'Active';
-                },
-                'filter' => [
-                    0 => 'Inactive',
-                    10 => 'Active'
-                ]
-            ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => Helper::filterActionColumn(['view', 'activate', 'delete']),
-                'buttons' => [
-                    'activate' => function($url, $model) {
-                        if ($model->status == 10) {
-                            return '';
-                        }
-                        $options = [
-                            'title' => Yii::t('rbac-admin', 'Activate'),
-                            'aria-label' => Yii::t('rbac-admin', 'Activate'),
-                            'data-confirm' => Yii::t('rbac-admin', 'Are you sure you want to activate this user?'),
-                            'data-method' => 'post',
-                            'data-pjax' => '0',
-                        ];
-                        return Html::a('<span class="glyphicon glyphicon-ok"></span>', $url, $options);
-                    }
-                    ]
-                ],
-            ],
-        ]);
-        ?>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">用户管理</h3>
+                <div class="box-tools">
+                    <?= Html::a(Yii::t('rbac-admin', 'Create'), ['signup'], ['class' => 'btn btn-success']) ?>
+                </div>
+            </div>
+            <div class="box-body">
+                <?=
+                GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'filterModel' => $searchModel,
+                    'layout'       => "{items}{summary}{pager}",
+                    'summary'      => "<span class='dataTables_info'>当前共有{totalCount}条数据,分为{pageCount}页,当前为第{page}页</span>",
+                    'options'      => [
+                        'class' => 'col-sm-12'
+                    ],
+                    'pager' => [
+                        'options'=>[
+                            'class' => 'pagination pull-right no-margin',
+                        ]
+                    ],
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'username',
+                        'email:email',
+                        'created_at:date',
+                        [
+                            'attribute' => 'status',
+                            'format' => 'html',
+                            'value' => function($model) {
+                                $string = $model->status==1 ? 'Forbid' : 'Active';
+                                $class  = $model->status==1 ? 'danger' : 'success';
+                                $html   ='<span class="label label-'.$class.'">'.$string.'</span>';
+                                return $html;
+                            },
+                            'filter' => [
+                                0 => 'Inactive',
+                                10 => 'Active'
+                            ]
+                        ],
+                        [
+                            'class' => 'yii\grid\ActionColumn',
+                            'template' => Helper::filterActionColumn(['view','update', 'activate', 'delete']),
+                            'buttonOptions' => [
+                                'class' => 'btn bg-olive margin-r-5'
+                            ],
+                            'buttons' => [
+                                'activate' => function($url, $model) {
+                                    if ($model->status == 10) {
+                                        return '';
+                                    }
+                                    $options = [
+                                        'title' => Yii::t('rbac-admin', 'Activate'),
+                                        'aria-label' => Yii::t('rbac-admin', 'Activate'),
+                                        'data-confirm' => Yii::t('rbac-admin', 'Are you sure you want to activate this user?'),
+                                        'data-method' => 'post',
+                                        'data-pjax' => '0',
+                                    ];
+                                    return Html::a('<span class="glyphicon glyphicon-ok"></span>', $url, $options);
+                                }
+                                ]
+                            ],
+                        ],
+                    ]);
+                ?>
+            </div>
+        </div>
+    </div>
 </div>

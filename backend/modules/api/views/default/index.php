@@ -10,42 +10,78 @@ use yii\grid\GridView;
 $this->title = 'Api Bases';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="api-base-index">
-
-<!--    <h1>--><?php //echo Html::encode($this->title) ?><!--</h1>-->
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Api Base', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'options' => [
-            'style'=>'overflow: auto; word-wrap: break-word;'
-        ],
-        'columns' => [
-            'id',
-            'api_name',
-            'status',
-            [
-                'attribute'=>'created_at',
-                'value'=>function ($model) {
-                    return date('Y-m-d H:i:s',$model->created_at);
-                },
-            ],
-            [
-                'attribute'=>'is_default',
-                'format' => 'html',
-                'value'=>function ($model) {
-                    $string = $model->is_default==1 ? '' : '默认';
-                    $class  = $model->is_default==1 ? 'danger' : 'success';
-                    $html   ='<p class="bg-'.$class.'">'.$string.'</p>';
-                    return $html;
-                },
-            ],
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">API接口列表</h3>
+                <div class="box-tools">
+                    <?php echo Html::a('Create Api Base', ['create'], ['class' => 'btn btn-sm btn-info']) ?>
+                </div>
+            </div>
+            <div class="box-body">
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'filterModel'  => $searchModel,
+                    'layout'       => "{items}{summary}{pager}",
+                    'summary'      => "<span class='dataTables_info'>当前共有{totalCount}条数据,分为{pageCount}页,当前为第{page}页</span>",
+                    'options'      => [
+                            'class' => 'col-sm-12'
+                    ],
+                    'pager' => [
+                        'options'=>[
+                            'class' => 'pagination pull-right no-margin',
+                        ]
+                    ],
+                    'columns' => [
+                        [
+                            'attribute' => 'id',
+                            "headerOptions" => [
+                                    "width" => "100"
+                            ],
+                        ],
+                        [
+                            'attribute'=>'api_name',
+                            'format' => 'html',
+                            'value'=>function ($model) {
+                                $string = $model->is_default==1 ? '' : '默认';
+                                $html   =$model->api_name.'<span class="label label-success margin">'.$string.'</span>';
+                                return $html;
+                            },
+                        ],
+                        'url',
+                        [
+                            'attribute'=>'status',
+                            'format' => 'html',
+                            'value'=>function ($model) {
+                                $string = $model->status==1 ? 'Forbid' : 'Active';
+                                $class  = $model->status==1 ? 'danger' : 'success';
+                                $html   ='<span class="label label-'.$class.'">'.$string.'</span>';
+                                return $html;
+                            },
+                            "headerOptions" => [
+                                "width" => "100"
+                            ],
+                        ],
+                        [
+                            'attribute'=>'created_at',
+                            'value'=>function ($model) {
+                                return date('Y-m-d H:i:s',$model->created_at);
+                            },
+                        ],
+                        [
+                            'class' => 'yii\grid\ActionColumn',
+                            'template' => '{view} {update} {delete}',
+                            'buttonOptions' => [
+                                'class' => 'btn bg-olive margin-r-5'
+                            ],
+                            "headerOptions" => [
+                                "width" => "200"
+                            ],
+                        ],
+                    ],
+                ]); ?>
+            </div>
+        </div>
+    </div>
 </div>

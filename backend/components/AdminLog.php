@@ -29,7 +29,7 @@ class AdminLog
             $description = Yii::$app->user->identity->username . '删除了 ' . $pk.'='.$event->sender->getAttribute($pk). ' 的记录';
             $operationType = 'delete';
         }elseif ($event->name=='afterInsert'){
-            if ($event->sender::tableName()=='admin_log'){
+            if ($event->sender::tableName()=='{{%admin_log}}'){
                 return false;
             }
             $pk = $event->sender->primaryKey()[0];
