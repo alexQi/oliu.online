@@ -7,14 +7,14 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\ApiBaseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Api Bases';
+$this->title = 'Api 接口列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-xs-12">
         <div class="box box-info">
             <div class="box-header with-border">
-                <h3 class="box-title">API接口列表</h3>
+                <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
                 <div class="box-tools">
                     <?php echo Html::a('Create Api Base', ['create'], ['class' => 'btn btn-sm btn-info']) ?>
                 </div>

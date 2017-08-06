@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-xs-12">
         <div class="box box-info">
             <div class="box-header with-border">
-                <h3 class="box-title">用户管理</h3>
+                <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
                 <div class="box-tools">
                     <?= Html::a(Yii::t('rbac-admin', 'Create'), ['signup'], ['class' => 'btn btn-info']) ?>
                 </div>
