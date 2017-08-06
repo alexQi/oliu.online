@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'layout'       => "{items}{summary}{pager}",
                     'summary'      => "<span class='dataTables_info'>当前共有{totalCount}条数据,分为{pageCount}页,当前为第{page}页</span>",
                     'options'      => [
-                        'class' => 'col-sm-12'
+                        'class' => 'col-sm-12 no-padding'
                     ],
                     'pager' => [
                         'options'=>[

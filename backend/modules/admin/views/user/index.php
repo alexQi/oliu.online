@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="box-header with-border">
                 <h3 class="box-title">用户管理</h3>
                 <div class="box-tools">
-                    <?= Html::a(Yii::t('rbac-admin', 'Create'), ['signup'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a(Yii::t('rbac-admin', 'Create'), ['signup'], ['class' => 'btn btn-info']) ?>
                 </div>
             </div>
             <div class="box-body">
@@ -25,10 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 GridView::widget([
                     'dataProvider' => $dataProvider,
                     'filterModel' => $searchModel,
-                    'layout'       => "{items}{summary}{pager}",
+                    'layout'       => "{items}{pager}{summary}",
                     'summary'      => "<span class='dataTables_info'>当前共有{totalCount}条数据,分为{pageCount}页,当前为第{page}页</span>",
                     'options'      => [
-                        'class' => 'col-sm-12'
+                        'class' => 'col-sm-12 no-padding'
                     ],
                     'pager' => [
                         'options'=>[
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'yii\grid\ActionColumn',
                             'template' => Helper::filterActionColumn(['view','update', 'activate', 'delete']),
                             'buttonOptions' => [
-                                'class' => 'btn bg-olive margin-r-5'
+                                'class' => 'btn btn-sm bg-olive margin-r-5'
                             ],
                             'buttons' => [
                                 'activate' => function($url, $model) {
