@@ -2,11 +2,12 @@
 
 namespace app\models;
 
-use common\models\User;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
+use common\models\Message;
+use common\models\User;
 
 /**
  * MessageSearch represents the model behind the search form about `app\models\Message`.
