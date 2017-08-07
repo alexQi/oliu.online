@@ -1,5 +1,4 @@
 <?php
-use yii\bootstrap\Nav;
 use backend\modules\admin\components\MenuHelper;
 ?>
 <aside class="main-sidebar">

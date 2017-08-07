@@ -23,6 +23,6 @@ class AdminLtePluginsICheckAsset extends AssetBundle
         'flat/blue.css',
     ];
     public $js = [
-        'iCheck.js'
+        'icheck.min.js'
     ];
 }

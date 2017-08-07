@@ -1,16 +1,15 @@
 <?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\Pjax;
+use backend\assets\AdminLtePluginsICheckAsset;
+use yii\helpers\StringHelper;
+use yii\widgets\LinkPager;
+use yii\helpers\Url;
+
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\MessageSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Messages');
 $this->params['breadcrumbs'][] = $this->title;
-//$this->registerCssFile($this->render('_script.js'));
-//$this->registerJsFile($this->render('_script.js'));
+AdminLtePluginsICheckAsset::register($this);
 ?>
 <div class="row">
     <div class="col-md-3">
@@ -65,10 +64,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="box-header with-border">
                 <h3 class="box-title">Inbox</h3>
 
-                <div class="box-tools pull-right">
-                    <div class="has-feedback">
-                        <input type="text" class="form-control input-sm" placeholder="Search Mail">
-                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                <div class="box-tools">
+                    <div class="has-feedback input-group col-lg-2  pull-right">
+                        <!-- /btn-group -->
+                        <input type="text" id="mail-keyword" class="form-control input-sm" value="<?php echo isset($param['keyword']) ? $param['keyword'] :''; ?>" placeholder="Search Mail">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-info btn-sm mail-search">搜索</button>
+                        </div>
                     </div>
                 </div>
                 <!-- /.box-tools -->
@@ -87,11 +89,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     <!-- /.btn-group -->
                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                     <div class="pull-right">
-                        1-50/200
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                        </div>
+                        <?php echo LinkPager::widget([
+                            'pagination' => $result['page'],
+                            'options' => [
+                                'class' => 'pagination pagination-sm no-margin'
+                            ]
+                        ]); ?>
                         <!-- /.btn-group -->
                     </div>
                     <!-- /.pull-right -->
@@ -99,19 +102,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="table-responsive mailbox-messages">
                     <table class="table table-hover table-striped">
                         <tbody>
-                        <tr>
-                            <td><div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position: relative;">
-                                    <input type="checkbox" style="position: absolute; opacity: 0;">
-                                    <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                </div>
-                            </td>
-                            <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                            <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                            <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                            </td>
-                            <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                            <td class="mailbox-date">28 mins ago</td>
-                        </tr>
+                        <?php if(!empty($result['list'])):?>
+                            <?php foreach($result['list'] as $key=>$value):?>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
+                                    <td class="mailbox-name"><a href="read-mail.html"><?php echo $value['username']; ?></a></td>
+                                    <td class="mailbox-subject"><b><?php echo $value['title']; ?></b> - <?php echo StringHelper::truncate($value['content'],40); ?>
+                                    </td>
+                                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                                    <td class="mailbox-date"><?php echo date('Y-m-d H:i',$value['created_at']); ?></td>
+                                </tr>
+                            <?php endforeach;?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="6">
+                                    未查询到记录.....
+                                </td>
+                            </tr>
+                        <?php endif;?>
                         </tbody>
                     </table>
                     <!-- /.table -->
@@ -132,11 +141,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     <!-- /.btn-group -->
                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                     <div class="pull-right">
-                        1-50/200
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                        </div>
+                        <?php echo LinkPager::widget([
+                            'pagination' => $result['page'],
+                            'options' => [
+                                'class' => 'pagination pagination-sm no-margin'
+                            ]
+                        ]); ?>
                         <!-- /.btn-group -->
                     </div>
                     <!-- /.pull-right -->
@@ -147,3 +157,53 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <!-- /.col -->
 </div>
+<script>
+    $(function () {
+        //Enable iCheck plugin for checkboxes
+        //iCheck for checkbox and radio inputs
+        $('.mailbox-messages input[type="checkbox"]').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+        });
+
+        $('.mail-search').click(function(){
+            var keyword = $('#mail-keyword').val();
+            window.location.href = "<?php echo Url::to(['index'])?>?keyword="+$.trim(keyword);
+        });
+
+        //Enable check and uncheck all functionality
+        $(".checkbox-toggle").click(function () {
+            var clicks = $(this).data('clicks');
+            if (clicks) {
+                //Uncheck all checkboxes
+                $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+                $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+            } else {
+                //Check all checkboxes
+                $(".mailbox-messages input[type='checkbox']").iCheck("check");
+                $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+            }
+            $(this).data("clicks", !clicks);
+        });
+
+        //Handle starring for glyphicon and font awesome
+        $(".mailbox-star").click(function (e) {
+            e.preventDefault();
+            //detect type
+            var $this = $(this).find("a > i");
+            var glyph = $this.hasClass("glyphicon");
+            var fa = $this.hasClass("fa");
+
+            //Switch states
+            if (glyph) {
+                $this.toggleClass("glyphicon-star");
+                $this.toggleClass("glyphicon-star-empty");
+            }
+
+            if (fa) {
+                $this.toggleClass("fa-star");
+                $this.toggleClass("fa-star-o");
+            }
+        });
+    });
+</script>

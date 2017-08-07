@@ -41,6 +41,7 @@ class DefaultController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'result'      => $result,
+            'param'       => Yii::$app->request->queryParams
         ]);
     }
 

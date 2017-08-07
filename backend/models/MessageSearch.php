@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use common\models\User;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -44,10 +45,13 @@ class MessageSearch extends Message
 
         $params['type'] = isset($params['type']) && $params['type'] ? $params['type'] : 1;
         $query = Message::find();
+        $query->select('user.username,msg.*');
+        $query->from(['msg'=>Message::tableName()]);
+        $query->leftJoin(['user'=>User::tableName()],'msg.from_user_id=user.id');
 
         $query->where(['type'=>$params['type']]);
 
-        if (isset($params['keyword']))
+        if (isset($params['keyword']) && $params['keyword']!='')
         {
             $query->andFilterWhere(['or',
                 ['like', 'title', $params['keyword']],
@@ -57,7 +61,7 @@ class MessageSearch extends Message
             ]);
         }
 
-        $result['page'] = new Pagination(['totalCount' =>$query->count(), 'pageSize' => '10']);
+        $result['page'] = new Pagination(['totalCount' =>$query->count(), 'pageSize' => '20']);
         $result['list'] = $query->offset($result['page']->offset)
             ->limit($result['page']->limit)
             ->asArray()
