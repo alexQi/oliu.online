@@ -7,21 +7,32 @@
  */
 namespace common\models;
 
+use common\models\service\MessageService;
 use Yii;
 use yii\base\Model;
 
 class Mail extends Model
 {
     /**
+     * @param $param
      * @return bool
      */
     public function SendMail($param)
     {
-        $mail= Yii::$app->mailer->compose();
-        $mail->setFrom($param['from']);
-        $mail->setTo($param['to']);
-        $mail->setSubject($param['title']);
-        $mail->setHtmlBody($param['msg']);
-        return $mail->send();
+        $MessageService = new MessageService();
+        $param['from_user_id'] = 3;
+        $param['created_at'] = time();
+        $param['updated_at'] = time();
+        if ($MessageService->saveMessage($param))
+        {
+            $mail= Yii::$app->mailer->compose();
+            $mail->setFrom($param['from']);
+            $mail->setTo($param['to']);
+            $mail->setSubject($param['title']);
+            $mail->setHtmlBody($param['content']);
+            return $mail->send();
+        }else{
+            return false;
+        }
     }
 }

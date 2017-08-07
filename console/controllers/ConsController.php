@@ -42,8 +42,7 @@ class ConsController extends Controller
 
                 $param = json_decode($data,true);
                 $param['title'] = $api->queryParam['queryString'];
-                $param['msg']   = $api->run();
-
+                $param['content'] = $api->run();
 
                 $res = $mail->SendMail($param);
                 if (!$res){
