@@ -20,6 +20,9 @@ return [
         'site' => [
             'class' => 'backend\modules\site\Module',
         ],
+        'message' => [
+            'class' => 'backend\modules\message\Module',
+        ],
         'ajax' => [
             'class' => 'backend\modules\ajax\Module',
         ],
