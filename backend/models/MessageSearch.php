@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Message;
+use yii\data\Pagination;
 
 /**
  * MessageSearch represents the model behind the search form about `app\models\Message`.
@@ -41,35 +41,28 @@ class MessageSearch extends Message
      */
     public function search($params)
     {
+
+        $params['type'] = isset($params['type']) && $params['type'] ? $params['type'] : 1;
         $query = Message::find();
 
-        // add conditions that should always apply here
+        $query->where(['type'=>$params['type']]);
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
+        if (isset($params['keyword']))
+        {
+            $query->andFilterWhere(['or',
+                ['like', 'title', $params['keyword']],
+                ['like', 'from', $params['keyword']],
+                ['like', 'to', $params['keyword']],
+                ['like', 'content', $params['keyword']]
+            ]);
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'type' => $this->type,
-        ]);
+        $result['page'] = new Pagination(['totalCount' =>$query->count(), 'pageSize' => '10']);
+        $result['list'] = $query->offset($result['page']->offset)
+            ->limit($result['page']->limit)
+            ->asArray()
+            ->all();
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'from', $this->from])
-            ->andFilterWhere(['like', 'to', $this->to])
-            ->andFilterWhere(['like', 'content', $this->content]);
-
-        return $dataProvider;
+        return $result;
     }
 }

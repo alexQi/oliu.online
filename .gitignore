@@ -1,3 +1,4 @@
 runtime/
-assets/
+frontend/web/assets/
+backend/web/assets/
 .idea/
