@@ -30,4 +30,9 @@ class DefaultController extends Controller
     {
         return $this->render('message-group');
     }
+
+    public function actionAddGroup()
+    {
+        return $this->render('add-group');
+    }
 }

@@ -35,4 +35,6 @@ return [
     'Created At'=>'创建时间',
     'Updated At'=>'更新时间',
     'Is Default'=>'是否默认',
+
+    'Message Box'=>'Message Box',
 ];
