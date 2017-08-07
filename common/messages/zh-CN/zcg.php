@@ -16,7 +16,6 @@ return [
     'delete'=>'删除',
 
     'cate'=>'分类',
-    'create cate'=>'添加分类',
 
     'admin log'=>'操作日志',
     'route'=>'路由',

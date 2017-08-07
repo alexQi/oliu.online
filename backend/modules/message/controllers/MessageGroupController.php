@@ -3,8 +3,9 @@
 namespace backend\modules\message\controllers;
 
 use Yii;
-use app\models\MessageGroup;
 use app\models\MessageGroupSearch;
+use app\models\UserSearch;
+use common\models\MessageGroup;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -63,6 +64,7 @@ class MessageGroupController extends Controller
      */
     public function actionCreate()
     {
+        $mailList = UserSearch::getUserMail();
         $model = new MessageGroup();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -70,6 +72,7 @@ class MessageGroupController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'mailList' => $mailList
             ]);
         }
     }

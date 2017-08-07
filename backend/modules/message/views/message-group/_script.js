@@ -1,7 +1,7 @@
 $('i.glyphicon-refresh-animate').hide();
 function updateRoutes(r) {
-    _opts.routes.avaliable = r.avaliable;
-    _opts.routes.assigned = r.assigned;
+    _opts.mailList.avaliable = r.avaliable;
+    _opts.mailList.assigned = r.assigned;
     search('avaliable');
     search('assigned');
 }
@@ -24,11 +24,11 @@ $('#btn-new').click(function () {
 $('.btn-assign').click(function () {
     var $this = $(this);
     var target = $this.data('target');
-    var routes = $('select.list[data-target="' + target + '"]').val();
+    var mailList = $('select.list[data-target="' + target + '"]').val();
 
-    if (routes && routes.length) {
+    if (mailList && mailList.length) {
         $this.children('i.glyphicon-refresh-animate').show();
-        $.post($this.attr('href'), {routes: routes}, function (r) {
+        $.post($this.attr('href'), {mailList: mailList}, function (r) {
             updateRoutes(r);
         }).always(function () {
             $this.children('i.glyphicon-refresh-animate').hide();
@@ -56,7 +56,7 @@ function search(target) {
     var $list = $('select.list[data-target="' + target + '"]');
     $list.html('');
     var q = $('.search[data-target="' + target + '"]').val();
-    $.each(_opts.routes[target], function () {
+    $.each(_opts.mailList[target], function () {
         var r = this;
         if (r.indexOf(q) >= 0) {
             $('<option>').text(r).val(r).appendTo($list);

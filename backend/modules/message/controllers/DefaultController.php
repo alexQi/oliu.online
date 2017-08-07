@@ -3,8 +3,9 @@
 namespace backend\modules\message\controllers;
 
 use Yii;
-use app\models\Message;
+
 use app\models\MessageSearch;
+use common\models\Message;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
