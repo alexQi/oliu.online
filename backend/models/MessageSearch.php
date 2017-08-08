@@ -53,11 +53,11 @@ class MessageSearch extends Message
         $query->from(['msg'=>Message::tableName()]);
         $query->leftJoin(['user'=>User::tableName()],'msg.from_user_id=user.id');
 
-        $query->where(['type'=>$params['type']]);
+        $query->where(['msg.type'=>$params['type']]);
 
-        $query->andWhere(['is_del'=>$params['is_del']]);
+        $query->andWhere(['msg.is_del'=>$params['is_del']]);
 
-        $query->andWhere(['status'=>$params['status']]);
+        $query->andWhere(['msg.status'=>$params['status']]);
 
         if (isset($params['keyword']) && $params['keyword']!='')
         {
