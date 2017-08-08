@@ -14189,7 +14189,7 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   
-  return "\n      <span class=\"glyphicon glyphicon-quote\"></span>\n    ";
+  return "\n      <span class=\"glyphicon glyphicon-align-center\"></span>\n    ";
   }
 
   buffer += "<li>\n  <a class=\"btn ";
