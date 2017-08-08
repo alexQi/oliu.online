@@ -10,7 +10,7 @@ $this->title = Yii::t('app', 'Update {modelClass}: ', [
 ]) . $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Messages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = '更新消息';
 
 AdminLtePluginsWysiHtml5Asset::register($this);
 ?>
@@ -95,12 +95,13 @@ AdminLtePluginsWysiHtml5Asset::register($this);
         });
         
         function HandleData(status) {
+            var id           = "<?php echo $model->id?>";
             var mail_to      = $('.mail-to').val();
             var mail_from    = $('.mail-from').val();
             var mail_content = $('.mail-content').val();
 
             var url = '<?php echo Url::to(['/ajax/message/deal-mail']);?>';
-            var param = {to:mail_to,from:mail_from,content:mail_content,status:status};
+            var param = {id:id,to:mail_to,from:mail_from,content:mail_content,status:status};
 
             $.post(url,param,function (result) {
                 console.log(result);

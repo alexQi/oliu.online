@@ -49,11 +49,6 @@ class MessageSearch extends Message
      */
     public function search($params)
     {
-
-        $params['type']   = isset($params['type']) && $params['type'] ? $params['type'] : 1;
-        $params['is_del'] = isset($params['is_del']) && $params['is_del'] ? $params['is_del'] : 1;
-        $params['status'] = isset($params['status']) && $params['status'] ? $params['status'] : 2;
-
         $query = Message::find();
         $query->select('user.username,msg.*');
         $query->from(['msg'=>Message::tableName()]);
@@ -61,9 +56,24 @@ class MessageSearch extends Message
 
         $query->where(['msg.type'=>$params['type']]);
 
-        $query->andWhere(['msg.is_del'=>$params['is_del']]);
+        if ($params['folder']==1)
+        {
+            $query->andWhere(['msg.status'=>$params['status']]);
+            $query->andWhere(['msg.is_del'=>1]);
 
-        $query->andWhere(['msg.status'=>$params['status']]);
+        }elseif($params['folder']==2)
+        {
+            $query->andWhere(['msg.type'=>false]);
+
+        }elseif($params['folder']==3)
+        {
+            $query->andWhere(['in','msg.status',[1,3]]);
+            $query->andWhere(['msg.is_del'=>1]);
+
+        }elseif($params['folder']==4)
+        {
+            $query->andWhere(['msg.is_del'=>2]);
+        }
 
         if (isset($params['keyword']) && $params['keyword']!='')
         {

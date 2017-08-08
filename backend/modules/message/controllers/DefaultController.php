@@ -36,13 +36,19 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
+        $params = Yii::$app->request->queryParams;
+
+        $params['type']   = isset($params['type']) && $params['type'] ? $params['type'] : 1;
+        $params['status'] = isset($params['status']) && $params['status'] ? $params['status'] : 2;
+        $params['folder'] = isset($params['folder']) && $params['folder'] ? $params['folder'] : 1;
+
         $searchModel = new MessageSearch();
-        $result = $searchModel->search(Yii::$app->request->queryParams);
+        $result = $searchModel->search($params);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'result'      => $result,
-            'param'       => Yii::$app->request->queryParams
+            'params'       => $params
         ]);
     }
 

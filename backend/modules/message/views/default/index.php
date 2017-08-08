@@ -6,13 +6,14 @@ use yii\widgets\LinkPager;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
+/* @var $params */
 
 $this->title = Yii::t('app', 'Messages');
 $this->params['breadcrumbs'][] = $this->title;
 AdminLtePluginsICheckAsset::register($this);
 ?>
 <div class="row">
-    <?php echo $this->render('message-menu'); ?>
+    <?php echo $this->render('message-menu',['params'=>$params]); ?>
     <div class="col-md-9">
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -21,7 +22,7 @@ AdminLtePluginsICheckAsset::register($this);
                 <div class="box-tools">
                     <div class="has-feedback input-group col-lg-2  pull-right">
                         <!-- /btn-group -->
-                        <input type="text" id="mail-keyword" class="form-control input-sm" value="<?php echo isset($param['keyword']) ? $param['keyword'] :''; ?>" placeholder="Search Mail">
+                        <input type="text" id="mail-keyword" class="form-control input-sm" value="<?php echo isset($params['keyword']) ? $params['keyword'] :''; ?>" placeholder="Search Mail">
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-info btn-sm mail-search">搜索</button>
                         </div>
@@ -60,12 +61,23 @@ AdminLtePluginsICheckAsset::register($this);
                             <?php foreach($result['list'] as $key=>$value):?>
                                 <tr>
                                     <td><input type="checkbox"></td>
-                                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
+                                    <td class="mailbox-star">
+                                        <a href="#">
+                                            <i class="fa fa-star-o text-yellow"></i>
+                                        </a>
+                                    </td>
                                     <td class="mailbox-name"><a href="javascript:void(0)"><?php echo $value['username']; ?></a></td>
                                     <td class="mailbox-subject">
-                                        <a class="text-muted" href="<?php echo Url::to(['update','id'=>$value['id']]); ?>">
+                                        <a class="text-muted" href="<?php echo $value['status']!=2 ? Url::to(['update','id'=>$value['id']]):Url::to(['view','id'=>$value['id']]); ?>">
                                             <b><?php echo $value['title']; ?></b> - <?php echo StringHelper::truncate($value['content'],40); ?>
                                         </a>
+                                    </td>
+                                    <td>
+                                        <?php if($value['status']==2):?>
+                                            <span class="label label-success">Send</span>
+                                        <?php else: ?>
+                                            <span class="label label-danger">Fail</span>
+                                        <?php endif;?>
                                     </td>
                                     <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                                     <td class="mailbox-date"><?php echo date('Y-m-d H:i',$value['created_at']); ?></td>
@@ -125,7 +137,11 @@ AdminLtePluginsICheckAsset::register($this);
 
         $('.mail-search').click(function(){
             var keyword = $('#mail-keyword').val();
-            window.location.href = "<?php echo Url::to(['index'])?>?keyword="+$.trim(keyword);
+            var url = "<?php echo Url::to(['index','folder'=>$params['folder']])?>";
+            if ($.trim(keyword)){
+                url += '&keyword='+$.trim(keyword);
+            }
+            window.location.href = url;
         });
 
         //Enable check and uncheck all functionality
