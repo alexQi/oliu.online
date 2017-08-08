@@ -1,7 +1,7 @@
 <?php
 
 use backend\assets\AdminLtePluginsWysiHtml5Asset;
-
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\Message */
 
@@ -25,13 +25,13 @@ AdminLtePluginsWysiHtml5Asset::register($this);
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="form-group">
-                    <input class="form-control" placeholder="To:" value="<?php echo $model->to; ?>">
+                    <input class="form-control mail-to" placeholder="To:" value="<?php echo $model->to; ?>">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" placeholder="Subject:" value="<?php echo $model->title; ?>">
+                    <input class="form-control mail-title" placeholder="Subject:" value="<?php echo $model->title; ?>">
                 </div>
                 <div class="form-group">
-                    <textarea id="compose-textarea" class="form-control" style="height: 300px">
+                    <textarea id="compose-textarea" class="form-control mail-content" style="height: 300px">
                         <?php echo $model->content; ?>
                     </textarea>
                 </div>
@@ -64,7 +64,47 @@ AdminLtePluginsWysiHtml5Asset::register($this);
         $("#compose-textarea").wysihtml5();
 
         $(".discard").click(function(){
-
+            bootbox.confirm(
+                {
+                    message: '所有修改内容将全部丢失，确定放弃？',
+                    buttons: {
+                        confirm: {
+                            label: "确定"
+                        },
+                        cancel: {
+                            label: "取消"
+                        }
+                    },
+                    callback: function (confirmed) {
+                        if (confirmed){
+                            window.location.href = "<?php echo Url::to(['index'])?>";
+                        }
+                    }
+                }
+            );
         });
+
+        $('.save_mail').click(function () {
+            var status = 3;
+            HandleData(status);
+        });
+
+        $('.send_mail').click(function () {
+            var status = 2;
+            HandleData(status);
+        });
+        
+        function HandleData(status) {
+            var mail_to      = $('.mail-to').val();
+            var mail_from    = $('.mail-from').val();
+            var mail_content = $('.mail-content').val();
+
+            var url = '<?php echo Url::to(['/ajax/message/deal-mail']);?>';
+            var param = {to:mail_to,from:mail_from,content:mail_content,status:status};
+
+            $.post(url,param,function (result) {
+                console.log(result);
+            },'json');
+        }
     });
 </script>

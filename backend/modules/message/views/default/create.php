@@ -40,10 +40,10 @@ AdminLtePluginsWysiHtml5Asset::register($this);
             <!-- /.box-body -->
             <div class="box-footer">
                 <div class="pull-right">
-                    <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> 存草稿</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 发送</button>
+                    <button type="button" class="btn btn-default save_mail"><i class="fa fa-pencil"></i> 存草稿</button>
+                    <button type="submit" class="btn btn-primary send_mail"><i class="fa fa-envelope-o"></i> 发送</button>
                 </div>
-                <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> 放弃</button>
+                <button type="reset" class="btn btn-default discard"><i class="fa fa-times"></i> 放弃</button>
             </div>
             <!-- /.box-footer -->
         </div>
@@ -56,6 +56,26 @@ AdminLtePluginsWysiHtml5Asset::register($this);
     $(function () {
         //Add text editor
         $("#compose-textarea").wysihtml5();
+        $(".discard").click(function(){
+            bootbox.confirm(
+                {
+                    message: '所有修改内容将全部丢失，确定放弃？',
+                    buttons: {
+                        confirm: {
+                            label: "OK"
+                        },
+                        cancel: {
+                            label: "Cancel"
+                        }
+                    },
+                    callback: function (confirmed) {
+                        if (confirmed){
+                            window.location.href = "<?php echo Url::to(['index'])?>";
+                        }
+                    }
+                }
+            );
+        });
     });
 </script>
 

@@ -14,6 +14,12 @@ use common\models\User;
  */
 class MessageSearch extends Message
 {
+
+    public static $STATUSLIST = [
+        '待发送' => 1,
+        '已发送' => 2,
+        '暂不发送' => 3,
+    ];
     /**
      * @inheritdoc
      */
