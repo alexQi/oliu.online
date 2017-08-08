@@ -21,13 +21,13 @@ AdminLtePluginsWysiHtml5Asset::register($this);
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="form-group">
-                    <input class="form-control" placeholder="To:">
+                    <input class="form-control mail-to" placeholder="To:">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" placeholder="Subject:">
+                    <input class="form-control mail-title" placeholder="Subject:">
                 </div>
                 <div class="form-group">
-                    <textarea id="compose-textarea" class="form-control" style="height: 300px"></textarea>
+                    <textarea id="compose-textarea" class="form-control mail-content" style="height: 300px"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="btn btn-default btn-file">
@@ -56,6 +56,7 @@ AdminLtePluginsWysiHtml5Asset::register($this);
     $(function () {
         //Add text editor
         $("#compose-textarea").wysihtml5();
+
         $(".discard").click(function(){
             bootbox.confirm(
                 {
@@ -76,6 +77,30 @@ AdminLtePluginsWysiHtml5Asset::register($this);
                 }
             );
         });
+
+        $('.save_mail').click(function () {
+            var status = 3;
+            HandleData(status);
+        });
+
+        $('.send_mail').click(function () {
+            var status = 2;
+            HandleData(status);
+        });
+
+        function HandleData(status) {
+            var id           = "<?php echo $model->id?>";
+            var mail_to      = $('.mail-to').val();
+            var mail_title   = $('.mail-title').val();
+            var mail_content = $('.mail-content').val();
+
+            var url = '<?php echo Url::to(['/ajax/message/deal-mail']);?>';
+            var param = {id:id,to:mail_to,title:mail_title,content:mail_content,status:status};
+
+            $.post(url,param,function (result) {
+                console.log(result);
+            },'json');
+        }
     });
 </script>
 

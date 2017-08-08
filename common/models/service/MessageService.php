@@ -2,6 +2,7 @@
 namespace common\models\service;
 
 use common\models\Message;
+use common\components\yii2beanstalk\Beanstalk;
 
 class MessageService extends Message
 {
@@ -16,5 +17,12 @@ class MessageService extends Message
         $this->updated_at = $param['updated_at'];
 
         return $this->save();
+    }
+
+    public static function InToQueue($data){
+        $beanstalk = new Beanstalk();
+        $beanstalk->useTube('oliu.sendEmail');
+
+        return $beanstalk->put(json_encode($data));
     }
 }

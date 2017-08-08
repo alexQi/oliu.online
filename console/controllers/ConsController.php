@@ -11,6 +11,7 @@ use yii;
 use yii\console\Controller;
 use yii\base\Exception;
 use common\components\yii2beanstalk\Beanstalk;
+use common\models\service\MessageService;
 use common\models\Mail;
 use common\models\Api;
 
@@ -23,27 +24,14 @@ class ConsController extends Controller
         $beanstalk->useTube('oliu.sendEmail');
         $beanstalk->watch('oliu.sendEmail');
 
-        //初始化Api
-        $api = new Api();
-        $api->queryParam['queryString'] = '杭州天气';
-
-        $api->getApiInfo();
         while (true){
             $job  = $beanstalk->reserve();
             try{
                 $data = $job->getData();
 
-                $data = json_encode($data);
-                if (!$data)
-                {
-                    continue;
-                }
-                $mail = new Mail();
-
                 $param = json_decode($data,true);
-                $param['title'] = $api->queryParam['queryString'];
-                $param['content'] = $api->run();
 
+                $mail = new Mail();
                 $res = $mail->SendMail($param);
 
                 if (!$res){
@@ -59,16 +47,37 @@ class ConsController extends Controller
     }
 
     public function actionInvokeWork(){
-        $beanstalk = new Beanstalk();
-        $beanstalk->useTube('oliu.sendEmail');
-        $param['from'] = [yii::$app->params['adminEmail']=>'Alex'];
-        $param['to']   = yii::$app->params['adminEmail'];
+        //初始化Api
+        $api = new Api();
+        $api->queryParam['queryString'] = '杭州天气';
 
-        $put = $beanstalk->put(json_encode($param));
+        $api->getApiInfo();
 
-        if (!$put){
-            exit($put);
+        $data['content'] = $api->run();
+        $data['title']   = $api->queryParam['queryString'];
+        $data['to']      = 'alex.qiubo@qq.com';
+        $data['from'] = [
+            'alex.qiubo@qq.com' => 'Alex'
+        ];
+
+        if (MessageService::InToQueue(json_encode($data)))
+        {
+            $messageInfo = new MessageService();
+            $messageInfo->title = $data['title'];
+            $messageInfo->from_user_id = 3;
+            $messageInfo->from = key($data['from']);
+            $messageInfo->to   = $data['to'];
+            $messageInfo->content = $data['content'];
+            $messageInfo->status = 2;
+            $messageInfo->created_at = time();
+            $messageInfo->updated_at = time();
+
+            $result = $messageInfo->save();
+        }else{
+            $result = false;
         }
+
+        return $result;
     }
 
     public function actionDeleteAll(){
