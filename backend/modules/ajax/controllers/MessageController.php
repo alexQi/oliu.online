@@ -68,10 +68,11 @@ class MessageController extends BaseController
 
                 if (!MessageService::InToQueue(json_encode($data)))
                 {
+                    //更新邮件到草稿箱
+                    $messageInfo->status = 3;
+                    $messageInfo->save();
                     throw new Exception('发送邮件失败');
                 }
-
-                $messageInfo->status = 2;
             }
 
             $messageInfo->status = $this->postData['status'];

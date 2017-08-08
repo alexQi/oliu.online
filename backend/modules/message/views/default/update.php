@@ -111,7 +111,32 @@ AdminLtePluginsWysiHtml5Asset::register($this);
             var param = {id:id,to:mail_to,title:mail_title,content:mail_content,status:status};
 
             $.post(url,param,function (result) {
-                console.log(result);
+                var message = '';
+                var url = '<?php echo Url::to(['index'])?>?folder=';
+                if (result.state==1){
+                    if (result.status==3){
+                        message = '邮件已成功存入草稿箱~';
+                    }else{
+                        message = '邮件已成功进入发送队列，发送中~';
+                    }
+                    url += 1;
+                }else{
+                    message = result.message+',请进入草稿箱重新发送~';
+                    url += 3;
+                }
+                bootbox.alert({
+                    title: '<i class="fa fa-warning text-info"></i> 提示',
+                    buttons: {
+                        ok: {
+                            label: '我知道啦~',
+                            className: 'btn bg-olive'
+                        }
+                    },
+                    message: message,
+                    callback: function() {
+                        window.location.href = url;
+                    }
+                });
             },'json');
         }
     });
