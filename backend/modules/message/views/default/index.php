@@ -61,8 +61,11 @@ AdminLtePluginsICheckAsset::register($this);
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                    <td class="mailbox-name"><a href="read-mail.html"><?php echo $value['username']; ?></a></td>
-                                    <td class="mailbox-subject"><b><?php echo $value['title']; ?></b> - <?php echo StringHelper::truncate($value['content'],40); ?>
+                                    <td class="mailbox-name"><a href="javascript:void(0)"><?php echo $value['username']; ?></a></td>
+                                    <td class="mailbox-subject">
+                                        <a class="text-muted" href="<?php echo Url::to(['update','id'=>$value['id']]); ?>">
+                                            <b><?php echo $value['title']; ?></b> - <?php echo StringHelper::truncate($value['content'],40); ?>
+                                        </a>
                                     </td>
                                     <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                                     <td class="mailbox-date"><?php echo date('Y-m-d H:i',$value['created_at']); ?></td>

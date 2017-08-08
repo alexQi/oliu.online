@@ -4,7 +4,7 @@ use backend\assets\AdminLtePluginsWysiHtml5Asset;
 
 /* @var $this yii\web\View */
 
-$this->title = Yii::t('app', '新消息');
+$this->title = '新消息';
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Messages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
