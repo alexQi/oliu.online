@@ -68,6 +68,7 @@ AdminLtePluginsICheckAsset::register($this);
                                     </td>
                                     <td class="mailbox-name"><a href="javascript:void(0)"><?php echo $value['username']; ?></a></td>
                                     <td class="mailbox-subject">
+                                        <?php $value['content'] = preg_replace("/<[^>]+>/", "", $value['content']);?>
                                         <a class="text-muted" href="<?php echo $value['status']!=2 ? Url::to(['update','id'=>$value['id']]):Url::to(['view','id'=>$value['id']]); ?>">
                                             <b><?php echo $value['title']; ?></b> - <?php echo StringHelper::truncate($value['content'],40); ?>
                                         </a>

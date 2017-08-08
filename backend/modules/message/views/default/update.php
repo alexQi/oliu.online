@@ -66,6 +66,7 @@ AdminLtePluginsWysiHtml5Asset::register($this);
         $(".discard").click(function(){
             bootbox.confirm(
                 {
+                    title  : '提示',
                     message: '所有修改内容将全部丢失，确定放弃？',
                     buttons: {
                         confirm: {

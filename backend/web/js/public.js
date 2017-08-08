@@ -11,6 +11,7 @@ yii.confirm = function (message, ok, cancel) {
 
     bootbox.confirm(
         {
+            title  : '提示',
             message: message,
             buttons: {
                 confirm: {
