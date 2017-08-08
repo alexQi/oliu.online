@@ -45,6 +45,7 @@ class ConsController extends Controller
                 $param['content'] = $api->run();
 
                 $res = $mail->SendMail($param);
+
                 if (!$res){
                     throw new Exception('发送失败');
                 }
