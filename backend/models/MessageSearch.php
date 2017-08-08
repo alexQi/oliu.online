@@ -85,6 +85,8 @@ class MessageSearch extends Message
             ]);
         }
 
+        $query->orderBy(['msg.updated_at'=>SORT_DESC]);
+
         $result['page'] = new Pagination(['totalCount' =>$query->count(), 'pageSize' => '20']);
         $result['list'] = $query->offset($result['page']->offset)
             ->limit($result['page']->limit)
