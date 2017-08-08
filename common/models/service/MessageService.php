@@ -11,7 +11,7 @@ class MessageService extends Message
         $this->from_user_id = $param['from_user_id'];
         $this->from = key($param['from']);
         $this->to = $param['to'];
-        $this->content = $param['title'];
+        $this->content = $param['content'];
         $this->created_at = $param['created_at'];
         $this->updated_at = $param['updated_at'];
 
