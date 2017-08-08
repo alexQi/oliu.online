@@ -25,10 +25,16 @@ AdminLtePluginsWysiHtml5Asset::register($this);
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="form-group">
-                    <input class="form-control mail-to" placeholder="To:" value="<?php echo $model->to; ?>">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                        <input class="form-control mail-to" placeholder="To:" value="<?php echo $model->to; ?>">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input class="form-control mail-title" placeholder="Subject:" value="<?php echo $model->title; ?>">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-header"></i></span>
+                        <input class="form-control mail-title" placeholder="Subject:" value="<?php echo $model->title; ?>">
+                    </div>
                 </div>
                 <div class="form-group">
                     <textarea id="compose-textarea" class="form-control mail-content" style="height: 300px">
