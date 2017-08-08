@@ -80,7 +80,9 @@ AdminLtePluginsICheckAsset::register($this);
                                         <?php endif;?>
                                     </td>
                                     <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                    <td class="mailbox-date"><?php echo date('Y-m-d H:i',$value['created_at']); ?></td>
+                                    <td class="mailbox-date">
+                                        <?php echo date('Y-m-d H:i',$value['updated_at']); ?>
+                                    </td>
                                 </tr>
                             <?php endforeach;?>
                         <?php else: ?>
