@@ -24,19 +24,19 @@ AdminLtePluginsWysiHtml5Asset::register($this);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <div class="form-group">
+                <div class="form-group group-mail-to">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                         <input class="form-control mail-to" placeholder="To:" value="<?php echo $model->to; ?>">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group group-mail-title">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-header"></i></span>
                         <input class="form-control mail-title" placeholder="Subject:" value="<?php echo $model->title; ?>">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group group-mail-content">
                     <textarea id="compose-textarea" class="form-control mail-content" style="height: 300px">
                         <?php echo $model->content; ?>
                     </textarea>
@@ -100,12 +100,68 @@ AdminLtePluginsWysiHtml5Asset::register($this);
             var status = 2;
             HandleData(status);
         });
-        
+
+        $('.mail-to').focus(function () {
+            $('.group-mail-to').removeClass('has-error');
+        });
+        $('.mail-to').blur(function () {
+            var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if(!emailReg.test($(this).val()))
+            {
+                $(this).attr('placeholder','邮箱为空或邮箱格式错误');
+                $('.group-mail-to').addClass('has-error');
+            }
+        });
+
+        $('.mail-title').focus(function () {
+            $('.group-mail-title').removeClass('has-error');
+        });
+        $('.mail-title').blur(function () {
+            if($.trim($('.mail-title').val())=='')
+            {
+                $('.mail-title').attr('placeholder','标题不能为空');
+                $('.group-mail-title').addClass('has-error');
+            }
+        });
+
         function HandleData(status) {
             var id           = "<?php echo $model->id?>";
-            var mail_to      = $('.mail-to').val();
+
+            var mail_to_addr = $('.mail-to');
+            var mail_to      = mail_to_addr.val();
+
+            var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if(!emailReg.test(mail_to))
+            {
+                mail_to_addr.attr('placeholder','邮箱为空或邮箱格式错误');
+                $('.group-mail-to').addClass('has-error');
+                return false;
+            }
+
             var mail_title   = $('.mail-title').val();
             var mail_content = $('.mail-content').val();
+
+            if ($.trim(mail_title)=='')
+            {
+                $('.mail-title').attr('placeholder','标题不能为空');
+                $('.group-mail-title').addClass('has-error');
+                return false;
+            }
+
+            if ($.trim(mail_content)=='')
+            {
+                bootbox.alert({
+                    title: '<i class="fa fa-danger text-info"></i> 提示',
+                    buttons: {
+                        ok: {
+                            label: '我知道啦~',
+                            className: 'btn bg-olive'
+                        }
+                    },
+                    message: '邮件内容不能为空'
+                });
+                return false;
+            }
 
             var url = '<?php echo Url::to(['/ajax/message/deal-mail']);?>';
             var param = {id:id,to:mail_to,title:mail_title,content:mail_content,status:status};

@@ -8,7 +8,7 @@ use yii\web\YiiAsset;
 /* @var $this yii\web\View */
 /* @var $mailList [] */
 
-$this->title = Yii::t('app', 'Create Message Group');
+$this->title = Yii::t('app', '添加消息组');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Message Groups'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -31,19 +31,35 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
             <div class="box-body">
                 <div class="row">
                     <div class="col-sm-11">
-                        <div class="input-group">
-                            <input id="inp-route" type="text" class="form-control"
-                                   placeholder="new email(s)">
-                            <span class="input-group-btn">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-cloud"></i></span>
+                                <input type="text" class="form-control" placeholder="组名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-comments"></i></span>
+                                <select name="type" class="form-control">
+                                    <option>邮件(email)</option>
+                                    <option>消息(message)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                <input id="inp-route" type="text" class="form-control" placeholder="新地址">
+                                <span class="input-group-btn">
                                 <?= Html::a(Yii::t('app', 'create') . $animateIcon, ['create'], [
                                     'class' => 'btn btn-success',
                                     'id' => 'btn-new'
                                 ]) ?>
-                            </span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <p>&nbsp;</p>
                 <div class="row">
                     <div class="col-sm-5">
                         <div class="input-group">
@@ -51,25 +67,30 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                                    placeholder="Search for avaliable">
                             <span class="input-group-btn">
                                 <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>', ['refresh'], [
-                                    'class' => 'btn btn-default',
+                                    'class' => 'btn btn-default btn-flat',
                                     'id' => 'btn-refresh'
                                 ]) ?>
                             </span>
                         </div>
                         <select multiple size="30" class="form-control list" data-target="avaliable"></select>
                     </div>
-                    <div class="col-sm-1">
-                        <br><br>
-                        <?= Html::a('&gt;&gt;' . $animateIcon, ['assign'], [
-                            'class' => 'btn btn-success btn-assign',
-                            'data-target' => 'avaliable',
-                            'title' => 'Assign'
-                        ]) ?><br><br>
-                        <?= Html::a('&lt;&lt;' . $animateIcon, ['remove'], [
-                            'class' => 'btn btn-danger btn-assign',
-                            'data-target' => 'assigned',
-                            'title' => 'Remove'
-                        ]) ?>
+                    <div class="col-sm-1 padding">
+                        <div class="margin">
+                            <p class="text-center">
+                                <?= Html::a('&gt;&gt;' . $animateIcon, ['assign'], [
+                                    'class' => 'btn btn-success btn-assign',
+                                    'data-target' => 'avaliable',
+                                    'title' => 'Assign'
+                                ]) ?>
+                            </p>
+                            <p class="text-center">
+                                <?= Html::a('&lt;&lt;' . $animateIcon, ['remove'], [
+                                    'class' => 'btn btn-danger btn-assign',
+                                    'data-target' => 'assigned',
+                                    'title' => 'Remove'
+                                ]) ?>
+                            </p>
+                        </div>
                     </div>
                     <div class="col-sm-5">
                         <input class="form-control search" data-target="assigned"
