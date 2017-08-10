@@ -8,10 +8,10 @@ function updateRoutes(r) {
 
 $('#btn-new').click(function () {
     var $this = $(this);
-    var route = $('#inp-route').val().trim();
-    if (route != '') {
+    var mail  = $('#inp-route').val().trim();
+    if (mail != '') {
         $this.children('i.glyphicon-refresh-animate').show();
-        $.post($this.attr('href'), {route: route}, function (r) {
+        $.post($this.attr('href'), {mail: mail}, function (r) {
             $('#inp-route').val('').focus();
             updateRoutes(r);
         }).always(function () {
@@ -24,11 +24,11 @@ $('#btn-new').click(function () {
 $('.btn-assign').click(function () {
     var $this = $(this);
     var target = $this.data('target');
-    var mailList = $('select.list[data-target="' + target + '"]').val();
+    var mail = $('select.list[data-target="' + target + '"]').val();
 
-    if (mailList && mailList.length) {
+    if (mail && mail.length) {
         $this.children('i.glyphicon-refresh-animate').show();
-        $.post($this.attr('href'), {mailList: mailList}, function (r) {
+        $.post($this.attr('href'), {mail: mail}, function (r) {
             updateRoutes(r);
         }).always(function () {
             $this.children('i.glyphicon-refresh-animate').hide();

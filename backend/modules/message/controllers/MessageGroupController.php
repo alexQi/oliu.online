@@ -65,6 +65,11 @@ class MessageGroupController extends Controller
     public function actionCreate()
     {
         $mailList = UserSearch::getUserMail();
+
+        //缓存用户数据
+        $cache = Yii::$app->cache;
+        $cache->set('mailList_'.yii::$app->user->identity->id, $mailList, 60*60);
+
         $model = new MessageGroup();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

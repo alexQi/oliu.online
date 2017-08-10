@@ -5,6 +5,7 @@ use yii;
 use yii\base\Exception;
 use common\models\service\MessageService;
 use app\models\MessageSearch;
+use app\models\UserSearch;
 
 class MessageController extends BaseController
 {
@@ -93,9 +94,77 @@ class MessageController extends BaseController
         return $this->ajaxReturn;
     }
 
-    public function actionCacheEmail()
+    /**
+     * 刷新缓存
+     * @return array|mixed
+     */
+    public function actionRefresh()
     {
-        var_dump(yii::$app->user->identity);
-        echo 11;
+        $mailList = UserSearch::getUserMail();
+
+        $cache = Yii::$app->cache;
+        $cache->set('mailList_'.yii::$app->user->identity->id, $mailList, 60*60);
+
+        return $mailList;
+    }
+
+    /**
+     * 添加到缓存列表
+     * @return array|mixed
+     */
+    public function actionAssign()
+    {
+        $mails  = Yii::$app->getRequest()->post('mail', []);
+
+        $cache = Yii::$app->cache;
+        $mailList = $cache->get('mailList_'.yii::$app->user->identity->id);
+
+        //处理未选中的项目
+        foreach ($mails as $mail)
+        {
+            $key = array_search($mail,$mailList['avaliable']);
+            if ($key!==false)
+            {
+                array_splice($mailList['avaliable'], $key, 1);
+            }
+        }
+
+        //处理选中项目
+        $mailList['assigned'] = array_merge($mailList['assigned'],$mails);
+
+        //重新暂存数据
+        $cache->set('mailList_'.yii::$app->user->identity->id, $mailList, 60*60);
+
+        return $mailList;
+    }
+
+    /**
+     * 从缓存列表移除
+     * @return array|mixed
+     */
+    public function actionRemove()
+    {
+        $mails  = Yii::$app->getRequest()->post('mail', []);
+
+        $cache = Yii::$app->cache;
+        $mailList = $cache->get('mailList_'.yii::$app->user->identity->id);
+
+        //处理未选中的项目
+        foreach ($mails as $mail)
+        {
+            $key = array_search($mail,$mailList['assigned']);
+            if ($key!==false)
+            {
+                array_splice($mailList['assigned'], $key, 1);
+            }
+        }
+
+        //处理选中项目
+        $mailList['avaliable'] = array_merge($mailList['avaliable'],$mails);
+
+        //重新暂存数据
+        $cache->set('mailList_'.yii::$app->user->identity->id, $mailList, 60*60);
+
+        return $mailList;
     }
 }

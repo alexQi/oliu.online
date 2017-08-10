@@ -66,7 +66,7 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                             <input class="form-control search" data-target="avaliable"
                                    placeholder="Search for avaliable">
                             <span class="input-group-btn">
-                                <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>', ['refresh'], [
+                                <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>', ['/ajax/message/refresh'], [
                                     'class' => 'btn btn-default btn-flat',
                                     'id' => 'btn-refresh'
                                 ]) ?>
@@ -77,14 +77,14 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                     <div class="col-sm-1 padding">
                         <div class="margin">
                             <p class="text-center">
-                                <?= Html::a('&gt;&gt;' . $animateIcon, ['assign'], [
+                                <?= Html::a('&gt;&gt;' . $animateIcon, ['/ajax/message/assign'], [
                                     'class' => 'btn btn-success btn-assign',
                                     'data-target' => 'avaliable',
                                     'title' => 'Assign'
                                 ]) ?>
                             </p>
                             <p class="text-center">
-                                <?= Html::a('&lt;&lt;' . $animateIcon, ['remove'], [
+                                <?= Html::a('&lt;&lt;' . $animateIcon, ['/ajax/message/remove'], [
                                     'class' => 'btn btn-danger btn-assign',
                                     'data-target' => 'assigned',
                                     'title' => 'Remove'
