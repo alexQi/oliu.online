@@ -72,14 +72,11 @@ class MessageGroupController extends Controller
 
         $model = new MessageGroup();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-                'mailList' => $mailList
-            ]);
-        }
+        return $this->render('create', [
+            'model' => $model,
+            'mailList' => $mailList
+        ]);
+
     }
 
     /**
@@ -92,13 +89,30 @@ class MessageGroupController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $model->members = json_decode($model->members);
+
+        $result    = UserSearch::getUserMail();
+        $avaliable = array_flip($result['avaliable']);
+
+        foreach($model->members as $member)
+        {
+            if (isset($avaliable[$member]))
+            {
+                unset($avaliable[$member]);
+            }
         }
+
+        $mailList['avaliable'] = array_flip($avaliable);
+        $mailList['assigned']  = $model->members;
+
+        //缓存用户数据
+        $cache = Yii::$app->cache;
+        $cache->set('mailList_'.yii::$app->user->identity->id, $mailList, 60*60);
+
+        return $this->render('update', [
+            'model' => $model,
+            'mailList' => $mailList
+        ]);
     }
 
     /**

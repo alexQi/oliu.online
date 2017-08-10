@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use backend\modules\admin\AnimateAsset;
 use yii\web\YiiAsset;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $mailList [] */
@@ -21,7 +22,6 @@ $this->registerJs("var _opts = {$opts};");
 $this->registerJs($this->render('_script.js'));
 $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>';
 ?>
-<!-- <h1><?= Html::encode($this->title) ?></h1> -->
 <div class="row">
     <div class="col-xs-12">
         <div class="box box-info">
@@ -117,7 +117,7 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
     $(function () {
         //取消提交
         $('.cancel-create').click(function () {
-            window.location.href='<?php echo \yii\helpers\Url::to(['index']);?>';
+            window.location.href='<?php echo Url::to(['index']);?>';
         });
 
         //提交数据
@@ -130,6 +130,26 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                 showAlert('用户组名称不能为空~');
                 return false;
             }
+
+            $.post("<?php echo Url::to(['/ajax/message/deal-message-group'])?>", {groupName: groupName,groupType:groupType}, function (r) {
+                if (r.state==1){
+                    bootbox.alert({
+                        title: '<i class="fa fa-info text-info"></i> 提示',
+                        buttons: {
+                            ok: {
+                                label: '我知道啦~',
+                                className: 'btn bg-olive'
+                            }
+                        },
+                        message: r.message,
+                        callback: function() {
+                            window.location.href = '<?php echo Url::to(['index'])?>';
+                        }
+                    });
+                }else{
+                    showAlert(r.message);
+                }
+            });
         });
     });
 </script>

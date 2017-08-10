@@ -1,6 +1,7 @@
 <?php
 namespace backend\modules\ajax\controllers;
 
+use app\models\MessageGroupSearch;
 use yii;
 use yii\base\Exception;
 use common\models\service\MessageService;
@@ -114,7 +115,7 @@ class MessageController extends BaseController
      */
     public function actionAssign()
     {
-        $mails  = Yii::$app->getRequest()->post('mail', []);
+        $mails  = $this->postData['mail'];
 
         $cache = Yii::$app->cache;
         $mailList = $cache->get('mailList_'.yii::$app->user->identity->id);
@@ -144,7 +145,7 @@ class MessageController extends BaseController
      */
     public function actionRemove()
     {
-        $mails  = Yii::$app->getRequest()->post('mail', []);
+        $mails  = $this->postData['mail'];
 
         $cache = Yii::$app->cache;
         $mailList = $cache->get('mailList_'.yii::$app->user->identity->id);
@@ -169,11 +170,11 @@ class MessageController extends BaseController
     }
 
     /**
-     * 添加新邮件
+     * 添加新邮件地址
      * @return mixed
      */
     public function actionAddNewMail(){
-        $mails  = Yii::$app->getRequest()->post('mail', []);
+        $mails  = $this->postData['mail'];
 
         $cache = Yii::$app->cache;
         $mailList = $cache->get('mailList_'.yii::$app->user->identity->id);
@@ -185,5 +186,67 @@ class MessageController extends BaseController
         $cache->set('mailList_'.yii::$app->user->identity->id, $mailList, 60*60);
 
         return $mailList;
+    }
+
+    /**
+     * 添加邮件组
+     * @param  array $this->postData
+     * @return array $this->ajaxReturn
+     */
+    public function actionDealMessageGroup()
+    {
+        try{
+            $cache = Yii::$app->cache;
+            $mailList = $cache->get('mailList_'.yii::$app->user->identity->id);
+
+            if (empty($mailList['assigned']))
+            {
+                throw new Exception('组成员最少有一个');
+            }
+
+            if (!isset($this->postData['groupName']))
+            {
+                throw new Exception('消息组名称不能为空');
+            }
+
+            if (isset($this->postData['id']) && $this->postData['id'])
+            {
+                $MessageGroupSearch = MessageGroupSearch::findOne($this->postData['id']);
+                if (empty($MessageGroupSearch))
+                {
+                    throw new Exception('未查找到该条记录');
+                }
+
+                $MessageGroupSearch->group_name = $this->postData['groupName'];
+                $MessageGroupSearch->type       = $this->postData['groupType'];
+                $MessageGroupSearch->members    = json_encode($mailList['assigned']);
+                $MessageGroupSearch->user_id    = yii::$app->user->identity->id;
+                $MessageGroupSearch->updated_at = time();
+
+            }else{
+                $MessageGroupSearch = new MessageGroupSearch();
+
+                $MessageGroupSearch->group_name = $this->postData['groupName'];
+                $MessageGroupSearch->type       = $this->postData['groupType'];
+                $MessageGroupSearch->members    = json_encode($mailList['assigned']);
+                $MessageGroupSearch->user_id    = yii::$app->user->identity->id;
+                $MessageGroupSearch->created_at = time();
+                $MessageGroupSearch->updated_at = time();
+            }
+
+            if (!$MessageGroupSearch->save())
+            {
+                throw new Exception('处理数据失败');
+            }
+
+            $this->ajaxReturn['state']   = 1;
+            $this->ajaxReturn['message'] = '操作成功';
+
+        }catch (Exception $e){
+
+            $this->ajaxReturn['message'] = $e->getMessage();
+        }
+
+        return $this->ajaxReturn;
     }
 }
