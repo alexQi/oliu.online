@@ -6,10 +6,13 @@ use yii\base\Exception;
 use common\models\service\MessageService;
 use app\models\MessageSearch;
 
-
 class MessageController extends BaseController
 {
 
+    /**
+     * 处理邮件
+     * @return array
+     */
     public function actionDealMail()
     {
 
@@ -36,10 +39,6 @@ class MessageController extends BaseController
                 $messageInfo->updated_at  = time();
 
             }else{
-                if(yii::$app->user->isGuest)
-                {
-                    throw new Exception('用户未登录');
-                }
 
                 $messageInfo = new MessageSearch();
                 $messageInfo->title = $this->postData['title'];
@@ -92,5 +91,11 @@ class MessageController extends BaseController
         }
 
         return $this->ajaxReturn;
+    }
+
+    public function actionCacheEmail()
+    {
+        var_dump(yii::$app->user->identity);
+        echo 11;
     }
 }
