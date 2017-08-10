@@ -15,7 +15,7 @@ $('#btn-new').click(function () {
     var mail  = $('#inp-route').val().trim();
 
     var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-    if(!emailReg.test($(this).val()))
+    if(!emailReg.test(mail))
     {
         $('.inp-route').attr('placeholder','邮箱为空或邮箱格式错误');
         $('.new-email').addClass('has-error');

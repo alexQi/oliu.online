@@ -98,6 +98,14 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                         <select multiple size="20" class="form-control list" data-target="assigned"></select>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-2 margin">
+                        <div class="btn-group">
+                            <input type="button" class="btn btn-default margin btn-flat" value="取消保存">
+                            <input type="button" class="btn btn-info margin btn-flat" value="保存用户组">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="box-footer">
                 <p>&nbsp;</p>

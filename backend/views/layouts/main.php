@@ -11,6 +11,7 @@ use backend\assets\AppAsset;
 use common\widgets\Alert;
 
 AppAsset::register($this);
+dmstr\web\AdminLteAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
