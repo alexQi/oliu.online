@@ -167,4 +167,23 @@ class MessageController extends BaseController
 
         return $mailList;
     }
+
+    /**
+     * 添加新邮件
+     * @return mixed
+     */
+    public function actionAddNewMail(){
+        $mails  = Yii::$app->getRequest()->post('mail', []);
+
+        $cache = Yii::$app->cache;
+        $mailList = $cache->get('mailList_'.yii::$app->user->identity->id);
+
+        //处理选中项目
+        array_push($mailList['assigned'],$mails);
+
+        //重新暂存数据
+        $cache->set('mailList_'.yii::$app->user->identity->id, $mailList, 60*60);
+
+        return $mailList;
+    }
 }

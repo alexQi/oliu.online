@@ -9,7 +9,7 @@ use yii\web\YiiAsset;
 /* @var $mailList [] */
 
 $this->title = Yii::t('app', '添加消息组');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Message Groups'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', '用户组'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 AnimateAsset::register($this);
@@ -46,12 +46,12 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group new-email">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                                 <input id="inp-route" type="text" class="form-control" placeholder="新地址">
                                 <span class="input-group-btn">
-                                <?= Html::a(Yii::t('app', 'create') . $animateIcon, ['create'], [
+                                <?= Html::a(Yii::t('app', 'create') . $animateIcon, ['/ajax/message/add-new-mail'], [
                                     'class' => 'btn btn-success',
                                     'id' => 'btn-new'
                                 ]) ?>
@@ -72,7 +72,7 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                                 ]) ?>
                             </span>
                         </div>
-                        <select multiple size="30" class="form-control list" data-target="avaliable"></select>
+                        <select multiple size="20" class="form-control list" data-target="avaliable"></select>
                     </div>
                     <div class="col-sm-1 padding">
                         <div class="margin">
@@ -95,7 +95,7 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                     <div class="col-sm-5">
                         <input class="form-control search" data-target="assigned"
                                placeholder="Search for assigned">
-                        <select multiple size="30" class="form-control list" data-target="assigned"></select>
+                        <select multiple size="20" class="form-control list" data-target="assigned"></select>
                     </div>
                 </div>
             </div>
