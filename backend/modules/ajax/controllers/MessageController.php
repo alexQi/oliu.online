@@ -1,13 +1,18 @@
 <?php
 namespace backend\modules\ajax\controllers;
 
-use app\models\MessageGroupSearch;
 use yii;
 use yii\base\Exception;
 use common\models\service\MessageService;
 use app\models\MessageSearch;
+use app\models\MessageGroupSearch;
 use app\models\UserSearch;
 
+/**
+ * ajax 消息处理类
+ * Class MessageController
+ * @package backend\modules\ajax\controllers
+ */
 class MessageController extends BaseController
 {
 
