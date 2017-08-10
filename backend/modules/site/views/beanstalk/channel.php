@@ -1,60 +1,91 @@
 <?php
 use common\components\gridop\GridopWidget;
+use yii\helpers\Url;
+use yii\bootstrap\Html;
+/* @var $items */
+/* @var $queue */
+/* @var $lastBuried common\components\yii2beanstalk\Beanstalk */
+/* @var $lastDelayed common\components\yii2beanstalk\Beanstalk */
+/* @var $lastReady common\components\yii2beanstalk\Beanstalk */
 ?>
-<table class="table table-strip">
-    <tr>
-        <td>队列名</td>
-        <td>任务总数</td>
-        <td>任务就绪</td>
-        <td>任务延时</td>
-        <td>任务睡眠</td>
-        <td>操作</td>
-    </tr>
-    <tr>
-        <td><?=$queue->name?></td>
-        <td><?=$queue["total-jobs"]?></td>
-        <td><?=$queue["current-jobs-ready"]?></td>
-        <td><?=$queue["current-jobs-delayed"]?></td>
-        <td><?=$queue["current-jobs-buried"]?></td>
-        <td>
-            <?php if($lastBuried||$lastDelayed):?>
-                <?=GridopWidget::widget(['items'=>[
-                    'title'=>['label'=>'选择kick','url'=>'javascript:void(0);'],
-                    'items'=>$items
-                ]]);?>
-            <?php endif;?>
-            <?= \yii\bootstrap\Html::a('Delete Job','javascript:void(0)',['class'=>'del_job','data-url'=>\yii\helpers\Url::to(['del-job','name'=>$queue->name])]);?>
-            <?= \yii\bootstrap\Html::a('Delete All Buried','javascript:void(0);',['class'=>'del_buried','data-url'=>\yii\helpers\Url::to(['del-buried','name'=>$queue->name])]);?>
-        </td>
-    </tr>
-</table>
-<?= \yii\bootstrap\Html::a('Pause ','javascript:void(0)',['class'=>'pause','data-url'=>\yii\helpers\Url::to(['pause','name'=>$queue->name])]);?>
-<?= \yii\bootstrap\Html::a('Resume ','javascript:void(0)',['class'=>'resume','data-url'=>\yii\helpers\Url::to(['resume','name'=>$queue->name])]);?>
-<?php if($lastBuried):?>
-    <div>
-        <div class="row">
-            编号:<?=$lastBuried->getId();?>
-        </div>
-        <?=\yii\bootstrap\Html::textarea("jobData",json_encode($lastBuried->getData()))?>
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <td>队列</td>
+                <td>总数</td>
+                <td>准备</td>
+                <td>延时</td>
+                <td>休眠</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td><?=$queue->name?></td>
+                <td><?=$queue["total-jobs"]?></td>
+                <td><?=$queue["current-jobs-ready"]?></td>
+                <td><?=$queue["current-jobs-delayed"]?></td>
+                <td><?=$queue["current-jobs-buried"]?></td>
+                <td>
+                    <?php if($lastBuried||$lastDelayed):?>
+                        <?=GridopWidget::widget(['items'=>[
+                            'title'=>['label'=>'踢回队列','url'=>'javascript:void(0);','class'=>'btn btn-info btn-sm'],
+                            'items'=>$items
+                        ]]);?>
+                    <?php endif;?>
+                    <?=GridopWidget::widget(
+                        [
+                            'items'=>[
+                                'title'=>['label'=>'删除休眠','url'=>'javascript:void(0);','class' => 'btn btn-info btn-sm'],
+                                'items'=>[
+                                    [
+                                        'label'=>'删除一条',
+                                        'url'=>'javascript:void(0);',
+                                        'options'=>[
+                                            'class'=>'del_job',
+                                            'data-url' => Url::to(['del-job','name'=>$queue->name])
+                                        ]
+                                    ],
+                                    [
+                                        'label'=>'删除所有',
+                                        'url'=>'javascript:void(0);',
+                                        'options'=>[
+                                            'class'=>'del_buried',
+                                            'data-url' => Url::to(['del-buried','name'=>$queue->name])
+                                        ]
+                                    ],
+                                ]
+                            ]
+                        ]
+                    );?>
+                </td>
+            </tr>
+        </table>
     </div>
-<?php endif;?>
-<?php if($lastDelayed):?>
-    <div>
-        <div class="row">
-            编号:<?=$lastDelayed->getId();?>
+</div>
 
-        </div>
-        <?=\yii\bootstrap\Html::textarea("jobData",json_encode($lastDelayed->getData()))?>
+<div class="row">
+    <div class="col-xs-12">
+        <?php if($lastBuried):?>
+            <div class="form-group">
+                <label class="control-label">最近休眠任务, ID : <?=$lastBuried->getId();?></label>
+                <div class="well"><?php echo json_encode(json_decode($lastBuried->getData(),true),JSON_UNESCAPED_UNICODE); ?></div>
+            </div>
+        <?php endif;?>
+        <?php if($lastDelayed):?>
+            <div class="form-group">
+                <label>最近延时任务, ID : <?=$lastDelayed->getId();?></label>
+                <div class="well"><?php echo json_encode(json_decode($lastDelayed->getData(),true),JSON_UNESCAPED_UNICODE); ?></div>
+            </div>
+        <?php endif;?>
+        <?php if($lastReady):?>
+            <div class="form-group">
+                <label>将要执行任务, ID : <?=$lastReady->getId();?></label>
+                <div class="well"><?php echo json_encode(json_decode($lastReady->getData(),true),JSON_UNESCAPED_UNICODE); ?></div>
+            </div>
+        <?php endif;?>
     </div>
-<?php endif;?>
-<?php if($lastReady):?>
-    <div>
-        <div class="row">
-            编号:<?=$lastReady->getId();?>
-        </div>
-        <?=\yii\bootstrap\Html::textarea("jobData",json_encode($lastReady->getData()))?>
-    </div>
-<?php endif;?>
+</div>
+
 <?php
 $this->registerJs(
     "    
@@ -87,20 +118,6 @@ $this->registerJs(
                 );
                 $('.close').click();
             }
-        });
-        $(document).on(\"click\",\".pause\",function() {
-            $.get($(this).attr(\"data-url\"),
-                function (data) {
-                alert('pause success');
-                }
-            );
-        });
-        $(document).on(\"click\",\".resume\",function() {
-            $.get($(this).attr(\"data-url\"),
-                function (data) {
-                alert('resume success');
-                }
-            );
         });
     "
 );
