@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $group_name
+ * @property string $user_id
  * @property integer $type
  * @property string $members
  * @property integer $status
@@ -31,10 +32,11 @@ class MessageGroup extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['group_name'], 'required'],
+            [['group_name', 'user_id', 'members'], 'required'],
             [['type', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['members'], 'string'],
             [['group_name'], 'string', 'max' => 45],
-            [['members'], 'string', 'max' => 255],
+            [['user_id'], 'string', 'max' => 100],
         ];
     }
 
@@ -46,6 +48,7 @@ class MessageGroup extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'group_name' => 'Group Name',
+            'user_id' => 'User ID',
             'type' => 'Type',
             'members' => 'Members',
             'status' => 'Status',
