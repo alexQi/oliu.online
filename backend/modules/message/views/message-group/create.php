@@ -34,15 +34,15 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-cloud"></i></span>
-                                <input type="text" class="form-control" placeholder="组名称">
+                                <input type="text" name="group_name" class="form-control group-name" placeholder="组名称">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-comments"></i></span>
-                                <select name="type" class="form-control">
-                                    <option>邮件(email)</option>
-                                    <option>消息(message)</option>
+                                <select name="type" class="form-control group-type">
+                                    <option value="1">邮件(email)</option>
+                                    <option value="2">消息(message)</option>
                                 </select>
                             </div>
                         </div>
@@ -99,10 +99,10 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-2 margin">
+                    <div class="col-sm-5 margin">
                         <div class="btn-group">
-                            <input type="button" class="btn btn-default margin btn-flat" value="取消保存">
-                            <input type="button" class="btn btn-info margin btn-flat" value="保存用户组">
+                            <input type="button" class="btn btn-default margin btn-flat cancel-create" value="取消并返回">
+                            <input type="button" class="btn btn-info margin btn-flat confirm-create"   value="保存用户组">
                         </div>
                     </div>
                 </div>
@@ -113,3 +113,23 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        //取消提交
+        $('.cancel-create').click(function () {
+            window.location.href='<?php echo \yii\helpers\Url::to(['index']);?>';
+        });
+
+        //提交数据
+        $('.confirm-create').click(function () {
+            var groupName = $('.group-name').val().trim();
+            var groupType = $('.group-type option:selected').val().trim();
+
+            if (groupName=='')
+            {
+                showAlert('用户组名称不能为空~');
+                return false;
+            }
+        });
+    });
+</script>

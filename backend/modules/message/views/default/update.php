@@ -150,16 +150,7 @@ AdminLtePluginsWysiHtml5Asset::register($this);
 
             if ($.trim(mail_content)=='')
             {
-                bootbox.alert({
-                    title: '<i class="fa fa-danger text-info"></i> 提示',
-                    buttons: {
-                        ok: {
-                            label: '我知道啦~',
-                            className: 'btn bg-olive'
-                        }
-                    },
-                    message: '邮件内容不能为空'
-                });
+                showAlert('邮件内容不能为空');
                 return false;
             }
 

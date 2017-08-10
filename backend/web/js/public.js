@@ -34,3 +34,17 @@ yii.confirm = function (message, ok, cancel) {
     // to cancel click handler
     return false;
 };
+
+function showAlert(msg){
+    bootbox.alert({
+        title: '<i class="fa fa-danger text-info"></i> 提示',
+        buttons: {
+            ok: {
+                label: '我知道啦~',
+                className: 'btn bg-olive'
+            }
+        },
+        message: msg
+    });
+    return false;
+}
