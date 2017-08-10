@@ -239,6 +239,8 @@ class MessageController extends BaseController
                 throw new Exception('处理数据失败');
             }
 
+            $cache->delete('mailList_'.yii::$app->user->identity->id);
+
             $this->ajaxReturn['state']   = 1;
             $this->ajaxReturn['message'] = '操作成功';
 
