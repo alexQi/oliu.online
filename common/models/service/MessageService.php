@@ -21,8 +21,6 @@ class MessageService extends Message
 
     public static function InToQueue($data){
         $beanstalk = new Beanstalk();
-        $beanstalk->useTube('oliu.sendEmail');
-
-        return $beanstalk->put(json_encode($data));
+        return $beanstalk->putInTube('oliu.sendEmail',json_encode($data));
     }
 }

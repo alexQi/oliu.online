@@ -76,7 +76,6 @@ class ConsController extends Controller
         }else{
             $result = false;
         }
-
         return $result;
     }
 
@@ -85,8 +84,8 @@ class ConsController extends Controller
         $beanstalk->useTube('oliu.sendEmail');
         $beanstalk->watch('oliu.sendEmail');
 
-        while (true){
-            $job  = $beanstalk->reserve();
+        while ($job  = $beanstalk->reserve(0))
+        {
             $beanstalk->delete($job);
         }
     }

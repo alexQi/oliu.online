@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\widgets\Pjax;
 use yii\grid\GridView;
+use yii\bootstrap\Modal;
 
 use yii\widgets\LinkPager;
 $server = $_SERVER;
@@ -177,6 +178,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ]);?>
                 <?php Pjax::end();?>
+                <?php Modal::begin([
+                    'id'     => 'activity-modal',
+                    'header' => '<h4 class="modal-title"><i class="glyphicon glyphicon-transfer"></i> 队列详情</h4>',
+                    'footer' => '<a href="#" class="btn bg-olive btn-flat" data-dismiss="modal">关闭</a>',
+                ]);?>
+
+                <div class="well">
+
+                </div>
+                <?php Modal::end();?>
             </div>
             <!-- /.box-body -->
         </div>
@@ -280,3 +291,17 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+<?php
+$this->registerJs(
+    "
+        $(document).on(\"click\",\".detail-link\",function() {
+            $.get($(this).attr(\"href\"),
+                function (data) {
+                    $('.modal-body').html(data);
+                    $('#activity-modal').modal();
+                }
+            );
+        });
+    "
+);
+?>
