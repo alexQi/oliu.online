@@ -92,7 +92,14 @@ class socketServer
                 //存储用户信息到redis
                 $this->redis->set('init_user_'.$res['data']['userId'],$frame->fd);
                 $this->redis->set('init_fd_'.$frame->fd,$res['data']['userId']);
+
+                //获取用户未读消息总数
+                $totalNotRead = $this->redis->lLen('message_receive_'.$res['data']['userId']);
+                $data['type']        = 'totalNotRead';
+                $data['data']['num'] = $totalNotRead;
+                $serv->push($frame->fd,json_encode($data));
                 break;
+
             case 'message':
                 //存储用户消息
                 $param['from_user_id'] = $res['data']['fromUserId'];
@@ -105,12 +112,11 @@ class socketServer
 
                 $serv->task(json_encode($param), -1);
                 break;
+
             default:
                 //nothing to do
                 break;
         }
-
-
     }
 
     /**

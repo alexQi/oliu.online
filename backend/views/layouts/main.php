@@ -57,41 +57,52 @@ if (Yii::$app->controller->action->id === 'login') {
     </div>
 
     <script>
-        // web socket
-        $(function () {
-            var ws = new WebSocket("ws://0.0.0.0:9501");
+        var socket;
+        var log = function(msg) {
+            alert(msg);
+        };
+        var initWebSocket = function() {
+            if (window.WebSocket) {
+                socket = new WebSocket("ws://127.0.0.1:9501");
+                socket.onmessage = function(event) {
+                    var res = JSON.parse(event.data);
+                    if (res.type=='time'){
+                        $('.time-clock').html(res.data.time);
+                    }
 
-            /**
-             * 当用户页面加载完毕时发送用户ID给socket服务器
-             * @param event
-             */
-            ws.onopen = function (event) {
-                var userId = '<?php echo yii::$app->user->identity->id;?>';
-                var data   = {type:'init',data:{userId:userId}};
-                data = JSON.stringify(data);
-                ws.send(data);
+                    if (res.type=='totalNotRead'){
+                        $('.message-num').html(res.data.num);
+                    }
 
-                //测试
-                var test = {type:'message',data:{fromUserId:userId,toUserId:userId,content:'哈哈哈哈哈哈'}};
-                test = JSON.stringify(test);
-                ws.send(test);
-            };
+                    if (res.type=='message')
+                    {
+                        console.log(res.data);
+                    }
+                };
+                socket.onopen = function(event) {
+                    var userId = '<?php echo yii::$app->user->identity->id;?>';
+                    var data   = {type:'init',data:{userId:userId}};
+                    data = JSON.stringify(data);
+                    socket.send(data);
 
-
-            ws.onmessage = function (event)
-            {
-                var res = JSON.parse(event.data);
-                if (res.type=='time'){
-                    $('.time-clock').html(res.data.time);
-                }
-
-                if (res.type=='message')
-                {
-                    console.log(res.data);
-                }
-
-            };
-        });
+                    //测试
+                    var test = {type:'message',data:{fromUserId:userId,toUserId:userId,content:'哈哈哈哈哈哈'}};
+                    test = JSON.stringify(test);
+                    socket.send(test);
+                };
+                socket.onclose = function(event) {
+                    log("Web Socket closed.");
+                };
+                socket.onerror = function(event) {
+                    log("Web Socket error.");
+                };
+            } else {
+                log("Your browser does not support Web Socket.");
+            }
+        };
+        window.onload = function() {
+            initWebSocket();
+        }
     </script>
 
     <?php $this->endBody() ?>
