@@ -22,7 +22,7 @@ use yii\helpers\Html;
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="hidden-xs"><?php echo date('Y-m-d H:i:s', time()); ?></span>
+                        <span class="hidden-xs time-clock"></span>
                     </a>
                 </li>
                 <li class="dropdown messages-menu">

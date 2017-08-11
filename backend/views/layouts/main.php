@@ -56,6 +56,44 @@ if (Yii::$app->controller->action->id === 'login') {
 
     </div>
 
+    <script>
+        // web socket
+        $(function () {
+            var ws = new WebSocket("ws://0.0.0.0:9501");
+
+            /**
+             * 当用户页面加载完毕时发送用户ID给socket服务器
+             * @param event
+             */
+            ws.onopen = function (event) {
+                var userId = '<?php echo yii::$app->user->identity->id;?>';
+                var data   = {type:'init',data:{userId:userId}};
+                data = JSON.stringify(data);
+                ws.send(data);
+
+                //测试
+                var test = {type:'message',data:{fromUserId:userId,toUserId:userId,content:'哈哈哈哈哈哈'}};
+                test = JSON.stringify(test);
+                ws.send(test);
+            };
+
+
+            ws.onmessage = function (event)
+            {
+                var res = JSON.parse(event.data);
+                if (res.type=='time'){
+                    $('.time-clock').html(res.data.time);
+                }
+
+                if (res.type=='message')
+                {
+                    console.log(res.data);
+                }
+
+            };
+        });
+    </script>
+
     <?php $this->endBody() ?>
     </body>
     </html>
