@@ -44,7 +44,7 @@ use kartik\date\DatePicker;
             // 是否展示预览图
             'initialPreviewAsData' => true,
             // 异步上传的接口地址设置
-            'uploadUrl' => yii\helpers\Url::toRoute(['/product/ajax-upload']),
+            'uploadUrl' => yii\helpers\Url::toRoute(['/product/default/ajax-upload']),
             // 异步上传需要携带的其他参数，比如商品id等
             'uploadExtraData' => [
                 'product_id' => $id,
