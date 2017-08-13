@@ -89,6 +89,8 @@ class socketServer
         switch ($res['type'])
         {
             case 'init':
+                //判断当前用户是否存在未读的消息
+
                 //存储用户信息到redis
                 $this->redis->set('init_user_'.$res['data']['userId'],$frame->fd);
                 $this->redis->set('init_fd_'.$frame->fd,$res['data']['userId']);
@@ -103,6 +105,7 @@ class socketServer
 
                 $this->redis->sAdd('message_send_'.$res['data']['userId'],$param); //发送方记录
                 $this->redis->lPush('message_receive_'.$res['data']['toUserId'],json_encode($param)); //接收方记录
+                $this->redis->sAdd('user_message_'.$res['data']['userId'],$res['data']['toUserId']);
 
 //                $serv->task(json_encode($param), -1);
 
