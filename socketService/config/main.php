@@ -12,16 +12,9 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'socket\controllers',
     'controllerMap' => [
-        'fixture' => [
-            'class' => 'yii\socket\controllers\FixtureController',
-            'namespace' => 'common\fixtures',
-          ],
-        'worker'=>[
-            'class' => 'socket\controllers\WorkerController',
+        'default'=>[
+            'class' => 'socket\controllers\DefaultController',
         ],
-        'cons'=>[
-            'class' => 'socket\controllers\ConsController',
-        ]
 
     ],
     'components' => [
