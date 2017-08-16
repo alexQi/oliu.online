@@ -192,21 +192,29 @@ class WebSocket
         {
             $fd = (int) $this->redis->get('init_user_'.$data);
 
-            if ($server->exist($fd)){
-                $send['type']        = 'totalNotRead';
-                $send['data']['num'] = $notReadNum;
-                $server->push($fd,json_encode($send));
-            }
-
             $response = [];
+            $preView  = [];
             while ($notRead = $this->redis->lPop('message_receive_'.$data))
             {
                 $param = json_decode($notRead,true);
                 $param['create_time'] = date('H:i:s',$param['create_time']);
+
+                $preView[] = $param;
+
                 $send['type'] = 'message';
                 $send['data'] = $param;
 
                 $response[] = $send;
+            }
+
+            if ($server->exist($fd))
+            {
+                //预览消息
+                $send['type']         = 'totalNotRead';
+                $send['data']['num']  = $notReadNum;
+                $send['data']['data'] = $preView;
+
+                $server->push($fd,json_encode($send));
             }
 
             if ($server->exist($fd))
