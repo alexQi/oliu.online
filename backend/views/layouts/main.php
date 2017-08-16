@@ -111,6 +111,16 @@ if (Yii::$app->controller->action->id === 'login') {
 
                     if (res.type=='totalNotRead'){
                         $('.message-num').html(res.data.num);
+                        $('.chat-num-notice').html("You have "+res.data.num+" messages");
+                        var html = '<li>';
+                        html += '<a href="<?php echo Url::to(['/message/default/chat']) ?>" class="message-chat" data-pjax="0" data-key="default" data-toggle="modal" data-target="#messageChat-modal">';
+                        html += '<div class="pull-left">';
+                        html += '<img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>';
+                        html += '</div>';
+                        html += '<h4>Support Team<small><i class="fa fa-clock-o"></i> 5 mins</small></h4>';
+                        html += '<p>Why not buy a new awesome theme?</p>';
+                        html += '</a>';
+                        html += '</li>';
                     }
 
                     if (res.type=='message')

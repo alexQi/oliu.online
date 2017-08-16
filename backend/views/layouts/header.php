@@ -31,25 +31,10 @@ use yii\helpers\Url;
                         <span class="label label-success message-num"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have 4 messages</li>
+                        <li class="header chat-num-notice">You have 4 messages</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
-                                <li><!-- start message -->
-                                    <a href="<?php echo Url::to(['/message/default/chat']) ?>" class="message-chat" data-pjax="0" data-key="default" data-toggle="modal" data-target="#messageChat-modal">
-                                        <div class="pull-left">
-                                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-                                                 alt="User Image"/>
-                                        </div>
-                                        <h4>
-                                            Support Team
-                                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                        </h4>
-                                        <p>Why not buy a new awesome theme?</p>
-                                    </a>
-                                </li>
-                                <!-- end message -->
-                            </ul>
+                            <ul class="menu chat-list"></ul>
                         </li>
                         <li class="footer"><a href="#">See All Messages</a></li>
                     </ul>
