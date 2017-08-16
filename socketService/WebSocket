@@ -21,7 +21,7 @@ class WebSocket
     private function initRuntime()
     {
         $result = true;
-        $this->runTimePath = dir(__DIR__)->path.'/socketService/runtime/logs/swoole';
+        $this->runTimePath = dir(__DIR__)->path.'/runtime/logs/swoole';
 
         if(!is_dir($this->runTimePath))
         {
@@ -41,7 +41,7 @@ class WebSocket
     public function connectRedis($config=array()){
         $redis = new redis();
         $redis->connect('127.0.0.1', 6379);
-        $redis->auth('6da192c7dd56a5ba917c59d2e723911a');
+//        $redis->auth('6da192c7dd56a5ba917c59d2e723911a');
         return $this->redis = $redis;
     }
 
@@ -151,6 +151,36 @@ class WebSocket
                 //存储用户信息到redis
                 $this->redis->set('init_user_'.$res['data']['userId'],$frame->fd);
                 $this->redis->set('init_fd_'.$frame->fd,$res['data']['userId']);
+
+                //判断未读消息数量
+                $notReadNum = $this->redis->lLen('message_receive_'.$res['data']['userId']);
+
+                $fd = (int) $this->redis->get('init_user_'.$res['data']['userId']);
+
+                $preView  = [];
+                while ($notRead = $this->redis->lPop('message_receive_'.$res['data']['userId']))
+                {
+                    $param = json_decode($notRead,true);
+                    $param['create_time'] = date('H:i:s',$param['create_time']);
+
+                    $preView[] = $param;
+                }
+
+                if ($server->exist($fd))
+                {
+                    //预览消息
+                    $send['type']         = 'totalNotRead';
+                    $send['data']['num']  = $notReadNum;
+                    $send['data']['data'] = $preView;
+
+                    $server->push($fd,json_encode($send));
+                }
+
+                foreach ($preView as $val)
+                {
+                    $this->redis->lPush('message_receive_'.$res['data']['userId'],$val); //接收方记录
+                }
+
                 break;
 
             case 'message':
@@ -182,7 +212,7 @@ class WebSocket
      */
     public function onTask(swoole_websocket_server $server, $task_id,$src_worker_id,$data)
     {
-        $cliNotice = "[ SWID : $src_worker_id <-> TID : $task_id ] ----> Execute Task, Opcode:{$data->opcode},Fin:{$data->finish}, Data:{$data->data} \r\n";
+        $cliNotice = "[ WID : $src_worker_id ] ----> TID : $task_id Execute Task, UserId:$data \r\n";
         echo $this->colors->getColoredString($cliNotice,'yellow');
 
         //判断未读消息数量
@@ -192,37 +222,27 @@ class WebSocket
         {
             $fd = (int) $this->redis->get('init_user_'.$data);
 
-            $response = [];
             $preView  = [];
             while ($notRead = $this->redis->lPop('message_receive_'.$data))
             {
                 $param = json_decode($notRead,true);
-                $param['create_time'] = date('H:i:s',$param['create_time']);
 
                 $preView[] = $param;
-
-                $send['type'] = 'message';
-                $send['data'] = $param;
-
-                $response[] = $send;
+                $preView[] = $param;
             }
 
             if ($server->exist($fd))
             {
-                //预览消息
-                $send['type']         = 'totalNotRead';
-                $send['data']['num']  = $notReadNum;
-                $send['data']['data'] = $preView;
+                $response['type'] = 'message';
+                $response['data'] = $preView;
 
-                $server->push($fd,json_encode($send));
-            }
-
-            if ($server->exist($fd))
-            {
                 $server->push($fd,json_encode($response));
             }else{
                 //client has been closed
-                $this->redis->lPush('message_receive_'.$data,$notRead); //接收方记录
+                foreach ($preView as $val)
+                {
+                    $this->redis->lPush('message_receive_'.$data,json_encode($val)); //接收方记录
+                }
             }
         }
 

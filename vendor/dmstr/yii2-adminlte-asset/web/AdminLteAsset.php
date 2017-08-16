@@ -15,7 +15,8 @@ class AdminLteAsset extends BaseAdminLteAsset
         'css/AdminLTE.min.css',
     ];
     public $js = [
-        'js/app.min.js'
+        'js/app.min.js',
+        'js/demo.js'
     ];
     public $depends = [
         'rmrevin\yii\fontawesome\AssetBundle',

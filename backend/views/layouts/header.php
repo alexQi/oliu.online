@@ -31,7 +31,7 @@ use yii\helpers\Url;
                         <span class="label label-success message-num"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header chat-num-notice">You have 4 messages</li>
+                        <li class="header chat-num-notice"></li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu chat-list"></ul>
@@ -99,17 +99,17 @@ use yii\helpers\Url;
                             </p>
                         </li>
                         <!-- Menu Body -->
-<!--                        <li class="user-body">-->
-<!--                            <div class="col-xs-4 text-center">-->
-<!--                                <a href="#">Followers</a>-->
-<!--                            </div>-->
-<!--                            <div class="col-xs-4 text-center">-->
-<!--                                <a href="#">Sales</a>-->
-<!--                            </div>-->
-<!--                            <div class="col-xs-4 text-center">-->
-<!--                                <a href="#">Friends</a>-->
-<!--                            </div>-->
-<!--                        </li>-->
+                        <li class="user-body">
+                            <div class="col-xs-4 text-center">
+                                <a href="#">Followers</a>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <a href="#">Sales</a>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <a href="#">Friends</a>
+                            </div>
+                        </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">

@@ -2,6 +2,9 @@
 use yii\widgets\Breadcrumbs;
 use dmstr\widgets\Alert;
 
+/* @var $content */
+/* @var $directoryAsset */
+
 ?>
 <div class="content-wrapper">
         <?=
@@ -21,7 +24,7 @@ use dmstr\widgets\Alert;
     <div class="pull-right hidden-xs">
         <b>Version</b> 2.0
     </div>
-    <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright &copy; 2017-2020 <a href="http://almsaeedstudio.com">OLIU Studio</a>.</strong> All rights
     reserved.
 </footer>
 
@@ -30,6 +33,7 @@ use dmstr\widgets\Alert;
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
         <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+        <li><a href="#control-sidebar-friend-tab" data-toggle="tab"><i class="fa fa-weixin"></i></a></li>
         <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
     </ul>
     <!-- Tab panes -->
@@ -140,7 +144,20 @@ use dmstr\widgets\Alert;
 
         </div>
         <!-- /.tab-pane -->
-
+        <!-- wechat tab content -->
+        <div class="tab-pane" id="control-sidebar-friend-tab">
+            <h3 class="control-sidebar-heading">我的好友</h3>
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>Alexander Pierce</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+        </div>
+        <!-- /.tab-pane -->
         <!-- Settings tab content -->
         <div class="tab-pane" id="control-sidebar-settings-tab">
             <form method="post">
