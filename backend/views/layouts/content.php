@@ -2,7 +2,7 @@
 use yii\widgets\Breadcrumbs;
 use dmstr\widgets\Alert;
 use backend\modules\admin\components\FriendHelper;
-
+use yii\helpers\Url;
 /* @var $content */
 /* @var $directoryAsset */
 
@@ -147,21 +147,60 @@ use backend\modules\admin\components\FriendHelper;
         <!-- /.tab-pane -->
         <!-- wechat tab content -->
         <div class="tab-pane" id="control-sidebar-friend-tab">
-            <h3 class="control-sidebar-heading">something</h3>
+            <h3 class="control-sidebar-heading">好友列表</h3>
             <?php
                 $users = FriendHelper::getAssignedFriendList(yii::$app->user->identity->id);
             ?>
-            <?php foreach($users as $key=>$user):?>
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p class="text-default"><a href="#"><?php echo $user['username']; ?></a></p>
-                    <i class="fa fa-circle text-success"></i> Online
-                </div>
+            <ul class="sidebar-menu">
+                <?php foreach($users as $key=>$user):?>
+                <li>
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p class="text-info">
+                                <a href="<?php echo Url::to(['/message/default/chat','id'=>$user['id']]) ?>" class="message-chat" data-pjax="0" data-key="default" data-toggle="modal" data-target="#messageChat-modal">
+                                    <?php echo $user['username']; ?>
+                                </a>
+                            </p>
+                            <i class="fa fa-circle text-success"></i> <span class="text-green">Online</span>
+                            <span class="pull-right-container margin">
+                                <small class="label pull-right bg-red">5</small>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                <?php endforeach;?>
+            </ul>
+
+            <h4 class="control-sidebar-heading"><i class="fa  fa-gears"></i> 聊天设置</h4>
+
+            <div class="form-group">
+                <label class="control-sidebar-subheading">
+                    显示在线
+                    <input type="checkbox" class="pull-right" checked/>
+                </label>
+                <h6>设置自己在线状态对他人可见</h6>
             </div>
-            <?php endforeach;?>
+            <!-- /.form-group -->
+
+            <div class="form-group">
+                <label class="control-sidebar-subheading">
+                    关闭提示
+                    <input type="checkbox" class="pull-right"/>
+                </label>
+                <h6>关闭消息提示后将不在弹出新消息提示</h6>
+            </div>
+            <!-- /.form-group -->
+
+            <div class="form-group">
+                <label class="control-sidebar-subheading">
+                    删除历史记录
+                    <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+                </label>
+                <h6>将删除所有的聊天记录</h6>
+            </div>
         </div>
         <!-- /.tab-pane -->
         <!-- Settings tab content -->

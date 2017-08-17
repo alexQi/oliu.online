@@ -11,7 +11,8 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
             </button>
             <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Contacts">
                 <i class="fa fa-comments"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-dismiss="modal"><i class="fa fa-times"></i></button>
+<!--            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
         </div>
     </div>
     <!-- /.box-header -->
