@@ -1,6 +1,7 @@
 <?php
 use yii\widgets\Breadcrumbs;
 use dmstr\widgets\Alert;
+use backend\modules\admin\components\FriendHelper;
 
 /* @var $content */
 /* @var $directoryAsset */
@@ -146,16 +147,21 @@ use dmstr\widgets\Alert;
         <!-- /.tab-pane -->
         <!-- wechat tab content -->
         <div class="tab-pane" id="control-sidebar-friend-tab">
-            <h3 class="control-sidebar-heading">我的好友</h3>
+            <h3 class="control-sidebar-heading">something</h3>
+            <?php
+                $users = FriendHelper::getAssignedFriendList(yii::$app->user->identity->id);
+            ?>
+            <?php foreach($users as $key=>$user):?>
             <div class="user-panel">
                 <div class="pull-left image">
                     <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <p class="text-default"><a href="#"><?php echo $user['username']; ?></a></p>
+                    <i class="fa fa-circle text-success"></i> Online
                 </div>
             </div>
+            <?php endforeach;?>
         </div>
         <!-- /.tab-pane -->
         <!-- Settings tab content -->
