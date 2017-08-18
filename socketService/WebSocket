@@ -65,7 +65,7 @@ class WebSocket
             exit(current($this->beanstalk->errors()));
         }
         //选择使用的tube
-        return $this->beanstalk;
+        return $this->beanstalk->useTube('oliu.saveiMassage');
     }
 
     /**
@@ -195,7 +195,8 @@ class WebSocket
                     $isRead = 1;
                 }
 
-                $server->task(['message'=>$param,'isRead'=>$isRead]);
+                $param['isRead'] = $isRead;
+                $server->task($param);
                 break;
 
             default:
@@ -216,16 +217,7 @@ class WebSocket
         $cliNotice = "[ WID : $src_worker_id ] ----> Execute Task , ID:$task_id... \r\n";
         echo $this->colors->getColoredString($cliNotice,'yellow');
 
-        if ($data['isRead']==2)
-        {
-            $tubeName = 'oliu.saveiMassage';
-        }else{
-            $tubeName = 'oliu.saveiMassage.notRead';
-        }
-
-        $this->beanstalk->useTube($tubeName);
-
-        return $this->beanstalk->put( 23,0,60,json_encode($data['message']) );
+        return $this->beanstalk->put( 23,0,60,json_encode($data) );
     }
 
     public function onFinish(swoole_websocket_server $server,$task_id,$data)
