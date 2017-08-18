@@ -68,19 +68,19 @@ use yii\bootstrap\Html;
         <?php if($lastBuried):?>
             <div class="form-group">
                 <label class="control-label">最近休眠任务, ID : <?=$lastBuried->getId();?></label>
-                <div class="well"><?php echo json_encode(json_decode($lastBuried->getData(),true),JSON_UNESCAPED_UNICODE); ?></div>
+                <div class="well"><?php echo json_encode($lastBuried->getData(),JSON_UNESCAPED_UNICODE); ?></div>
             </div>
         <?php endif;?>
         <?php if($lastDelayed):?>
             <div class="form-group">
                 <label>最近延时任务, ID : <?=$lastDelayed->getId();?></label>
-                <div class="well"><?php echo json_encode(json_decode($lastDelayed->getData(),true),JSON_UNESCAPED_UNICODE); ?></div>
+                <div class="well"><?php echo json_encode($lastDelayed->getData(),JSON_UNESCAPED_UNICODE); ?></div>
             </div>
         <?php endif;?>
         <?php if($lastReady):?>
             <div class="form-group">
                 <label>将要执行任务, ID : <?=$lastReady->getId();?></label>
-                <div class="well"><?php echo json_encode(json_decode($lastReady->getData(),true),JSON_UNESCAPED_UNICODE); ?></div>
+                <div class="well"><?php echo json_encode($lastReady->getData(),JSON_UNESCAPED_UNICODE); ?></div>
             </div>
         <?php endif;?>
     </div>

@@ -168,7 +168,7 @@ if (Yii::$app->controller->action->id === 'login') {
                 };
 
                 socket.onclose = function(event) {
-                    log("Web Socket closed.");
+//                    log("Web Socket closed.");
                 };
                 socket.onerror = function(event) {
 //                    log("Web Socket error.");
@@ -178,7 +178,7 @@ if (Yii::$app->controller->action->id === 'login') {
             }
         };
         window.onload = function() {
-//            initWebSocket();
+            initWebSocket();
         }
     </script>
 

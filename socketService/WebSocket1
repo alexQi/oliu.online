@@ -49,10 +49,6 @@ class WebSocket
         return $this->redis = $redis;
     }
 
-    /**
-     * 获取beanstalk资源
-     * @return bool|string
-     */
     public function connectBeanstalk()
     {
         $this->beanstalk = new Client(array(
@@ -65,7 +61,7 @@ class WebSocket
             exit(current($this->beanstalk->errors()));
         }
         //选择使用的tube
-        return $this->beanstalk;
+        $this->beanstalk->useTube('oliu.saveiMessage');
     }
 
     /**
@@ -173,29 +169,53 @@ class WebSocket
         switch ($res['type'])
         {
             case 'init':
-                //存储用户对应fd
-                $this->redis->set('oliu:im:fd:'.$res['data']['userId'],$frame->fd);
+                //存储用户信息到redis
+                $this->redis->set('init_user_'.$res['data']['userId'],$frame->fd);
+                $this->redis->set('init_fd_'.$frame->fd,$res['data']['userId']);
+
+                //判断未读消息数量
+                $notReadNum = $this->redis->lLen('message_receive_'.$res['data']['userId']);
+
+                $fd = (int) $this->redis->get('init_user_'.$res['data']['userId']);
+
+                $preView  = [];
+                while ($notRead = $this->redis->lPop('message_receive_'.$res['data']['userId']))
+                {
+                    $param = json_decode($notRead,true);
+                    $param['create_time'] = date('H:i:s',$param['create_time']);
+
+                    $preView[] = $param;
+                }
+
+                if ($server->exist($fd))
+                {
+                    //预览消息
+                    $send['type']         = 'totalNotRead';
+                    $send['data']['num']  = $notReadNum;
+                    $send['data']['data'] = $preView;
+
+                    $server->push($fd,json_encode($send));
+                }
+
+                foreach ($preView as $val)
+                {
+                    $this->redis->lPush('message_receive_'.$res['data']['userId'],$val); //接收方记录
+                }
+
                 break;
 
             case 'message':
-
                 //存储用户消息
                 $param['from_user_id'] = $res['data']['userId'];
                 $param['to_user_id']   = $res['data']['toUserId'];
                 $param['content']      = $res['data']['content'];
                 $param['create_time']  = time();
 
-                $receiveUserFd = $this->redis->get($res['data']['toUserId']);
+                $this->redis->sAdd('message_send_'.$res['data']['userId'],json_encode($param)); //发送方记录
+                $this->redis->lPush('message_receive_'.$res['data']['toUserId'],json_encode($param)); //接收方记录
 
-                $isRead = 2;
-                if ($server->exist($receiveUserFd))
-                {
-                    $server->push($receiveUserFd,json_encode($param));
-                }else{
-                    $isRead = 1;
-                }
-
-                $server->task(['message'=>$param,'isRead'=>$isRead]);
+                // send receive_user_id to task
+                $server->task($res['data']['toUserId']);
                 break;
 
             default:
@@ -213,19 +233,41 @@ class WebSocket
      */
     public function onTask(swoole_websocket_server $server, $task_id,$src_worker_id,$data)
     {
-        $cliNotice = "[ WID : $src_worker_id ] ----> Execute Task , ID:$task_id... \r\n";
+        $cliNotice = "[ WID : $src_worker_id ] ----> TID : $task_id Execute Task, UserId:$data \r\n";
         echo $this->colors->getColoredString($cliNotice,'yellow');
 
-        if ($data['isRead']==2)
+        //判断未读消息数量
+        $notReadNum = $this->redis->lLen('message_receive_'.$data);
+
+        if ($notReadNum>0)
         {
-            $tubeName = 'oliu.saveiMassage';
-        }else{
-            $tubeName = 'oliu.saveiMassage.notRead';
+            $fd = (int) $this->redis->get('init_user_'.$data);
+
+            $preView  = [];
+            while ($notRead = $this->redis->lPop('message_receive_'.$data))
+            {
+                $param = json_decode($notRead,true);
+
+                $preView[] = $param;
+                $preView[] = $param;
+            }
+
+            if ($server->exist($fd))
+            {
+                $response['type'] = 'message';
+                $response['data'] = $preView;
+
+                $server->push($fd,json_encode($response));
+            }else{
+                //client has been closed
+                foreach ($preView as $val)
+                {
+                    $this->redis->lPush('message_receive_'.$data,json_encode($val)); //接收方记录
+                }
+            }
         }
 
-        $this->beanstalk->useTube($tubeName);
-
-        return $this->beanstalk->put( 23,0,60,json_encode($data['message']) );
+        return true;
     }
 
     public function onFinish(swoole_websocket_server $server,$task_id,$data)
