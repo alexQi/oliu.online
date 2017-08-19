@@ -182,6 +182,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id'     => 'activity-modal',
                     'header' => '<h4 class="modal-title"><i class="glyphicon glyphicon-transfer"></i> 队列详情</h4>',
                     'footer' => '<a href="#" class="btn bg-olive btn-flat" data-dismiss="modal">关闭</a>',
+                    'size'   => Modal::SIZE_LARGE,
                 ]);?>
                 <?php Modal::end();?>
             </div>

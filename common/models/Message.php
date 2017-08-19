@@ -16,9 +16,10 @@ use Yii;
  * @property string $to
  * @property string $content
  * @property integer $status
+ * @property integer $is_read
+ * @property integer $is_del
  * @property integer $created_at
  * @property integer $updated_at
- * @property integer $is_del
  */
 class Message extends \yii\db\ActiveRecord
 {
@@ -36,7 +37,7 @@ class Message extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'from_user_id', 'to_user_id', 'status', 'created_at', 'updated_at', 'is_del'], 'integer'],
+            [['type', 'from_user_id', 'to_user_id', 'status', 'is_read', 'is_del', 'created_at', 'updated_at'], 'integer'],
             [['title', 'from', 'to', 'content'], 'required'],
             [['content'], 'string'],
             [['title', 'from', 'to'], 'string', 'max' => 50],
@@ -58,9 +59,10 @@ class Message extends \yii\db\ActiveRecord
             'to' => Yii::t('app', 'To'),
             'content' => Yii::t('app', 'Content'),
             'status' => Yii::t('app', 'Status'),
+            'is_read' => Yii::t('app', 'Is Read'),
+            'is_del' => Yii::t('app', 'Is Del'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
-            'is_del' => Yii::t('app', 'Is Del'),
         ];
     }
 }

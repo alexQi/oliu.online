@@ -29,7 +29,7 @@ class ConsController extends Controller
             try{
                 $data = $job->getData();
 
-                $param = json_decode($data,true);
+                $param = json_decode(json_encode($data,JSON_UNESCAPED_UNICODE),true);
 
                 $mail = new Mail();
                 $res = $mail->SendMail($param);
@@ -49,21 +49,21 @@ class ConsController extends Controller
     public function actionSaveImessage()
     {
         $beanstalk = new Beanstalk();
-        $beanstalk->useTube('oliu.sendEmail');
-        $beanstalk->watch('oliu.sendEmail');
+        $beanstalk->useTube('oliu.saveiMassage');
+        $beanstalk->watch('oliu.saveiMassage');
 
         while (true){
             $job  = $beanstalk->reserve();
             try{
                 $data = $job->getData();
 
-                $param = json_decode($data,true);
+                $param = json_decode(json_encode($data,JSON_UNESCAPED_UNICODE),true);
 
-                $mail = new Mail();
-                $res = $mail->SendMail($param);
-
+                $message = new MessageService();
+                $res = $message->saveiMessage($param);
+//                var_dump($message->getFirstError());
                 if (!$res){
-                    throw new Exception('发送失败');
+                    throw new Exception('持久化消息失败');
                 }
                 $beanstalk->delete($job);
             }catch (Exception $e)

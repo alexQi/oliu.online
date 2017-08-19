@@ -8,12 +8,23 @@
  */
 namespace backend\modules\admin\components;
 
+use app\models\MessageSearch;
 use backend\modules\admin\models\User as UserModel;
 
 class FriendHelper
 {
     public static function getAssignedFriendList($user_id)
     {
-        return UserModel::find()->where(['!=','id',$user_id])->asArray()->all();
+        $result = UserModel::find()
+            ->select('user.id,user.username,count(message.id) as message_num')
+            ->from(['user'=>UserModel::tableName()])
+            ->leftJoin(['message'=>MessageSearch::tableName()],'message.from_user_id=user.id')
+            ->where(['!=','user.id',$user_id])
+            ->where(['message.to_user_id'=>$user_id])
+            ->groupBy(['user.id'])
+            ->asArray()
+            ->all();
+
+        return $result;
     }
 }

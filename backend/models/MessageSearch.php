@@ -95,4 +95,25 @@ class MessageSearch extends Message
 
         return $result;
     }
+
+    public function getUserMessage($fUserId,$toUserId)
+    {
+        $query = Message::find();
+
+        $query->select(['']);
+        $query->from(['message'=>Message::tableName()]);
+        $query->leftJoin(['f_user'=>User::tableName()],'message.from_user_id=f_user.id');
+        $query->leftJoin(['t_user'=>User::tableName()],'message.to_user_id=t_user.id');
+        $query->where(['message.type'=>1]);
+        $query->andWhere(['message.is_del'=>1]);
+        $query->orWhere(['or',['from_user_id'=>$fUserId],['to_user_id'=>$toUserId]]);
+        $query->orWhere(['or',['from_user_id'=>$toUserId],['to_user_id'=>$fUserId]]);
+        $query->orderBy(['message.created_at'=>SORT_ASC]);
+
+        $res = $query->asArray()->all();
+        foreach($res as $key=>$val){
+
+        }
+
+    }
 }

@@ -165,9 +165,11 @@ use yii\helpers\Url;
                                 </a>
                             </p>
                             <i class="fa fa-circle text-success"></i> <span class="text-green">Online</span>
+                            <?php if($user['message_num']>0):?>
                             <span class="pull-right-container margin">
-                                <small class="label pull-right bg-red">5</small>
+                                <small class="label pull-right bg-red"><?php echo $user['message_num']; ?></small>
                             </span>
+                            <?php endif;?>
                         </div>
                     </div>
                 </li>
