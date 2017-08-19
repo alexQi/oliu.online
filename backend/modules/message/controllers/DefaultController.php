@@ -118,7 +118,8 @@ class DefaultController extends Controller
 
     public function actionChat()
     {
-        return $this->renderAjax('chat');
+        $messageList = MessageSearch::getUserMessage(yii::$app->request->get('id'),yii::$app->user->identity->id);
+        return $this->renderAjax('chat',['messageList'=>$messageList,'from_user_id'=>yii::$app->request->get('id')]);
     }
 
     /**

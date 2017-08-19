@@ -45,7 +45,7 @@ class WebSocket
     public function connectRedis($config=array()){
         $redis = new redis();
         $redis->connect('127.0.0.1', 6379);
-        $redis->auth('6da192c7dd56a5ba917c59d2e723911a');
+//        $redis->auth('6da192c7dd56a5ba917c59d2e723911a');
         return $this->redis = $redis;
     }
 
@@ -185,13 +185,15 @@ class WebSocket
                 $param['content']      = $res['data']['content'];
                 $param['create_time']  = time();
 
-                $receiveUserFd = $this->redis->get($res['data']['toUserId']);
+                $receiveUserFd = $this->redis->get('oliu:im:fd:'.$res['data']['toUserId']);
 
                 $isRead = 2;
                 if ($server->exist($receiveUserFd))
                 {
-                    $server->push($receiveUserFd,json_encode($param));
+                    echo "user is online , active send message process \n";
+                    $server->push((int)$receiveUserFd,json_encode(['type'=>'message','data'=>$param]));
                 }else{
+                    echo "user is not online , save message ... \n";
                     $isRead = 1;
                 }
 

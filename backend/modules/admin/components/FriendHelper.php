@@ -20,11 +20,11 @@ class FriendHelper
             ->from(['user'=>UserModel::tableName()])
             ->leftJoin(['message'=>MessageSearch::tableName()],'message.from_user_id=user.id')
             ->where(['!=','user.id',$user_id])
-            ->where(['message.to_user_id'=>$user_id])
+            ->andwhere(['message.to_user_id'=>$user_id])
             ->groupBy(['user.id'])
             ->asArray()
             ->all();
-
+        var_dump($result);
         return $result;
     }
 }

@@ -19,6 +19,16 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
     <div class="box-body">
         <!-- Conversations are loaded here -->
         <div class="direct-chat-messages">
+            <?php foreach($messageList  as $key=>$value):?>
+            <div class="direct-chat-msg <?php echo $value['from_user_id']==$from_user_id ? '':'right'; ?>">
+                <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-name pull-right"><?php echo $value['from_user_id']==$from_user_id ? $value['f_username']:$value['t_username']; ?></span>
+                    <span class="direct-chat-timestamp pull-left"><?php echo date('H:i',$value['created_at']); ?></span>
+                </div>
+                <img class="direct-chat-img" src="<?= $directoryAsset ?>/img/user3-128x128.jpg" alt="Message User Image">
+                <div class="direct-chat-text"><?php echo $value['content']; ?></div>
+            </div>
+            <?php endforeach;?>
         </div>
         <!--/.direct-chat-messages-->
 
@@ -64,14 +74,14 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
         var message = $('.chat-message-content').val();
         var userId = '<?php echo yii::$app->user->identity->id;?>';
 
-        var data = {type:'message',data:{userId:userId,toUserId:4,content:message}};
+        var data = {type:'message',data:{userId:userId,toUserId:'<?php echo $from_user_id;?>',content:message}};
         data = JSON.stringify(data);
         socket.send(data);
 
         var html = '<div class="direct-chat-msg right">';
         html += '<div class="direct-chat-info clearfix">';
         html += '<span class="direct-chat-name pull-right">Sarah Bullock</span>';
-        html += '<span class="direct-chat-timestamp pull-left">'+1111+'</span>';
+        html += '<span class="direct-chat-timestamp pull-left">'+(new Date()).getHours()+':'+(new Date()).getMinutes()+'</span>';
         html += '</div>';
         html += '<img class="direct-chat-img" src="<?= $directoryAsset ?>/img/user3-128x128.jpg" alt="Message User Image">';
         html += '<div class="direct-chat-text">'+message+'</div>';

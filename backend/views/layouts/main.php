@@ -142,22 +142,18 @@ if (Yii::$app->controller->action->id === 'login') {
 
                     if (res.type=='message')
                     {
-                        console.log(res);
-                        $.each(res.data,function(keys,datas){
-                            console.log(datas);
-                            var html = '<div class="direct-chat-msg">';
-                            html += '<div class="direct-chat-info clearfix">';
-                            html += '<span class="direct-chat-name pull-right">Sarah Bullock</span>';
-                            html += '<span class="direct-chat-timestamp pull-left">'+datas.create_time+'</span>';
-                            html += '</div>';
-                            html += '<img class="direct-chat-img" src="<?= $directoryAsset ?>/img/user3-128x128.jpg" alt="Message User Image">';
-                            html += '<div class="direct-chat-text">'+datas.content+'</div>';
-                            html += '</div>';
+                        var html = '<div class="direct-chat-msg">';
+                        html += '<div class="direct-chat-info clearfix">';
+                        html += '<span class="direct-chat-name pull-right">Sarah Bullock</span>';
+                        html += '<span class="direct-chat-timestamp pull-left">'+res.data.create_time+'</span>';
+                        html += '</div>';
+                        html += '<img class="direct-chat-img" src="<?= $directoryAsset ?>/img/user3-128x128.jpg" alt="Message User Image">';
+                        html += '<div class="direct-chat-text">'+res.data.content+'</div>';
+                        html += '</div>';
 
-                            $('.direct-chat-messages').append(html);
+                        $('.direct-chat-messages').append(html);
 
-                            $('.direct-chat-messages').scrollTop( $('.direct-chat-messages')[0].scrollHeight );
-                        });
+                        $('.direct-chat-messages').scrollTop( $('.direct-chat-messages')[0].scrollHeight );
                     }
                 };
                 socket.onopen = function(event) {
