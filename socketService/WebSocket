@@ -191,6 +191,7 @@ class WebSocket
                 if ($server->exist($receiveUserFd))
                 {
                     echo "user is online , active send message process \n";
+                    $param['create_time'] = date('H:i',$param['create_time']);
                     $server->push((int)$receiveUserFd,json_encode(['type'=>'message','data'=>$param]));
                 }else{
                     echo "user is not online , save message ... \n";
