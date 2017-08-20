@@ -5,3 +5,5 @@
 `编辑配置文件 /etc/supervisor/conf.d/`
 
 `echo_supervisor_conf`
+
+`finished`
