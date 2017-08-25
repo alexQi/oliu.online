@@ -24,7 +24,6 @@ class FriendHelper
             ->groupBy(['user.id'])
             ->asArray()
             ->all();
-        var_dump($result);
         return $result;
     }
 }
