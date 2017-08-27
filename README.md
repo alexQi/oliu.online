@@ -7,3 +7,5 @@
 `echo_supervisor_conf`
 
 `finished`
+
+** try to use mac **
